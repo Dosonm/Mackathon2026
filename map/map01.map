@@ -265,7 +265,7 @@
           "path": "/maps/map01/Model_Segment1_1/Ground",
           "nameEditable": true,
           "enable": false,
-          "visible": true,
+          "visible": false,
           "localize": false,
           "displayOrder": 0,
           "pathConstraints": "////",
@@ -719,7 +719,9 @@
                 "IsRelative": false,
                 "EntityId": "da9ffdad-2ba8-4360-9eb4-57e02f74f9e8",
                 "Version2": false
-              }
+              },
+              "tileSpeed": 1.0,
+              "backgroundSpeed": 0.0
             }
           ],
           "@version": 1
