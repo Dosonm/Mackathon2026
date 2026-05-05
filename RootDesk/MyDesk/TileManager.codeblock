@@ -1,7 +1,7 @@
 {
   "Id": "",
   "GameId": "",
-  "EntryKey": "codeblock://feed42ed-a68c-49b2-9687-81ef08226633",
+  "EntryKey": "codeblock://c0ac6ac5-a3c3-43f5-ab47-9bd75a741fd8",
   "ContentType": "x-mod/codeblock",
   "Content": "",
   "Usage": 0,
@@ -22,15 +22,12 @@
         "Minor": 1
       },
       "Description": "",
-      "Id": "feed42ed-a68c-49b2-9687-81ef08226633",
+      "Id": "c0ac6ac5-a3c3-43f5-ab47-9bd75a741fd8",
       "Language": 1,
-      "Name": "TileScroller",
+      "Name": "TileManager",
       "Type": 1,
       "Source": 0,
-      "Target": null,
-      "worldCoreVersion": "26.3.0.0",
-      "worldStudioVersion": "0.1.0.0",
-      "useService": 0
+      "Target": null
     }
   }
 }
