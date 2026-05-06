@@ -5,89 +5,77 @@ script TileManager extends Component
 	property number tileSpeed = 5
 	property number backgroundSpeed = 2
 
-	-- 각 난이도별 타일 템플릿 부모 엔티티
-	property Entity TileParent_Easy = nil
-	property Entity TileParent_Normal = nil
-	property Entity TileParent_Hard = nil
+	-- 순서가 모두 고정되어 있다고 하니 parent에 자식으로 순서대로 entity를 넣으면 됨
+	property Entity TileParent = nil
 
-	-- 타일 하나의 너비 (월드 단위, 씬에서 실제 값으로 맞춰야 함)
-	property number tileWidth = 20
+	-- 화면 좌우 경계 (카메라 기준 월드 좌표) // 직접 입력
+	property number screenLeftX = nil
+	property number screenRightX = nil
 
-	-- 화면 좌우 경계 (카메라 기준 월드 좌표)
-	property number screenLeftX = -15
-	property number screenRightX = 15
+	-- 순서대로 배치할 타일 목록 { entity, width }
+	property table _tiles = {}
 
-	-- 이 거리마다 Normal/Hard 비율 증가
-	property number difficultyScaleDistance = 100
-
-	-- 오브젝트 풀 크기 (난이도별)
-	property number _poolSize = 4
-
-	-- 활성 타일 목록 { entity, difficulty }
+	-- 활성 타일 목록 { entity, width }
 	property table _activeTiles = {}
 
-	-- 난이도별 대기 풀
-	property table _easyPool = {}
-	property table _normalPool = {}
-	property table _hardPool = {}
-
-	property number _distanceTraveled = 0
+	-- 다음에 배치할 타일 인덱스
+	property number _nextTileIndex = 1
 
 	@ExecSpace("ClientOnly")
 	method void OnBeginPlay()
-		self:_BuildPool(self.TileParent_Easy, self._easyPool, "easy")
-		self:_BuildPool(self.TileParent_Normal, self._normalPool, "normal")
-		self:_BuildPool(self.TileParent_Hard, self._hardPool, "hard")
+		self:_BuildTileList(self.TileParent)
 
 		-- 화면을 채울 만큼 초기 타일 배치
-		local needed = math.ceil((self.screenRightX - self.screenLeftX) / self.tileWidth) + 2
-		for i = 1, needed do
+		local spawned = 0
+		while self:_GetRightEdge() < self.screenRightX do
 			self:_SpawnNextTile()
+			spawned = spawned + 1
+			if spawned > 20 then break end
 		end
 	end
 
 	@ExecSpace("ClientOnly")
 	method void OnUpdate(number delta)
 		local move = self.tileSpeed * delta
-		self._distanceTraveled = self._distanceTraveled + move
 
-		-- 배경 스크롤
-		--local bg = self.background.TransformComponent
-		--bg:Translate(-10000*self.backgroundSpeed,0)
+		--배경 스크롤
+		local bg = self.background.TransformComponent
+		--bg.Position = Vector3(bg.Position.x - self.backgroundSpeed * delta, bg.Position.y, bg.Position.z)
+		bg:Translate(-0.01*self.backgroundSpeed,0)
 
-		-- 활성 타일 이동 + 왼쪽으로 벗어난 타일 재활용
+		--활성 타일 이동 + 왼쪽으로 벗어난 타일 재활용
 		local i = 1
 		while i <= #self._activeTiles do
+
 			local entry = self._activeTiles[i]
 			local tf = entry.entity.TransformComponent
-			tf:Translate(-100,0) --매프레임 왼쪽으로 이동
+			tf:Translate(-0.01*self.tileSpeed,0)
+			--tf.Position = Vector3(tf.Position.x - move, tf.Position.y, tf.Position.z)
 
-			-- 타일 오른쪽 끝이 화면 밖으로 나가면 재활용
-			if tf.Position.x + self.tileWidth < self.screenLeftX then
-				self:_RecycleTile(entry)
+			if tf.Position.x + entry.width < self.screenLeftX then
+				entry.entity:SetEnable(false)
 				table.remove(self._activeTiles, i)
 				self:_SpawnNextTile()
-				-- i는 증가하지 않음 (제거 후 같은 인덱스 재검사)
 			else
 				i = i + 1
 			end
 		end
 	end
 
-	-- 현재 오른쪽 끝 위치를 마지막 활성 타일로부터 직접 계산
 	method number _GetRightEdge()
 		if #self._activeTiles == 0 then
 			return self.screenLeftX
 		end
+
 		local last = self._activeTiles[#self._activeTiles]
-		return last.entity.TransformComponent.Position.x + self.tileWidth
+		return last.entity.TransformComponent.Position.x + last.width
 	end
 
-	-- 다음 타일을 오른쪽 끝에 배치
 	method void _SpawnNextTile()
-		local difficulty = self:_PickDifficulty()
-		local entry = self:_GetFromPool(difficulty)
-		if entry == nil then return end
+		if #self._tiles == 0 then return end
+
+		local entry = self._tiles[self._nextTileIndex]
+		self._nextTileIndex = (self._nextTileIndex % #self._tiles) + 1
 
 		local spawnX = self:_GetRightEdge()
 		entry.entity.TransformComponent.Position = Vector3(spawnX, 0, 0)
@@ -95,82 +83,17 @@ script TileManager extends Component
 		table.insert(self._activeTiles, entry)
 	end
 
-	-- 타일을 풀에 반환
-	method void _RecycleTile(table entry)
-		entry.entity:SetEnable(false)
-		if entry.difficulty == "easy" then
-			table.insert(self._easyPool, entry)
-		elseif entry.difficulty == "normal" then
-			table.insert(self._normalPool, entry)
-		else
-			table.insert(self._hardPool, entry)
-		end
-	end
-
-	-- 풀에서 타일 꺼내기 (해당 난이도 풀이 비면 easy 폴백)
-	method table _GetFromPool(string difficulty)
-		local pool
-		if difficulty == "easy" then
-			pool = self._easyPool
-		elseif difficulty == "normal" then
-			pool = self._normalPool
-		else
-			pool = self._hardPool
-		end
-
-		if #pool > 0 then
-			local entry = pool[#pool]
-			table.remove(pool, #pool)
-			return entry
-		end
-
-		-- 폴백: easy 풀에서 꺼내기
-		if #self._easyPool > 0 then
-			local entry = self._easyPool[#self._easyPool]
-			table.remove(self._easyPool, #self._easyPool)
-			entry.difficulty = "easy"
-			return entry
-		end
-
-		return nil
-	end
-
-	-- 거리 기반 난이도 가중치 랜덤 선택
-	method string _PickDifficulty()
-		local stage = math.floor(self._distanceTraveled / self.difficultyScaleDistance)
-		local easyW, normalW, hardW
-		
-		if stage == 0 then
-			easyW, normalW, hardW = 80, 20, 0
-		elseif stage == 1 then
-			easyW, normalW, hardW = 60, 30, 10
-		else
-			easyW, normalW, hardW = 40, 35, 25
-		end
-
-		local total = easyW + normalW + hardW
-		local r = math.random(1, total)
-		if r <= easyW then
-			return "easy"
-		elseif r <= easyW + normalW then
-			return "normal"
-		else
-			return "hard"
-		end
-	end
-
-	-- 템플릿 부모의 자식들을 Clone해서 풀 미리 채우기
-	method void _BuildPool(Entity parent, table pool, string difficulty)
+	-- TileParent 자식들을 순서대로 등록, CustomFootholdComponent로 너비 계산
+	method void _BuildTileList(Entity parent)
 		if parent == nil then return end
-
-		local templates = parent.Children	--table<Entity>//정적 타입 언어가 아니라서
+		local templates = parent.Children
 		if templates == nil or #templates == 0 then return end
 
-		for i = 1, self._poolSize do
-			local template = templates[(i % #templates) + 1]
-			local cloned = template:Clone()
-			cloned:SetEnable(false)
-			table.insert(pool, { entity = cloned, difficulty = difficulty })
+		for i = 1, #templates do
+			local entity = templates[i]
+			local width = entity.TileData.TileWidth
+			entity:SetEnable(false)
+			table.insert(self._tiles, { entity = entity, width = width })
 		end
 	end
 

@@ -17,7 +17,9 @@
       "Name": "DefaultPlayer",
       "BaseModelId": "player",
       "Id": "defaultplayer",
-      "Components": [],
+      "Components": [
+        "script.player"
+      ],
       "Properties": [],
       "Values": [
         {
@@ -766,6 +768,65 @@
             "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
           },
           "Value": 0.0
+        },
+        {
+          "TargetType": "script.player",
+          "Name": "speed",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": 3.0
+        },
+        {
+          "TargetType": "MOD.Core.SideviewbodyComponent",
+          "Name": "JumpDrag",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": 20.0
+        },
+        {
+          "TargetType": "MOD.Core.KinematicbodyComponent",
+          "Name": "JumpDrag",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": 20.0
+        },
+        {
+          "TargetType": "MOD.Core.MovementComponent",
+          "Name": "JumpForce",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": 1.0
+        },
+        {
+          "TargetType": "script.player",
+          "Name": "btnComponent",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "MOD.Core.Component.MODComponent, MOD.Core, Version=26.3.0.0, Culture=neutral, PublicKeyToken=null"
+          },
+          "Value": {
+            "$type": "MOD.Core.MODComponentRef, MOD.Core",
+            "IsRelative": false,
+            "ComponentId": "806a43c1-3bb6-4894-b414-ae742b988d8a:ButtonComponent",
+            "UseNested": false
+          }
+        },
+        {
+          "TargetType": "MOD.Core.RigidbodyComponent",
+          "Name": "WalkDrag",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": 1.0
         }
       ],
       "EventLinks": [],
