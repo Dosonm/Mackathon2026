@@ -1,7 +1,7 @@
 {
   "Id": "",
   "GameId": "",
-  "EntryKey": "map://map02",
+  "EntryKey": "map://map03",
   "ContentType": "x-mod/map",
   "Content": "",
   "Usage": 0,
@@ -14,13 +14,13 @@
     "Use": "Binary",
     "Entities": [
       {
-        "id": "1fe67ed4-a145-466a-8d6e-4cfaf9c68d9a",
-        "path": "/maps/map02",
+        "id": "48c0d217-e11e-4004-992d-aca79aeeb7ad",
+        "path": "/maps/map03",
         "componentNames": "MOD.Core.MapComponent,MOD.Core.FootholdComponent",
         "jsonString": {
-          "name": "map02",
-          "path": "/maps/map02",
-          "nameEditable": true,
+          "name": "map03",
+          "path": "/maps/map03",
+          "nameEditable": false,
           "enable": true,
           "visible": true,
           "localize": false,
@@ -41,7 +41,7 @@
                 "1": [
                   {
                     "Length": 8.96029949,
-                    "NextFootholdId": 0,
+                    "NextFootholdId": 2,
                     "PreviousFootholdId": 0,
                     "groupID": 1,
                     "layer": 1,
@@ -55,46 +55,15 @@
                       "isCustomFoothold": true,
                       "inertiaOption": 0
                     },
-                    "OwnerId": "1c5830c9-eea7-4218-ba2d-1e0eae5e1241",
+                    "OwnerId": "9d9f5662-fc78-42af-8fbc-c7cf76b024df",
                     "Id": 1,
                     "StartPoint": {
-                      "x": -5.8956,
-                      "y": -2.7722
+                      "x": -1.1844,
+                      "y": -0.3444
                     },
                     "EndPoint": {
-                      "x": 3.0647,
-                      "y": -2.7722
-                    },
-                    "Variance": {
-                      "x": 1.0,
-                      "y": 0.0
-                    }
-                  },
-                  {
-                    "Length": 8.96029949,
-                    "NextFootholdId": 0,
-                    "PreviousFootholdId": 0,
-                    "groupID": 2,
-                    "layer": 1,
-                    "sortingLayerName": "MapLayer0",
-                    "attribute": {
-                      "walk": 1.0,
-                      "force": 0.0,
-                      "drag": 1.0,
-                      "isBlockVertical": false,
-                      "isDynamic": false,
-                      "isCustomFoothold": true,
-                      "inertiaOption": 0
-                    },
-                    "OwnerId": "b76120f4-341e-4261-92b7-51ac2c4a08ba",
-                    "Id": 2,
-                    "StartPoint": {
-                      "x": 3.8499,
-                      "y": -2.3144
-                    },
-                    "EndPoint": {
-                      "x": 12.8102,
-                      "y": -2.3144
+                      "x": 7.7759,
+                      "y": -0.3444
                     },
                     "Variance": {
                       "x": 1.0,
@@ -103,9 +72,9 @@
                   },
                   {
                     "Length": 8.9603,
-                    "NextFootholdId": 0,
-                    "PreviousFootholdId": 0,
-                    "groupID": 3,
+                    "NextFootholdId": 3,
+                    "PreviousFootholdId": 1,
+                    "groupID": 1,
                     "layer": 1,
                     "sortingLayerName": "MapLayer0",
                     "attribute": {
@@ -117,15 +86,46 @@
                       "isCustomFoothold": true,
                       "inertiaOption": 0
                     },
-                    "OwnerId": "a1365e9f-7cf1-4cd6-a561-1fd6a8c2e271",
-                    "Id": 3,
+                    "OwnerId": "cf9ddeb1-2fee-48f8-bcd9-1a287ef73ce9",
+                    "Id": 2,
                     "StartPoint": {
-                      "x": 14.9256,
-                      "y": -2.7722
+                      "x": 7.8487,
+                      "y": -0.3561
                     },
                     "EndPoint": {
-                      "x": 23.8859,
-                      "y": -2.7722
+                      "x": 16.809,
+                      "y": -0.3561
+                    },
+                    "Variance": {
+                      "x": 1.0,
+                      "y": 0.0
+                    }
+                  },
+                  {
+                    "Length": 8.960299,
+                    "NextFootholdId": 0,
+                    "PreviousFootholdId": 2,
+                    "groupID": 1,
+                    "layer": 1,
+                    "sortingLayerName": "MapLayer0",
+                    "attribute": {
+                      "walk": 1.0,
+                      "force": 0.0,
+                      "drag": 1.0,
+                      "isBlockVertical": false,
+                      "isDynamic": false,
+                      "isCustomFoothold": true,
+                      "inertiaOption": 0
+                    },
+                    "OwnerId": "d01e1a61-684d-46a1-b116-925db6f83d73",
+                    "Id": 3,
+                    "StartPoint": {
+                      "x": 16.8945,
+                      "y": -0.3755
+                    },
+                    "EndPoint": {
+                      "x": 25.8548,
+                      "y": -0.3755
                     },
                     "Variance": {
                       "x": 1.0,
@@ -141,12 +141,12 @@
         }
       },
       {
-        "id": "553cb295-4354-483a-b3a1-17d7cbcba9dc",
-        "path": "/maps/map02/Background",
-        "componentNames": "MOD.Core.BackgroundComponent",
+        "id": "6f021670-c44d-494e-a349-f0cd051f289e",
+        "path": "/maps/map03/Background",
+        "componentNames": "MOD.Core.BackgroundComponent,MOD.Core.TransformComponent",
         "jsonString": {
           "name": "Background",
-          "path": "/maps/map02/Background",
+          "path": "/maps/map03/Background",
           "nameEditable": false,
           "enable": true,
           "visible": true,
@@ -158,8 +158,29 @@
           "@components": [
             {
               "@type": "MOD.Core.BackgroundComponent",
-              "TemplateRUID": "79cf249e1519401795aad717096dbf6f",
+              "SolidColor": {
+                "r": 0.549019635,
+                "g": 0.34117648,
+                "b": 0.164705887,
+                "a": 1.0
+              },
+              "TemplateRUID": "65c4167ea7484196b890022354e5a4a4",
               "Type": 1,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
               "Enable": true
             }
           ],
@@ -167,12 +188,12 @@
         }
       },
       {
-        "id": "a1d0ed6f-7711-4688-8ee6-c20cf23e38a2",
-        "path": "/maps/map02/MapleMapLayer",
+        "id": "057b4e83-04cb-4c7e-91e1-2a35b3bdfc40",
+        "path": "/maps/map03/MapleMapLayer",
         "componentNames": "MOD.Core.MapLayerComponent",
         "jsonString": {
           "name": "MapleMapLayer",
-          "path": "/maps/map02/MapleMapLayer",
+          "path": "/maps/map03/MapleMapLayer",
           "nameEditable": false,
           "enable": true,
           "visible": true,
@@ -195,7 +216,7 @@
               "LayerSortOrder": 0,
               "Locked": false,
               "MapLayerName": "Layer1",
-              "Thumbnail": null,
+              "Thumbnail": "",
               "Enable": true
             }
           ],
@@ -203,70 +224,17 @@
         }
       },
       {
-        "id": "9f8cdf0c-7e64-450f-8165-33aba0cac521",
-        "path": "/maps/map02/TileMap",
-        "componentNames": "MOD.Core.TransformComponent,MOD.Core.TileMapComponent",
-        "jsonString": {
-          "name": "TileMap",
-          "path": "/maps/map02/TileMap",
-          "nameEditable": false,
-          "enable": false,
-          "visible": false,
-          "localize": false,
-          "displayOrder": 2,
-          "pathConstraints": "///",
-          "revision": 1,
-          "origin": {
-            "type": "Model",
-            "entry_id": "tilemap",
-            "sub_entity_id": null,
-            "root_entity_id": null,
-            "replaced_model_id": null
-          },
-          "modelId": "tilemap",
-          "@components": [
-            {
-              "@type": "MOD.Core.TransformComponent",
-              "Position": {
-                "x": -0.225,
-                "y": -0.15,
-                "z": 1000.0
-              },
-              "QuaternionRotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "w": 1.0
-              },
-              "Enable": true
-            },
-            {
-              "@type": "MOD.Core.TileMapComponent",
-              "IsOddGridPosition": false,
-              "SortingLayer": "MapLayer0",
-              "TileMapVersion": 1,
-              "TileSetRUID": {
-                "DataId": "16bedc23c0a042c2b3b692e0b70b0f5e"
-              },
-              "Tiles": [],
-              "Enable": true
-            }
-          ],
-          "@version": 1
-        }
-      },
-      {
-        "id": "0af6abcd-79c9-4c5e-ab66-4f619d37e81a",
-        "path": "/maps/map02/SpawnLocation",
+        "id": "01eb27c8-d921-478b-9853-cd6b84300b0d",
+        "path": "/maps/map03/SpawnLocation",
         "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.SpawnLocationComponent",
         "jsonString": {
           "name": "SpawnLocation",
-          "path": "/maps/map02/SpawnLocation",
+          "path": "/maps/map03/SpawnLocation",
           "nameEditable": true,
           "enable": true,
           "visible": true,
           "localize": false,
-          "displayOrder": 3,
+          "displayOrder": 2,
           "pathConstraints": "///",
           "revision": 1,
           "origin": {
@@ -281,9 +249,9 @@
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {
-                "x": -5.04441547,
-                "y": -2.545441,
-                "z": 999.998047
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
               },
               "QuaternionRotation": {
                 "x": 0.0,
@@ -312,12 +280,72 @@
         }
       },
       {
-        "id": "d82af82c-9bf5-42c2-b256-6435e1bf9290",
-        "path": "/maps/map02/TileParent",
+        "id": "1673b791-eb50-4ace-891d-62c8d90d273d",
+        "path": "/maps/map03/TileManager",
+        "componentNames": "MOD.Core.TransformComponent,script.TileManager",
+        "jsonString": {
+          "name": "TileManager",
+          "path": "/maps/map03/TileManager",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 3,
+          "pathConstraints": "///",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "mapempty",
+            "sub_entity_id": null,
+            "root_entity_id": "1673b791-eb50-4ace-891d-62c8d90d273d",
+            "replaced_model_id": null
+          },
+          "modelId": "mapempty",
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Position": {
+                "x": 1.58894861,
+                "y": 0.0635998249,
+                "z": 999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "script.TileManager",
+              "Enable": true,
+              "background": {
+                "tempEntityId": null,
+                "IsRelative": false,
+                "EntityId": "6f021670-c44d-494e-a349-f0cd051f289e",
+                "Version2": false
+              },
+              "TileParent": {
+                "tempEntityId": null,
+                "IsRelative": false,
+                "EntityId": "787f8ced-12e4-414e-a043-0a7aec0039cf",
+                "Version2": false
+              },
+              "screenLeftX": -1.0,
+              "screenRightX": 12.0
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "787f8ced-12e4-414e-a043-0a7aec0039cf",
+        "path": "/maps/map03/TileParent",
         "componentNames": "MOD.Core.TransformComponent",
         "jsonString": {
           "name": "TileParent",
-          "path": "/maps/map02/TileParent",
+          "path": "/maps/map03/TileParent",
           "nameEditable": true,
           "enable": true,
           "visible": true,
@@ -354,12 +382,12 @@
         }
       },
       {
-        "id": "b93591a8-3bdd-446c-a265-e7e41c248799",
-        "path": "/maps/map02/TileParent/pattern",
-        "componentNames": "MOD.Core.TransformComponent",
+        "id": "e8a30933-4da9-46e2-b937-9b07893acccc",
+        "path": "/maps/map03/TileParent/pattern",
+        "componentNames": "MOD.Core.TransformComponent,script.TileData",
         "jsonString": {
           "name": "pattern",
-          "path": "/maps/map02/TileParent/pattern",
+          "path": "/maps/map03/TileParent/pattern",
           "nameEditable": true,
           "enable": true,
           "visible": true,
@@ -379,8 +407,8 @@
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {
-                "x": -4.31,
-                "y": -5.56,
+                "x": -0.08,
+                "y": 0.0,
                 "z": 0.0
               },
               "QuaternionRotation": {
@@ -395,18 +423,23 @@
                 "z": 1.0
               },
               "Enable": true
+            },
+            {
+              "@type": "script.TileData",
+              "Enable": true,
+              "TileWidth": 12.5
             }
           ],
           "@version": 1
         }
       },
       {
-        "id": "1c5830c9-eea7-4218-ba2d-1e0eae5e1241",
-        "path": "/maps/map02/TileParent/pattern/foothold-31",
+        "id": "9d9f5662-fc78-42af-8fbc-c7cf76b024df",
+        "path": "/maps/map03/TileParent/pattern/foothold-31",
         "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
         "jsonString": {
           "name": "foothold-31",
-          "path": "/maps/map02/TileParent/pattern/foothold-31",
+          "path": "/maps/map03/TileParent/pattern/foothold-31",
           "nameEditable": true,
           "enable": true,
           "visible": true,
@@ -426,8 +459,8 @@
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {
-                "x": -1.1519,
-                "y": 0.0,
+                "x": -0.6707,
+                "y": -3.1322,
                 "z": 0.0
               },
               "QuaternionRotation": {
@@ -480,12 +513,12 @@
         }
       },
       {
-        "id": "b76120f4-341e-4261-92b7-51ac2c4a08ba",
-        "path": "/maps/map02/TileParent/pattern/foothold-31_1",
+        "id": "cf9ddeb1-2fee-48f8-bcd9-1a287ef73ce9",
+        "path": "/maps/map03/TileParent/pattern/foothold-31_1",
         "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
         "jsonString": {
           "name": "foothold-31_1",
-          "path": "/maps/map02/TileParent/pattern/foothold-31_1",
+          "path": "/maps/map03/TileParent/pattern/foothold-31_1",
           "nameEditable": true,
           "enable": true,
           "visible": true,
@@ -505,8 +538,8 @@
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {
-                "x": 8.5936,
-                "y": 0.4578,
+                "x": 8.3624,
+                "y": -3.1439,
                 "z": 0.0
               },
               "QuaternionRotation": {
@@ -559,12 +592,12 @@
         }
       },
       {
-        "id": "a1365e9f-7cf1-4cd6-a561-1fd6a8c2e271",
-        "path": "/maps/map02/TileParent/pattern/foothold-31_2",
+        "id": "d01e1a61-684d-46a1-b116-925db6f83d73",
+        "path": "/maps/map03/TileParent/pattern/foothold-31_2",
         "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
         "jsonString": {
           "name": "foothold-31_2",
-          "path": "/maps/map02/TileParent/pattern/foothold-31_2",
+          "path": "/maps/map03/TileParent/pattern/foothold-31_2",
           "nameEditable": true,
           "enable": true,
           "visible": true,
@@ -584,8 +617,8 @@
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {
-                "x": 19.6693,
-                "y": 0.0,
+                "x": 17.4082,
+                "y": -3.1633,
                 "z": 0.0
               },
               "QuaternionRotation": {
@@ -638,12 +671,12 @@
         }
       },
       {
-        "id": "ee6b67e7-b245-4156-9672-12cf84d8176e",
-        "path": "/maps/map02/TileParent/pattern_1",
+        "id": "c2867f1e-f728-45aa-b296-575e2e7e27a8",
+        "path": "/maps/map03/TileParent/pattern_1",
         "componentNames": "MOD.Core.TransformComponent,script.TileData",
         "jsonString": {
           "name": "pattern_1",
-          "path": "/maps/map02/TileParent/pattern_1",
+          "path": "/maps/map03/TileParent/pattern_1",
           "nameEditable": true,
           "enable": false,
           "visible": true,
@@ -663,9 +696,9 @@
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {
-                "x": 4.9624,
-                "y": 2.0438,
-                "z": 999.999
+                "x": 27.91,
+                "y": 0.0,
+                "z": 0.0
               },
               "QuaternionRotation": {
                 "x": 0.0,
@@ -683,19 +716,19 @@
             {
               "@type": "script.TileData",
               "Enable": true,
-              "TileWidth": 29.7
+              "TileWidth": 12.5
             }
           ],
           "@version": 1
         }
       },
       {
-        "id": "9b6ae2b8-33b8-4cf9-bcdf-dcef7ff043f7",
-        "path": "/maps/map02/TileParent/pattern_1/foothold-31",
+        "id": "410003e5-c06a-454a-8c68-5763da6b406f",
+        "path": "/maps/map03/TileParent/pattern_1/foothold-31",
         "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
         "jsonString": {
           "name": "foothold-31",
-          "path": "/maps/map02/TileParent/pattern_1/foothold-31",
+          "path": "/maps/map03/TileParent/pattern_1/foothold-31",
           "nameEditable": true,
           "enable": true,
           "visible": true,
@@ -715,9 +748,9 @@
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {
-                "x": -2.4328,
-                "y": -1.6683,
-                "z": -1000.0
+                "x": 7.5289,
+                "y": -3.185,
+                "z": 0.0
               },
               "QuaternionRotation": {
                 "x": 0.0,
@@ -749,6 +782,7 @@
             },
             {
               "@type": "MOD.Core.CustomFootholdComponent",
+              "IsDynamicFoothold": false,
               "edgeLists": [
                 [
                   {
@@ -768,12 +802,12 @@
         }
       },
       {
-        "id": "ac7ab03d-bcd8-4797-846f-7232acc99fe2",
-        "path": "/maps/map02/TileParent/pattern_1/foothold-31_1",
+        "id": "31dabc7f-4e23-495b-b036-5e8052bbc376",
+        "path": "/maps/map03/TileParent/pattern_1/foothold-31_1",
         "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
         "jsonString": {
           "name": "foothold-31_1",
-          "path": "/maps/map02/TileParent/pattern_1/foothold-31_1",
+          "path": "/maps/map03/TileParent/pattern_1/foothold-31_1",
           "nameEditable": true,
           "enable": true,
           "visible": true,
@@ -793,9 +827,9 @@
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {
-                "x": 7.6307,
-                "y": -1.0093,
-                "z": -1000.0
+                "x": -1.4971,
+                "y": -3.1851,
+                "z": 0.0
               },
               "QuaternionRotation": {
                 "x": 0.0,
@@ -827,6 +861,7 @@
             },
             {
               "@type": "MOD.Core.CustomFootholdComponent",
+              "IsDynamicFoothold": false,
               "edgeLists": [
                 [
                   {
@@ -846,12 +881,12 @@
         }
       },
       {
-        "id": "f7a0d66c-2efb-47aa-b4a1-7109758af332",
-        "path": "/maps/map02/TileParent/pattern_1/foothold-31_2",
+        "id": "2713b7b4-d6b4-4c8e-88a6-f662fe8af785",
+        "path": "/maps/map03/TileParent/pattern_1/foothold-31_2",
         "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
         "jsonString": {
           "name": "foothold-31_2",
-          "path": "/maps/map02/TileParent/pattern_1/foothold-31_2",
+          "path": "/maps/map03/TileParent/pattern_1/foothold-31_2",
           "nameEditable": true,
           "enable": true,
           "visible": true,
@@ -871,9 +906,9 @@
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {
-                "x": 18.4213,
-                "y": -1.6683,
-                "z": -1000.0
+                "x": 16.6047,
+                "y": -3.1878,
+                "z": 0.0
               },
               "QuaternionRotation": {
                 "x": 0.0,
@@ -905,6 +940,7 @@
             },
             {
               "@type": "MOD.Core.CustomFootholdComponent",
+              "IsDynamicFoothold": false,
               "edgeLists": [
                 [
                   {
@@ -917,6 +953,348 @@
                   }
                 ]
               ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "0a69d907-1d48-4780-b9cd-4cfb098fd6d1",
+        "path": "/maps/map03/TileParent/pattern_2",
+        "componentNames": "MOD.Core.TransformComponent,script.TileData",
+        "jsonString": {
+          "name": "pattern_2",
+          "path": "/maps/map03/TileParent/pattern_2",
+          "nameEditable": true,
+          "enable": false,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 2,
+          "pathConstraints": "////",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "mapempty",
+            "sub_entity_id": null,
+            "root_entity_id": "bfe0095e-2af5-41ed-8251-6cd1a7a5300b",
+            "replaced_model_id": null
+          },
+          "modelId": "mapempty",
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Position": {
+                "x": 36.9467,
+                "y": 0.0448,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "script.TileData",
+              "Enable": true,
+              "TileWidth": 12.5
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "0d6a2313-6a7b-4ef7-9652-a66b1ea573f3",
+        "path": "/maps/map03/TileParent/pattern_2/foothold-31",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
+        "jsonString": {
+          "name": "foothold-31",
+          "path": "/maps/map03/TileParent/pattern_2/foothold-31",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 0,
+          "pathConstraints": "/////",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "Foothold",
+            "sub_entity_id": null,
+            "root_entity_id": "c6d6a8ad-3435-44a5-86c5-4c1506531243",
+            "replaced_model_id": null
+          },
+          "modelId": "foothold",
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Position": {
+                "x": 7.5289,
+                "y": -3.185,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 2,
+              "EndFrameIndex": 2147483647,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "0f76d370541b43a189bee711ea2a65c8",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 10.0,
+                "y": 5.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.CustomFootholdComponent",
+              "IsDynamicFoothold": false,
+              "edgeLists": [
+                [
+                  {
+                    "x": -0.433707476,
+                    "y": 2.78779244
+                  },
+                  {
+                    "x": 8.526582,
+                    "y": 2.78779244
+                  }
+                ]
+              ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "a363808a-8eb7-4dd9-b496-4e2b2e0d3b30",
+        "path": "/maps/map03/TileParent/pattern_2/foothold-31_1",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
+        "jsonString": {
+          "name": "foothold-31_1",
+          "path": "/maps/map03/TileParent/pattern_2/foothold-31_1",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 1,
+          "pathConstraints": "/////",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "Foothold",
+            "sub_entity_id": null,
+            "root_entity_id": "c6d6a8ad-3435-44a5-86c5-4c1506531243",
+            "replaced_model_id": null
+          },
+          "modelId": "foothold",
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Position": {
+                "x": -1.4971,
+                "y": -3.1851,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 2,
+              "EndFrameIndex": 2147483647,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "0f76d370541b43a189bee711ea2a65c8",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 10.0,
+                "y": 5.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.CustomFootholdComponent",
+              "IsDynamicFoothold": false,
+              "edgeLists": [
+                [
+                  {
+                    "x": -0.433707476,
+                    "y": 2.787792
+                  },
+                  {
+                    "x": 8.526582,
+                    "y": 2.78779244
+                  }
+                ]
+              ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "e347aa82-78d2-44e3-901c-33549043fbba",
+        "path": "/maps/map03/TileParent/pattern_2/foothold-31_2",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
+        "jsonString": {
+          "name": "foothold-31_2",
+          "path": "/maps/map03/TileParent/pattern_2/foothold-31_2",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 2,
+          "pathConstraints": "/////",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "Foothold",
+            "sub_entity_id": null,
+            "root_entity_id": "c6d6a8ad-3435-44a5-86c5-4c1506531243",
+            "replaced_model_id": null
+          },
+          "modelId": "foothold",
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Position": {
+                "x": 16.6047,
+                "y": -3.1878,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 2,
+              "EndFrameIndex": 2147483647,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "0f76d370541b43a189bee711ea2a65c8",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 10.0,
+                "y": 5.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.CustomFootholdComponent",
+              "IsDynamicFoothold": false,
+              "edgeLists": [
+                [
+                  {
+                    "x": -0.433707476,
+                    "y": 2.787792
+                  },
+                  {
+                    "x": 8.526582,
+                    "y": 2.78779244
+                  }
+                ]
+              ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "fa3871b6-0c0c-4c64-9ce2-669fecdde9bd",
+        "path": "/maps/map03/TileMap",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.TileMapComponent",
+        "jsonString": {
+          "name": "TileMap",
+          "path": "/maps/map03/TileMap",
+          "nameEditable": false,
+          "enable": false,
+          "visible": false,
+          "localize": false,
+          "displayOrder": 5,
+          "pathConstraints": "///",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "tilemap",
+            "sub_entity_id": null,
+            "root_entity_id": null,
+            "replaced_model_id": null
+          },
+          "modelId": "tilemap",
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Position": {
+                "x": -0.225,
+                "y": -0.15,
+                "z": 1000.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.TileMapComponent",
+              "IsOddGridPosition": false,
+              "SortingLayer": "MapLayer0",
+              "TileMapVersion": 1,
+              "TileSetRUID": {
+                "DataId": "0c2eaa8e49a74e1fb70c9e7286483814"
+              },
+              "Tiles": [],
               "Enable": true
             }
           ],

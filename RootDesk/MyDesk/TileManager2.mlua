@@ -1,0 +1,4 @@
+@Component
+script TileManager2 extends Component
+
+end

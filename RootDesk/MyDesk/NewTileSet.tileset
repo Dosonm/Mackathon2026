@@ -1,0 +1,21 @@
+{
+  "Id": "",
+  "GameId": "",
+  "EntryKey": "tileset://f95b8e33-3ddd-4035-ac41-a10be93997f8",
+  "ContentType": "x-mod/tileset",
+  "Content": "",
+  "Usage": 0,
+  "UsePublish": 1,
+  "UseService": 0,
+  "CoreVersion": "26.3.0.0",
+  "StudioVersion": "0.1.0.0",
+  "DynamicLoading": 0,
+  "ContentProto": {
+    "Use": "Json",
+    "Json": {
+      "name": "NewTileSet",
+      "id": "tileset://f95b8e33-3ddd-4035-ac41-a10be93997f8",
+      "datas": []
+    }
+  }
+}

@@ -1,0 +1,100 @@
+@Component
+script TileManager extends Component
+
+	property Entity background = nil
+	property number tileSpeed = 5
+	property number backgroundSpeed = 2
+
+	-- 순서가 모두 고정되어 있다고 하니 parent에 자식으로 순서대로 entity를 넣으면 됨
+	property Entity TileParent = nil
+
+	-- 화면 좌우 경계 (카메라 기준 월드 좌표) // 직접 입력
+	property number screenLeftX = nil
+	property number screenRightX = nil
+
+	-- 순서대로 배치할 타일 목록 { entity, width }
+	property table _tiles = {}
+
+	-- 활성 타일 목록 { entity, width }
+	property table _activeTiles = {}
+
+	-- 다음에 배치할 타일 인덱스
+	property number _nextTileIndex = 1
+
+	@ExecSpace("ClientOnly")
+	method void OnBeginPlay()
+		self:_BuildTileList(self.TileParent)
+
+		-- 화면을 채울 만큼 초기 타일 배치
+		local spawned = 0
+		while self:_GetRightEdge() < self.screenRightX do
+			self:_SpawnNextTile()
+			spawned = spawned + 1
+			if spawned > 20 then break end
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void OnUpdate(number delta)
+		local move = self.tileSpeed * delta
+
+		--배경 스크롤
+		local bg = self.background.TransformComponent
+		--bg.Position = Vector3(bg.Position.x - self.backgroundSpeed * delta, bg.Position.y, bg.Position.z)
+		bg:Translate(-0.01*self.backgroundSpeed,0)
+
+		--활성 타일 이동 + 왼쪽으로 벗어난 타일 재활용
+		local i = 1
+		while i <= #self._activeTiles do
+
+			local entry = self._activeTiles[i]
+			local tf = entry.entity.TransformComponent
+			tf:Translate(-0.01*self.tileSpeed,0)
+			--tf.Position = Vector3(tf.Position.x - move, tf.Position.y, tf.Position.z)
+
+			if tf.Position.x + entry.width < self.screenLeftX then
+				entry.entity:SetEnable(false)
+				table.remove(self._activeTiles, i)
+				self:_SpawnNextTile()
+			else
+				i = i + 1
+			end
+		end
+	end
+
+	method number _GetRightEdge()
+		if #self._activeTiles == 0 then
+			return self.screenLeftX
+		end
+
+		local last = self._activeTiles[#self._activeTiles]
+		return last.entity.TransformComponent.Position.x + last.width
+	end
+
+	method void _SpawnNextTile()
+		if #self._tiles == 0 then return end
+
+		local entry = self._tiles[self._nextTileIndex]
+		self._nextTileIndex = (self._nextTileIndex % #self._tiles) + 1
+
+		local spawnX = self:_GetRightEdge()
+		entry.entity.TransformComponent.Position = Vector3(spawnX, 0, 0)
+		entry.entity:SetEnable(true)
+		table.insert(self._activeTiles, entry)
+	end
+
+	-- TileParent 자식들을 순서대로 등록, CustomFootholdComponent로 너비 계산
+	method void _BuildTileList(Entity parent)
+		if parent == nil then return end
+		local templates = parent.Children
+		if templates == nil or #templates == 0 then return end
+
+		for i = 1, #templates do
+			local entity = templates[i]
+			local width = entity.TileData.TileWidth
+			entity:SetEnable(false)
+			table.insert(self._tiles, { entity = entity, width = width })
+		end
+	end
+
+end

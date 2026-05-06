@@ -328,7 +328,7 @@
       {
         "id": "059bad79-e945-490e-b4f4-6b53aed4a5b6",
         "path": "/maps/map01/TileScroller",
-        "componentNames": "MOD.Core.TransformComponent,script.TileScroller",
+        "componentNames": "MOD.Core.TransformComponent",
         "jsonString": {
           "name": "TileScroller",
           "path": "/maps/map01/TileScroller",
@@ -362,24 +362,6 @@
                 "w": 1.0
               },
               "Enable": true
-            },
-            {
-              "@type": "script.TileScroller",
-              "Enable": true,
-              "tiles": {
-                "tempEntityId": null,
-                "IsRelative": false,
-                "EntityId": "72a28878-d075-4582-a151-3f668ae01a21",
-                "Version2": false
-              },
-              "background": {
-                "tempEntityId": null,
-                "IsRelative": false,
-                "EntityId": "da9ffdad-2ba8-4360-9eb4-57e02f74f9e8",
-                "Version2": false
-              },
-              "tileSpeed": 1.0,
-              "backgroundSpeed": 0.0
             }
           ],
           "@version": 1

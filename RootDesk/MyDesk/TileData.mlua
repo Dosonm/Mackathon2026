@@ -1,0 +1,6 @@
+@Component
+script TileData extends Component
+
+	property number TileWidth = nil
+
+end

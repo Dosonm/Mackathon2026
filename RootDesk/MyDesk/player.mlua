@@ -1,0 +1,50 @@
+@Component
+script player extends Component
+
+	property any movement = nil
+
+	property SideviewbodyComponent body = nil
+
+	property number speed = 5
+
+	property boolean isReadyToJump = true
+
+	property number landTimer = 0
+
+	property boolean wasOnGround = true
+
+	property ButtonComponent btnComponent = nil
+
+	@ExecSpace("ClientOnly")
+	method void OnBeginPlay()
+		self.movement = self.Entity.MovementComponent
+		self.body = self.Entity.SideviewbodyComponent
+	end
+
+	@ExecSpace("ClientOnly")
+	method void OnUpdate(number delta)
+		self.movement:MoveToDirection(Vector2(1, 0), delta)
+		
+		local onGround = self.body:IsOnGround()
+		log(self.body:IsOnGround())
+		
+		if onGround and not self.wasOnGround then
+			self.isReadyToJump = false
+			self.landTimer = 0
+			self.btnComponent.Enable = false;
+			log("dd")
+		end
+		
+		if not self.isReadyToJump then
+			self.landTimer = self.landTimer + delta
+			if self.landTimer >= .5 then
+				self.isReadyToJump = true
+				self.btnComponent.Enable = true;
+				log("ss")
+			end
+		end
+		
+		self.wasOnGround = onGround
+	end
+
+end
