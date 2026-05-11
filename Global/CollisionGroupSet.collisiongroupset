@@ -37,31 +37,71 @@
         {
           "Id": "MOD@Climbable",
           "Name": "Climbable"
+        },
+        {
+          "Id": "184abcedde304cd6ae74c4c93cf4125c",
+          "Name": "Player"
+        },
+        {
+          "Id": "2c56fac883b84ce3b524cb8f3e883ccd",
+          "Name": "Monster"
+        },
+        {
+          "Id": "01414ff9aa8548b3b00cb1e51cbda3ce",
+          "Name": "Trap"
+        },
+        {
+          "Id": "e19d3559a1d34ec79853dc9399f837c7",
+          "Name": "Hole"
         }
       ],
       "Matrix": {
         "2dbfc8c0830f4e1aa9c66337384cfa80": [
-          "2dbfc8c0830f4e1aa9c66337384cfa80"
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
+          "184abcedde304cd6ae74c4c93cf4125c",
+          "2c56fac883b84ce3b524cb8f3e883ccd",
+          "01414ff9aa8548b3b00cb1e51cbda3ce",
+          "e19d3559a1d34ec79853dc9399f837c7"
         ],
         "MOD@TriggerBox": [
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
           "MOD@TriggerBox"
         ],
         "MOD@HitBox": [
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
           "MOD@HitBox"
         ],
         "MOD@Interaction": [
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
           "MOD@Interaction"
         ],
         "MOD@Portal": [
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
           "MOD@Portal"
         ],
         "MOD@Climbable": [
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
           "MOD@Climbable"
+        ],
+        "184abcedde304cd6ae74c4c93cf4125c": [
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
+          "2c56fac883b84ce3b524cb8f3e883ccd",
+          "01414ff9aa8548b3b00cb1e51cbda3ce",
+          "e19d3559a1d34ec79853dc9399f837c7"
+        ],
+        "2c56fac883b84ce3b524cb8f3e883ccd": [
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
+          "184abcedde304cd6ae74c4c93cf4125c"
+        ],
+        "01414ff9aa8548b3b00cb1e51cbda3ce": [
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
+          "184abcedde304cd6ae74c4c93cf4125c"
+        ],
+        "e19d3559a1d34ec79853dc9399f837c7": [
+          "2dbfc8c0830f4e1aa9c66337384cfa80",
+          "184abcedde304cd6ae74c4c93cf4125c"
         ]
-      },
-      "worldCoreVersion": "26.3.0.0",
-      "worldStudioVersion": "0.1.0.0",
-      "useService": 0
+      }
     }
   }
 }

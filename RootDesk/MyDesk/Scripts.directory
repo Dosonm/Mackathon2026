@@ -1,7 +1,7 @@
 {
   "Id": "",
   "GameId": "",
-  "EntryKey": "directory://c587008953864380be797528df436638",
+  "EntryKey": "directory://097382caba144dada4aa1c1541417df7",
   "ContentType": "x-mod/directory",
   "Content": "",
   "Usage": 0,
@@ -13,8 +13,8 @@
   "ContentProto": {
     "Use": "Json",
     "Json": {
-      "entry_id": "directory://c587008953864380be797528df436638",
-      "name": "Models",
+      "entry_id": "directory://097382caba144dada4aa1c1541417df7",
+      "name": "Scripts",
       "lock": false,
       "folding": false,
       "nameEditable": true
