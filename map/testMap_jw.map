@@ -73,7 +73,7 @@
                 ],
                 "2": [
                   {
-                    "Length": 101.0,
+                    "Length": 10001.0,
                     "NextFootholdId": 0,
                     "PreviousFootholdId": 0,
                     "groupID": 2,
@@ -92,11 +92,11 @@
                     "Id": 2,
                     "StartPoint": {
                       "x": -1.0,
-                      "y": -1.0
+                      "y": -0.61
                     },
                     "EndPoint": {
-                      "x": 100.0,
-                      "y": -1.0
+                      "x": 10000.0,
+                      "y": -0.61
                     },
                     "Variance": {
                       "x": 1.0,
@@ -370,8 +370,7 @@
             {
               "@type": "script.ScrollManager",
               "Enable": true,
-              "patternTable": "{\"k\":\"number\",\"v\":\"string\",\"e\":{\"1\":\"model://130ae093-d834-4048-b860-d8e52ac1dc52\",\"2\":\"model://bcabb362-a493-45dd-8996-f5c57ec9f184\"}}",
-              "Player": null
+              "patternTable": "{\"k\":\"number\",\"v\":\"string\",\"e\":{\"1\":\"130ae093-d834-4048-b860-d8e52ac1dc52\",\"2\":\"bcabb362-a493-45dd-8996-f5c57ec9f184\"}}"
             }
           ],
           "@version": 1
@@ -466,11 +465,11 @@
                 [
                   {
                     "x": -1.0,
-                    "y": 0.0
+                    "y": 0.39
                   },
                   {
-                    "x": 100.0,
-                    "y": 0.0
+                    "x": 10000.0,
+                    "y": 0.39
                   }
                 ]
               ],
@@ -831,48 +830,6 @@
             },
             {
               "@type": "script.HoleComponent",
-              "Enable": true
-            }
-          ],
-          "@version": 1
-        }
-      },
-      {
-        "id": "a95da3a9-3a60-4376-a6ce-ca8c3457da5c",
-        "path": "/maps/testMap_jw/MapEmpty",
-        "componentNames": "MOD.Core.TransformComponent",
-        "jsonString": {
-          "name": "MapEmpty",
-          "path": "/maps/testMap_jw/MapEmpty",
-          "nameEditable": true,
-          "enable": true,
-          "visible": true,
-          "localize": false,
-          "displayOrder": 8,
-          "pathConstraints": "///",
-          "revision": 1,
-          "origin": {
-            "type": "Model",
-            "entry_id": "mapempty",
-            "sub_entity_id": null,
-            "root_entity_id": "a95da3a9-3a60-4376-a6ce-ca8c3457da5c",
-            "replaced_model_id": null
-          },
-          "modelId": "mapempty",
-          "@components": [
-            {
-              "@type": "MOD.Core.TransformComponent",
-              "Position": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-              },
-              "QuaternionRotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "w": 1.0
-              },
               "Enable": true
             }
           ],

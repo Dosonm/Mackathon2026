@@ -5,36 +5,120 @@ script ScrollManager extends Component
 
 	property number totalLength = 0
 
-	@HideFromInspector
-	property Entity Player = nil
+	property number totalCount = 0
 
 	@ExecSpace("ServerOnly")
 	method void OnBeginPlay()
-		self.Player = _EntityService:GetEntityByTag("Player")
+		self._T.lastPatterns = {}
+		self._T.pool = {}
+		local length = _SyncTableExtend:GetLength(self.patternTable)
+		for i = 1, length do
+			table.insert(self._T.pool, {})
+		end
 		
-		local length = self:GetSyncTableLength(self.patternTable)
+		--local length = self:GetSyncTableLength(self.patternTable)
 		
-		for i = 1, 3 do
-			local index = math.random(length)
-			local spawnPosition = Vector3(self.totalLength, 0, 0)
-			
-			local pattern
-				= _SpawnService:SpawnByModelId(self.patternTable[index], "pattern", spawnPosition, self.Entity)
-			if isvalid(pattern.PatternComponent) then
-				self.totalLength += pattern.PatternComponent.patternLength
+		--for i = 1, 100 do
+		--    local index = math.random(length)
+		--    local spawnPosition = Vector3(self.totalLength, 0, 0)
+		--    
+		--    local pattern = self:SpawnPattern(index, spawnPosition)
+		--    if isvalid(pattern.PatternComponent) then
+		--        self.totalLength += pattern.PatternComponent.patternLength
+		--        self.totalCount += 1
+		--    end
+		--end
+	end
+
+	@ExecSpace("ServerOnly")
+	method void OnUpdate(number delta)
+		if isvalid(self._T.player) == false then
+			self._T.player = _EntityService:GetEntitiesSpawnedByModelId("model://defaultplayer")[1]
+			if isvalid(self._T.player) == false then
+				return
 			end
 		end
 		
-		self._T.object = 1
+		if self.totalLength > 0 then
+		    local playerPosition = self._T.player.TransformComponent.WorldPosition
+			local remainDistance = self.totalLength - playerPosition.x
+			
+		    --if remainDistance < 10 then
+		    --    self:ReleasePattern(self.Entity.Children[1])
+		    --end
+			
+			if remainDistance < 10 then
+		        if isvalid(self._T.lastPatterns[1]) then
+		            self:ReleasePattern(self._T.lastPatterns[1])	
+		        end
+				self:SpawnRandomPattern()
+			end
+		else
+			self:SpawnRandomPattern()
+			self:SpawnRandomPattern()
+		end
 	end
 
-	method integer GetSyncTableLength(SyncTable<string> table)
-		local length = 0
-		for _ in pairs(table) do
-		    length += 1
-		end
+	method void SpawnRandomPattern()
+		local length = _SyncTableExtend:GetLength(self.patternTable)
 		
-		return length
+		local index = math.random(length)
+		local spawnPosition = Vector3(self.totalLength, 0, 0)
+		
+		local pattern = self:SpawnPattern(index, spawnPosition)
+		table.insert(self._T.lastPatterns, pattern)
+		
+		if isvalid(pattern.PatternComponent) then
+			self.totalLength += pattern.PatternComponent.patternLength
+			self.totalCount += 1
+		else
+			log("MISSING: PatternComponent-", pattern.Model.Name)
+		end
+	end
+
+	method Entity SpawnPattern(integer idx, Vector3 position)
+		local pattern = self:GetPattern(idx)
+		
+		pattern.Enable = true
+		pattern.TransformComponent.WorldPosition = position
+		
+		return pattern
+	end
+
+	method Entity GetPattern(integer idx)
+		--local patterns = self._T.pool[idx]
+		--if patterns then
+		--    local pattern = patterns[1]
+		--    if pattern then
+		--        log(idx)
+		--        table.remove(self._T.pool[idx][1])
+		--        return pattern
+		--    end
+		--end
+		
+		local pattern = self._T.pool[idx][1]
+			if pattern then
+				table.remove(self._T.pool[idx], 1)
+				return pattern
+			end
+		
+		return self:CreatePattern(idx)
+	end
+
+	method Entity CreatePattern(integer idx)
+		local pattern
+			= _SpawnService:SpawnByModelId(self.patternTable[idx], "pattern", Vector3.zero, self.Entity)
+		return pattern
+	end
+
+	method void ReleasePattern(Entity pattern)
+		local idx = _SyncTableExtend:GetFirstIndex(self.patternTable, pattern.Model.Id)
+		
+		if idx >= 1 then
+			pattern.Enable = false
+			table.insert(self._T.pool[idx], pattern)
+			table.remove(self._T.lastPatterns, 1)
+		end
 	end
 
 end
