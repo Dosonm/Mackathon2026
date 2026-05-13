@@ -1,0 +1,18 @@
+@Component
+script JumpButton extends Component
+	property player player = nil
+	--property StateComponent StateComponent = nil
+
+	method void OnBeginPlay()
+		player = _UserService.LocalPlayer.player
+		--StateComponent = player.Entity.StateComponent
+	end
+	@EventSender("Self")
+    handler HandleButtonPressedEvent(ButtonPressedEvent event)	--플레이어 점프 후 상태변환 + 공중에 뜸 -> 버튼 이벤트 호출 (순서)이기 때문에
+		if player.jumpCount == 0 then
+			_UserService.LocalPlayer.player:Jump()
+		elseif player.jumpCount == 1 then
+			_UserService.LocalPlayer.player:TryDoubleJump()
+		end
+    end
+end
