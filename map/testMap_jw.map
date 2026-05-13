@@ -120,11 +120,11 @@
                     "OwnerId": "eabca104-7127-4844-817b-31bc8cfeef1c",
                     "Id": 3,
                     "StartPoint": {
-                      "x": 4.2853,
+                      "x": 4.2504,
                       "y": 1.18
                     },
                     "EndPoint": {
-                      "x": 5.7853,
+                      "x": 5.7504,
                       "y": 1.18
                     },
                     "Variance": {
@@ -376,6 +376,88 @@
         }
       },
       {
+        "id": "4ce626a6-8f29-4c3e-9a1a-d0952133aeb4",
+        "path": "/maps/testMap_jw/pattern1/item1",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,script.ItemComponent,MOD.Core.HitComponent",
+        "jsonString": {
+          "name": "item1",
+          "path": "/maps/testMap_jw/pattern1/item1",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 0,
+          "pathConstraints": "////",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "mapempty",
+            "sub_entity_id": null,
+            "root_entity_id": "4ce626a6-8f29-4c3e-9a1a-d0952133aeb4",
+            "replaced_model_id": null
+          },
+          "modelId": "mapempty",
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 5.0175,
+                "y": 1.4771,
+                "z": 999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": -1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "EndFrameIndex": 2147483647,
+              "RenderSetting": 0,
+              "SpriteRUID": "020b25de085f4c34a5f46f5a388b0c51",
+              "StartFrameIndex": 0,
+              "Enable": true
+            },
+            {
+              "@type": "script.ItemComponent",
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.HitComponent",
+              "BoxSize": {
+                "x": 0.26,
+                "y": 0.26
+              },
+              "ColliderOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "CollisionGroup": {
+                "Id": "13095fd3915c440fa708bcb3fdea4e75"
+              },
+              "IsLegacy": false,
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
         "id": "4c001fc0-7851-4294-8fa6-4445232eef23",
         "path": "/maps/testMap_jw/pattern1/Model_trap1",
         "componentNames": "MOD.Core.TransformComponent,MOD.Core.StateAnimationComponent,MOD.Core.SpriteRendererComponent,MOD.Core.HitComponent,script.TrapAttack",
@@ -386,7 +468,7 @@
           "enable": true,
           "visible": true,
           "localize": false,
-          "displayOrder": 0,
+          "displayOrder": 1,
           "pathConstraints": "////",
           "revision": 1,
           "origin": {
@@ -450,7 +532,7 @@
           "enable": true,
           "visible": true,
           "localize": false,
-          "displayOrder": 1,
+          "displayOrder": 2,
           "pathConstraints": "////",
           "revision": 1,
           "origin": {
@@ -498,7 +580,7 @@
           "enable": true,
           "visible": true,
           "localize": false,
-          "displayOrder": 2,
+          "displayOrder": 3,
           "pathConstraints": "////",
           "revision": 1,
           "origin": {
@@ -546,7 +628,7 @@
           "enable": true,
           "visible": true,
           "localize": false,
-          "displayOrder": 3,
+          "displayOrder": 4,
           "pathConstraints": "////",
           "revision": 1,
           "origin": {
@@ -560,13 +642,8 @@
           "@components": [
             {
               "@type": "MOD.Core.TransformComponent",
-              "Rotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-              },
               "Position": {
-                "x": 5.0353,
+                "x": 5.0004,
                 "y": 0.79,
                 "z": 999.999
               },
@@ -574,14 +651,13 @@
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0,
-                "w": -1.0
+                "w": 1.0
               },
               "Scale": {
                 "x": 1.0,
                 "y": 1.0,
                 "z": 1.0
               },
-              "ZRotation": 0.0,
               "Enable": true
             },
             {
@@ -609,7 +685,7 @@
           "enable": true,
           "visible": true,
           "localize": false,
-          "displayOrder": 4,
+          "displayOrder": 5,
           "pathConstraints": "////",
           "revision": 1,
           "origin": {
