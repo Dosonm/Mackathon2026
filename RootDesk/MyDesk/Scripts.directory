@@ -1,7 +1,7 @@
 {
   "Id": "",
   "GameId": "",
-  "EntryKey": "directory://11f5ce0ea379472ab2911b1edfad54ec",
+  "EntryKey": "directory://097382caba144dada4aa1c1541417df7",
   "ContentType": "x-mod/directory",
   "Content": "",
   "Usage": 0,
@@ -13,8 +13,8 @@
   "ContentProto": {
     "Use": "Json",
     "Json": {
-      "entry_id": "directory://11f5ce0ea379472ab2911b1edfad54ec",
-      "name": "test",
+      "entry_id": "directory://097382caba144dada4aa1c1541417df7",
+      "name": "Scripts",
       "lock": false,
       "folding": false,
       "nameEditable": true
