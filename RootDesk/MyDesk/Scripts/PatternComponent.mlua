@@ -1,0 +1,7 @@
+@Component
+script PatternComponent extends Component
+
+	@Sync
+	property number patternLength = 0
+
+end
