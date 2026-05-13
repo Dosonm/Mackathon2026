@@ -1,4 +1,122 @@
 @Component
 script TileManager2 extends Component
 
+	-- 순서가 모두 고정되어 있다고 하니 parent에 자식으로 순서대로 entity를 넣으면 됨
+	property Entity TileParent = nil
+
+	-- 플레이어 엔티티 (위치 기준으로 패턴 배치)
+	property Entity PlayerEntity = nil
+
+	-- 화면 좌우 경계 (플레이어 기준 상대 오프셋)
+	property number screenLeftX = -10
+	property number screenRightX = 10
+
+	-- 동시 활성화할 최대 패턴 수
+	property number maxActivePatterns = 2
+
+	-- 패턴 풀 { entity, width }
+	property table _pool = {}
+
+	-- 활성 패턴 목록 { entity, width, spawnX }
+	property table _activePatterns = {}
+
+	-- 다음에 배치할 패턴 인덱스
+	property number _nextPatternIndex = 1
+
+	-- 마지막으로 패턴이 배치된 X 좌표 (월드)
+	property number _lastSpawnedRightEdge = 0
+
+	@ExecSpace("ClientOnly")
+	method void OnBeginPlay()
+		self:_BuildPool(self.TileParent)
+
+		-- 플레이어 초기 위치 기준으로 패턴 2개 미리 배치
+		local playerX = self:_GetPlayerX()
+		self._lastSpawnedRightEdge = playerX + self.screenLeftX
+
+		while #self._activePatterns < self.maxActivePatterns do
+			self:_SpawnNextPattern()
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void OnUpdate(number delta)
+		
+		local playerX = self:_GetPlayerX()
+
+		-- 플레이어 뒤로 벗어난 패턴 비활성화 후 반환
+		local i = 1
+		while i <= #self._activePatterns do
+			local entry = self._activePatterns[i]
+			local patternRightEdge = entry.spawnX + entry.width
+
+			-- 패턴 오른쪽 끝이 플레이어 기준 왼쪽 경계보다 뒤에 있으면 제거
+			if patternRightEdge < playerX + self.screenLeftX then
+				entry.entity:SetEnable(false)
+				table.remove(self._activePatterns, i)
+			else
+				i = i + 1
+			end
+		end
+
+		-- 활성 패턴이 maxActivePatterns보다 적으면 새 패턴 보충
+		while #self._activePatterns < self.maxActivePatterns do
+			self:_SpawnNextPattern()
+		end
+	end
+
+	-- 플레이어 찾기
+	method void _GetPlayer()
+		self.PlayerEntity = _UserService.LocalPlayer
+	end
+
+	-- 플레이어 X 좌표 반환
+	method number _GetPlayerX()
+		if self.PlayerEntity == nil then return 0 end
+		return self.PlayerEntity.TransformComponent.Position.x
+	end
+
+	-- 현재 배치된 패턴들의 가장 오른쪽 X 좌표
+	method number _GetSpawnEdge()
+		if #self._activePatterns == 0 then
+			return self:_GetPlayerX() + self.screenLeftX
+		end
+		local last = self._activePatterns[#self._activePatterns]
+		return last.spawnX + last.width
+	end
+
+	-- 다음 패턴을 오른쪽에 배치
+	method void _SpawnNextPattern()
+		if #self._pool == 0 then return end
+
+		local entry = self._pool[self._nextPatternIndex]
+		self._nextPatternIndex = (self._nextPatternIndex % #self._pool) + 1
+
+		local spawnX = self:_GetSpawnEdge()
+		entry.entity.TransformComponent.Position = Vector3(spawnX, 0, 0)
+		entry.entity:SetEnable(true)
+
+		table.insert(self._activePatterns, {
+			entity = entry.entity,
+			width = entry.width,
+			spawnX = spawnX
+		})
+
+		self._lastSpawnedRightEdge = spawnX + entry.width
+	end
+
+	-- TileParent 자식들을 패턴 풀로 등록
+	method void _BuildPool(Entity parent)
+		if parent == nil then return end
+		local templates = parent.Children
+		if templates == nil or #templates == 0 then return end
+
+		for i = 1, #templates do
+			local entity = templates[i]
+			local width = entity.TileData.TileWidth
+			entity:SetEnable(false)
+			table.insert(self._pool, { entity = entity, width = width })
+		end
+	end
+
 end

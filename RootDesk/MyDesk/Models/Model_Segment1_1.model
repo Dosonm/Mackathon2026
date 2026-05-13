@@ -389,10 +389,7 @@
         }
       ],
       "thumbnail_keyname": "6c/bc/6cbc061a799e472594960d56fb99f89d/model/b8c40a5b-ab1d-46ad-87fe-bd3092e29acd/thumbnail/639132434807104908",
-      "thumbnail_hash": "1733681C3C7A39CC567BED379409239E554A0987D195500D454E238FC710D560",
-      "worldCoreVersion": "26.3.0.0",
-      "worldStudioVersion": "0.1.0.0",
-      "useService": 0
+      "thumbnail_hash": "1733681C3C7A39CC567BED379409239E554A0987D195500D454E238FC710D560"
     }
   }
 }
