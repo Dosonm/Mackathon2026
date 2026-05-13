@@ -40,7 +40,7 @@
               "FootholdsByLayer": {
                 "1": [
                   {
-                    "Length": 10.5098543,
+                    "Length": 9.923506,
                     "NextFootholdId": 0,
                     "PreviousFootholdId": 0,
                     "groupID": 1,
@@ -55,39 +55,8 @@
                       "isCustomFoothold": true,
                       "inertiaOption": 0
                     },
-                    "OwnerId": "a363808a-8eb7-4dd9-b496-4e2b2e0d3b30",
-                    "Id": 1,
-                    "StartPoint": {
-                      "x": 56.3542,
-                      "y": -0.4018
-                    },
-                    "EndPoint": {
-                      "x": 66.8304,
-                      "y": -1.2422
-                    },
-                    "Variance": {
-                      "x": 0.99679786,
-                      "y": -0.07996305
-                    }
-                  },
-                  {
-                    "Length": 9.923506,
-                    "NextFootholdId": 0,
-                    "PreviousFootholdId": 0,
-                    "groupID": 2,
-                    "layer": 1,
-                    "sortingLayerName": "MapLayer0",
-                    "attribute": {
-                      "walk": 1.0,
-                      "force": 0.0,
-                      "drag": 1.0,
-                      "isBlockVertical": false,
-                      "isDynamic": false,
-                      "isCustomFoothold": true,
-                      "inertiaOption": 0
-                    },
                     "OwnerId": "9d9f5662-fc78-42af-8fbc-c7cf76b024df",
-                    "Id": 2,
+                    "Id": 1,
                     "StartPoint": {
                       "x": -1.5038,
                       "y": -0.3416
@@ -105,7 +74,7 @@
                     "Length": 10.2119007,
                     "NextFootholdId": 0,
                     "PreviousFootholdId": 0,
-                    "groupID": 3,
+                    "groupID": 2,
                     "layer": 1,
                     "sortingLayerName": "MapLayer0",
                     "attribute": {
@@ -118,7 +87,7 @@
                       "inertiaOption": 0
                     },
                     "OwnerId": "cf9ddeb1-2fee-48f8-bcd9-1a287ef73ce9",
-                    "Id": 3,
+                    "Id": 2,
                     "StartPoint": {
                       "x": 8.5998,
                       "y": 0.1562
@@ -136,7 +105,7 @@
                     "Length": 10.062,
                     "NextFootholdId": 0,
                     "PreviousFootholdId": 0,
-                    "groupID": 4,
+                    "groupID": 3,
                     "layer": 1,
                     "sortingLayerName": "MapLayer0",
                     "attribute": {
@@ -149,7 +118,7 @@
                       "inertiaOption": 0
                     },
                     "OwnerId": "d01e1a61-684d-46a1-b116-925db6f83d73",
-                    "Id": 4,
+                    "Id": 3,
                     "StartPoint": {
                       "x": 18.8088,
                       "y": -0.6075
@@ -161,6 +130,68 @@
                     "Variance": {
                       "x": 1.0,
                       "y": 0.0
+                    }
+                  },
+                  {
+                    "Length": 0.0,
+                    "NextFootholdId": 0,
+                    "PreviousFootholdId": 0,
+                    "groupID": 4,
+                    "layer": 1,
+                    "sortingLayerName": "MapLayer0",
+                    "attribute": {
+                      "walk": 1.0,
+                      "force": 0.0,
+                      "drag": 1.0,
+                      "isBlockVertical": false,
+                      "isDynamic": false,
+                      "isCustomFoothold": true,
+                      "inertiaOption": 0
+                    },
+                    "OwnerId": "31dabc7f-4e23-495b-b036-5e8052bbc376",
+                    "Id": 4,
+                    "StartPoint": {
+                      "x": 29.3929,
+                      "y": -2.65
+                    },
+                    "EndPoint": {
+                      "x": 29.3929,
+                      "y": -2.65
+                    },
+                    "Variance": {
+                      "x": 0.0,
+                      "y": 0.0
+                    }
+                  },
+                  {
+                    "Length": 10.5098543,
+                    "NextFootholdId": 0,
+                    "PreviousFootholdId": 0,
+                    "groupID": 5,
+                    "layer": 1,
+                    "sortingLayerName": "MapLayer0",
+                    "attribute": {
+                      "walk": 1.0,
+                      "force": 0.0,
+                      "drag": 1.0,
+                      "isBlockVertical": false,
+                      "isDynamic": false,
+                      "isCustomFoothold": true,
+                      "inertiaOption": 0
+                    },
+                    "OwnerId": "a363808a-8eb7-4dd9-b496-4e2b2e0d3b30",
+                    "Id": 5,
+                    "StartPoint": {
+                      "x": 56.3542,
+                      "y": -0.4018
+                    },
+                    "EndPoint": {
+                      "x": 66.8304,
+                      "y": -1.2422
+                    },
+                    "Variance": {
+                      "x": 0.99679786,
+                      "y": -0.07996305
                     }
                   }
                 ]
@@ -799,6 +830,9 @@
             },
             {
               "@type": "MOD.Core.CustomFootholdComponent",
+              "edgeLists": [
+                null
+              ],
               "Enable": true
             }
           ],
@@ -865,6 +899,18 @@
             },
             {
               "@type": "MOD.Core.CustomFootholdComponent",
+              "edgeLists": [
+                [
+                  {
+                    "x": 0.0,
+                    "y": 0.0
+                  },
+                  {
+                    "x": 0.0,
+                    "y": 0.0
+                  }
+                ]
+              ],
               "Enable": true
             }
           ],
@@ -931,6 +977,9 @@
             },
             {
               "@type": "MOD.Core.CustomFootholdComponent",
+              "edgeLists": [
+                null
+              ],
               "Enable": true
             }
           ],

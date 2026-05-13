@@ -3,9 +3,7 @@ script player extends Component
 
 	property any movement = nil
 
-	property SideviewbodyComponent body = nil
-
-	property number speed = 5
+	property RigidbodyComponent rg = nil
 
 	property boolean isReadyToJump = true
 
@@ -13,38 +11,42 @@ script player extends Component
 
 	property boolean wasOnGround = true
 
+	property number jumpCount = 0
+
 	property ButtonComponent btnComponent = nil
 
-	@ExecSpace("ClientOnly")
+	property number DoubleJumpSpeed = nil
+
+	property number PlayerSpeed = nil
+
 	method void OnBeginPlay()
 		self.movement = self.Entity.MovementComponent
-		self.body = self.Entity.SideviewbodyComponent
+		self.rg = self.Entity.RigidbodyComponent
+		self.PlayerSpeed = self.Entity.MovementComponent.InputSpeed
 	end
 
-	@ExecSpace("ClientOnly")
 	method void OnUpdate(number delta)
-		self.movement:MoveToDirection(Vector2(1, 0), delta)
-		
-		local onGround = self.body:IsOnGround()
-		log(self.body:IsOnGround())
-		
-		if onGround and not self.wasOnGround then
-			self.isReadyToJump = false
-			self.landTimer = 0
-			self.btnComponent.Enable = false;
-			log("dd")
+		self.movement:MoveToDirection(Vector2(1, 0) , delta)
+	end
+
+	method void Jump()
+		self.jumpCount = 1
+	end
+
+	method void TryDoubleJump()
+		log("jjump")
+		if not self.rg:IsOnGround() and self.jumpCount == 1 then
+			self.jumpCount = 2
+
+			self.rg:SetForce(Vector2(self.PlayerSpeed*1.5,7))
 		end
-		
-		if not self.isReadyToJump then
-			self.landTimer = self.landTimer + delta
-			if self.landTimer >= .5 then
-				self.isReadyToJump = true
-				self.btnComponent.Enable = true;
-				log("ss")
-			end
+	end
+
+	@EventSender("Self")
+	handler HandleStateChangeEvent(StateChangeEvent event)
+		if event.CurrentStateName == "MOVE" then
+			self.jumpCount = 0
 		end
-		
-		self.wasOnGround = onGround
 	end
 
 end

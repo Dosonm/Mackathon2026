@@ -37,7 +37,72 @@
             },
             {
               "@type": "MOD.Core.FootholdComponent",
-              "FootholdsByLayer": {},
+              "FootholdsByLayer": {
+                "1": [
+                  {
+                    "Length": 7.5,
+                    "NextFootholdId": 0,
+                    "PreviousFootholdId": 0,
+                    "groupID": 1,
+                    "layer": 1,
+                    "sortingLayerName": "MapLayer0",
+                    "attribute": {
+                      "walk": 1.0,
+                      "force": 0.0,
+                      "drag": 1.0,
+                      "isBlockVertical": false,
+                      "isDynamic": false,
+                      "isCustomFoothold": true,
+                      "inertiaOption": 0
+                    },
+                    "OwnerId": "cc9431fb-3c5f-49d9-bf44-b3aa696c7665",
+                    "Id": 1,
+                    "StartPoint": {
+                      "x": -0.75,
+                      "y": 0.39
+                    },
+                    "EndPoint": {
+                      "x": 6.75,
+                      "y": 0.39
+                    },
+                    "Variance": {
+                      "x": 1.0,
+                      "y": 0.0
+                    }
+                  },
+                  {
+                    "Length": 7.5,
+                    "NextFootholdId": 0,
+                    "PreviousFootholdId": 0,
+                    "groupID": 2,
+                    "layer": 1,
+                    "sortingLayerName": "MapLayer0",
+                    "attribute": {
+                      "walk": 1.0,
+                      "force": 0.0,
+                      "drag": 1.0,
+                      "isBlockVertical": false,
+                      "isDynamic": false,
+                      "isCustomFoothold": true,
+                      "inertiaOption": 0
+                    },
+                    "OwnerId": "f4dae11a-b9f9-4490-8e3f-7f4d3a2ea0df",
+                    "Id": 2,
+                    "StartPoint": {
+                      "x": 7.75,
+                      "y": 0.39
+                    },
+                    "EndPoint": {
+                      "x": 15.25,
+                      "y": 0.39
+                    },
+                    "Variance": {
+                      "x": 1.0,
+                      "y": 0.0
+                    }
+                  }
+                ]
+              },
               "Enable": true
             }
           ],
@@ -384,7 +449,7 @@
             },
             {
               "@type": "MOD.Core.CustomFootholdComponent",
-              "IsDynamicFoothold": true,
+              "IsDynamicFoothold": false,
               "Enable": true
             }
           ],
@@ -432,7 +497,7 @@
             },
             {
               "@type": "MOD.Core.CustomFootholdComponent",
-              "IsDynamicFoothold": true,
+              "IsDynamicFoothold": false,
               "Enable": true
             }
           ],
