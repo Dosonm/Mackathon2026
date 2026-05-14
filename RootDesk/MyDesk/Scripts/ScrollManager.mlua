@@ -1,0 +1,98 @@
+@Component
+script ScrollManager extends Component
+
+	property SyncTable<string> patternTable
+
+	property number totalLength = 0
+
+	property number totalCount = 0
+
+	@ExecSpace("ServerOnly")
+	method void OnBeginPlay()
+		self._T.latestPatterns = {}
+		self._T.pool = {}
+		local length = _SyncTableExtend:GetLength(self.patternTable)
+		for i = 1, length do
+			table.insert(self._T.pool, {})
+		end
+	end
+
+	@ExecSpace("ServerOnly")
+	method void OnUpdate(number delta)
+		if isvalid(self._T.player) == false then
+			self._T.player = _EntityService:GetEntitiesSpawnedByModelId("model://defaultplayer")[1]
+			if isvalid(self._T.player) == false then
+				return
+			end
+		end
+		
+		if self.totalLength > 0 then
+		    local playerPosition = self._T.player.TransformComponent.WorldPosition
+			local remainDistance = self.totalLength - playerPosition.x
+			
+			-- 남은 타일 길이고 10m보다 짧으면 풀링&배치 
+			if remainDistance < 10 then
+		        if isvalid(self._T.latestPatterns[1]) then
+		            self:ReleasePattern(self._T.latestPatterns[1])	
+		        end
+				self:SpawnRandomPattern()
+			end
+		else
+			self:SpawnRandomPattern()
+			self:SpawnRandomPattern()
+		end
+	end
+
+	method void SpawnRandomPattern()
+		local length = _SyncTableExtend:GetLength(self.patternTable)
+		
+		local index = math.random(length)
+		local spawnPosition = Vector3(self.totalLength, 0, 0)
+		
+		local pattern = self:SpawnPattern(index, spawnPosition)
+		table.insert(self._T.latestPatterns, pattern)
+		
+		if isvalid(pattern.PatternComponent) then
+			self.totalLength += pattern.PatternComponent.patternLength
+			self.totalCount += 1
+		else
+			log("MISSING: PatternComponent-", pattern.Model.Name)
+		end
+	end
+
+	method Entity SpawnPattern(integer idx, Vector3 position)
+		local pattern = self:GetPattern(idx)
+		
+		pattern.Enable = true
+		pattern.TransformComponent.WorldPosition = position
+		
+		return pattern
+	end
+
+	method Entity GetPattern(integer idx)
+		local pattern = self._T.pool[idx][1]
+			if pattern then
+				table.remove(self._T.pool[idx], 1)
+				return pattern
+			end
+		
+		return self:CreatePattern(idx)
+	end
+
+	method Entity CreatePattern(integer idx)
+		local pattern
+			= _SpawnService:SpawnByModelId(self.patternTable[idx], "pattern", Vector3.zero, self.Entity)
+		return pattern
+	end
+
+	method void ReleasePattern(Entity pattern)
+		local idx = _SyncTableExtend:GetFirstIndex(self.patternTable, pattern.Model.Id)
+		
+		if idx >= 1 then
+			pattern.Enable = false
+			table.insert(self._T.pool[idx], pattern)
+			table.remove(self._T.latestPatterns, 1)
+		end
+	end
+
+end

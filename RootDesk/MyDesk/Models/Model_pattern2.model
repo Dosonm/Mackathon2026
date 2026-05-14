@@ -1,7 +1,7 @@
 {
   "Id": "",
   "GameId": "",
-  "EntryKey": "model://130ae093-d834-4048-b860-d8e52ac1dc52",
+  "EntryKey": "model://bcabb362-a493-45dd-8996-f5c57ec9f184",
   "ContentType": "x-mod/model",
   "Content": "",
   "Usage": 0,
@@ -14,9 +14,9 @@
     "Use": "Json",
     "Json": {
       "Version": 1,
-      "Name": "Model_pattern1",
+      "Name": "Model_pattern2",
       "BaseModelId": null,
-      "Id": "130ae093-d834-4048-b860-d8e52ac1dc52",
+      "Id": "bcabb362-a493-45dd-8996-f5c57ec9f184",
       "Components": [
         "MOD.Core.TransformComponent",
         "script.PatternComponent"
@@ -85,6 +85,24 @@
           "Value": true
         },
         {
+          "TargetType": "script.PatternComponent",
+          "Name": "Enable",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": true
+        },
+        {
+          "TargetType": "script.PatternComponent",
+          "Name": "totalLength",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": 13.0
+        },
+        {
           "TargetType": "MOD.Core.MODEntity",
           "Name": "Enable",
           "ValueType": {
@@ -104,24 +122,6 @@
         },
         {
           "TargetType": "script.PatternComponent",
-          "Name": "Enable",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": true
-        },
-        {
-          "TargetType": "script.PatternComponent",
-          "Name": "totalLength",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": 13.0
-        },
-        {
-          "TargetType": "script.PatternComponent",
           "Name": "patternLength",
           "ValueType": {
             "$type": "MODNativeType",
@@ -133,14 +133,14 @@
       "EventLinks": [],
       "Children": [
         {
-          "Id": "ab1c2ad2-8239-45cd-a302-67e081dd83a5",
-          "ParentId": "130ae093-d834-4048-b860-d8e52ac1dc52",
+          "Id": "871b887e-28c9-4793-8e1a-dd81f787b08b",
+          "ParentId": "bcabb362-a493-45dd-8996-f5c57ec9f184",
           "Name": "item1",
           "Model": {
             "Version": 1,
             "Name": "item1",
             "BaseModelId": null,
-            "Id": "ab1c2ad2-8239-45cd-a302-67e081dd83a5",
+            "Id": "871b887e-28c9-4793-8e1a-dd81f787b08b",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.SpriteRendererComponent",
@@ -151,6 +151,20 @@
             "Values": [
               {
                 "TargetType": "MOD.Core.TransformComponent",
+                "Name": "Rotation",
+                "ValueType": {
+                  "$type": "MODNativeType",
+                  "type": "MOD.Core.MODVector3, MOD.Core, Version=26.3.0.0, Culture=neutral, PublicKeyToken=null"
+                },
+                "Value": {
+                  "$type": "MOD.Core.MODVector3, MOD.Core",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              },
+              {
+                "TargetType": "MOD.Core.TransformComponent",
                 "Name": "Position",
                 "ValueType": {
                   "$type": "MODNativeType",
@@ -158,8 +172,8 @@
                 },
                 "Value": {
                   "$type": "MOD.Core.MODVector3, MOD.Core",
-                  "x": 5.0175,
-                  "y": 1.4771,
+                  "x": 2.9517,
+                  "y": 0.6323,
                   "z": 999.999
                 }
               },
@@ -191,6 +205,15 @@
                   "y": 1.0,
                   "z": 1.0
                 }
+              },
+              {
+                "TargetType": "MOD.Core.TransformComponent",
+                "Name": "ZRotation",
+                "ValueType": {
+                  "$type": "MODNativeType",
+                  "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                },
+                "Value": 0.0
               },
               {
                 "TargetType": "MOD.Core.TransformComponent",
@@ -346,14 +369,14 @@
           }
         },
         {
-          "Id": "b21b8822-3481-4a25-b5a6-26fc5292650c",
-          "ParentId": "130ae093-d834-4048-b860-d8e52ac1dc52",
+          "Id": "4c8a4985-c8d3-4adf-b89c-e33860318803",
+          "ParentId": "bcabb362-a493-45dd-8996-f5c57ec9f184",
           "Name": "Model_trap1",
           "Model": {
             "Version": 1,
             "Name": "Model_trap1",
             "BaseModelId": null,
-            "Id": "b21b8822-3481-4a25-b5a6-26fc5292650c",
+            "Id": "4c8a4985-c8d3-4adf-b89c-e33860318803",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.StateAnimationComponent",
@@ -386,8 +409,8 @@
                 },
                 "Value": {
                   "$type": "MOD.Core.MODVector3, MOD.Core",
-                  "x": 2.1094,
-                  "y": 0.44,
+                  "x": 6.7878,
+                  "y": 1.1968,
                   "z": 999.999
                 }
               },
@@ -636,14 +659,14 @@
           }
         },
         {
-          "Id": "52af9b60-4689-46ba-a645-ef318b2fd447",
-          "ParentId": "130ae093-d834-4048-b860-d8e52ac1dc52",
+          "Id": "f9a82843-9eac-4360-ad35-dcb814782f28",
+          "ParentId": "bcabb362-a493-45dd-8996-f5c57ec9f184",
           "Name": "Model_foothold1",
           "Model": {
             "Version": 1,
             "Name": "Model_foothold1",
             "BaseModelId": null,
-            "Id": "52af9b60-4689-46ba-a645-ef318b2fd447",
+            "Id": "f9a82843-9eac-4360-ad35-dcb814782f28",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.SpriteRendererComponent",
@@ -674,7 +697,7 @@
                 },
                 "Value": {
                   "$type": "MOD.Core.MODVector3, MOD.Core",
-                  "x": 0.0,
+                  "x": 5.5,
                   "y": 0.0,
                   "z": 0.0
                 }
@@ -887,14 +910,14 @@
           }
         },
         {
-          "Id": "0c745d61-b10f-4efe-8aa7-9b2d7bd75ed4",
-          "ParentId": "130ae093-d834-4048-b860-d8e52ac1dc52",
+          "Id": "a0d52f3e-cfe7-4030-9172-2e2b354399b6",
+          "ParentId": "bcabb362-a493-45dd-8996-f5c57ec9f184",
           "Name": "Model_foothold1_1",
           "Model": {
             "Version": 1,
             "Name": "Model_foothold1_1",
             "BaseModelId": null,
-            "Id": "0c745d61-b10f-4efe-8aa7-9b2d7bd75ed4",
+            "Id": "a0d52f3e-cfe7-4030-9172-2e2b354399b6",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.SpriteRendererComponent",
@@ -925,7 +948,7 @@
                 },
                 "Value": {
                   "$type": "MOD.Core.MODVector3, MOD.Core",
-                  "x": 8.5,
+                  "x": 0.0,
                   "y": 0.0,
                   "z": 0.0
                 }
@@ -1138,14 +1161,14 @@
           }
         },
         {
-          "Id": "6c7b8d40-8386-4df3-b732-a16c2150e9ef",
-          "ParentId": "130ae093-d834-4048-b860-d8e52ac1dc52",
+          "Id": "c19f7492-5e30-48fe-bec5-ad0d002cc191",
+          "ParentId": "bcabb362-a493-45dd-8996-f5c57ec9f184",
           "Name": "Model_foothold1_2",
           "Model": {
             "Version": 1,
             "Name": "Model_foothold1_2",
             "BaseModelId": null,
-            "Id": "6c7b8d40-8386-4df3-b732-a16c2150e9ef",
+            "Id": "c19f7492-5e30-48fe-bec5-ad0d002cc191",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.SpriteRendererComponent",
@@ -1176,7 +1199,7 @@
                 },
                 "Value": {
                   "$type": "MOD.Core.MODVector3, MOD.Core",
-                  "x": 5.0073,
+                  "x": 6.8324,
                   "y": 0.79,
                   "z": 999.999
                 }
@@ -1389,14 +1412,14 @@
           }
         },
         {
-          "Id": "7f00e219-f316-4396-94c0-1a8da27e0406",
-          "ParentId": "130ae093-d834-4048-b860-d8e52ac1dc52",
+          "Id": "b5af07cb-c4de-4e6a-aae7-d976fc21168c",
+          "ParentId": "bcabb362-a493-45dd-8996-f5c57ec9f184",
           "Name": "Model_Hole",
           "Model": {
             "Version": 1,
             "Name": "Model_Hole",
             "BaseModelId": null,
-            "Id": "7f00e219-f316-4396-94c0-1a8da27e0406",
+            "Id": "b5af07cb-c4de-4e6a-aae7-d976fc21168c",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.HitComponent",

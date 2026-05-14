@@ -1,0 +1,28 @@
+@Logic
+script SyncTableExtend extends Logic
+
+	method integer GetLength(SyncTable<string> table)
+		local len = 0
+		for _ in pairs(table) do
+		    len += 1
+		end
+		
+		return len
+	end
+
+	method integer GetFirstIndex(SyncTable<string> table, string elem)
+		local len = 0
+		for _ in pairs(table) do
+		    len += 1
+		end
+		
+		for i = 1, len do
+			if table[i] == elem then
+				return i
+			end
+		end
+		
+		return 0
+	end
+
+end
