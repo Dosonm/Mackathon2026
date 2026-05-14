@@ -13,9 +13,9 @@ script ItemComponent extends Component
 
 	@ExecSpace("ServerOnly")
 	method void OnUpdate(number delta)
-		--local transform = self.Entity.TransformComponent
-		--local position = Vector2(transform.WorldPosition.x, transform.WorldPosition.y) 
-		--self.Shape.Position = position
+		local transform = self.Entity.TransformComponent
+		local position = Vector2(transform.WorldPosition.x, transform.WorldPosition.y) 
+		self.Shape.Position = position
 		
 		local simulator = _CollisionService:GetSimulator(self.Entity)
 		local overlaps = simulator:OverlapAll(CollisionGroups.Player, self.Shape)

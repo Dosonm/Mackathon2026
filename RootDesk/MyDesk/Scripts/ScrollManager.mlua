@@ -9,25 +9,12 @@ script ScrollManager extends Component
 
 	@ExecSpace("ServerOnly")
 	method void OnBeginPlay()
-		self._T.lastPatterns = {}
+		self._T.latestPatterns = {}
 		self._T.pool = {}
 		local length = _SyncTableExtend:GetLength(self.patternTable)
 		for i = 1, length do
 			table.insert(self._T.pool, {})
 		end
-		
-		--local length = self:GetSyncTableLength(self.patternTable)
-		
-		--for i = 1, 100 do
-		--    local index = math.random(length)
-		--    local spawnPosition = Vector3(self.totalLength, 0, 0)
-		--    
-		--    local pattern = self:SpawnPattern(index, spawnPosition)
-		--    if isvalid(pattern.PatternComponent) then
-		--        self.totalLength += pattern.PatternComponent.patternLength
-		--        self.totalCount += 1
-		--    end
-		--end
 	end
 
 	@ExecSpace("ServerOnly")
@@ -43,13 +30,10 @@ script ScrollManager extends Component
 		    local playerPosition = self._T.player.TransformComponent.WorldPosition
 			local remainDistance = self.totalLength - playerPosition.x
 			
-		    --if remainDistance < 10 then
-		    --    self:ReleasePattern(self.Entity.Children[1])
-		    --end
-			
+			-- 남은 타일 길이고 10m보다 짧으면 풀링&배치 
 			if remainDistance < 10 then
-		        if isvalid(self._T.lastPatterns[1]) then
-		            self:ReleasePattern(self._T.lastPatterns[1])	
+		        if isvalid(self._T.latestPatterns[1]) then
+		            self:ReleasePattern(self._T.latestPatterns[1])	
 		        end
 				self:SpawnRandomPattern()
 			end
@@ -66,7 +50,7 @@ script ScrollManager extends Component
 		local spawnPosition = Vector3(self.totalLength, 0, 0)
 		
 		local pattern = self:SpawnPattern(index, spawnPosition)
-		table.insert(self._T.lastPatterns, pattern)
+		table.insert(self._T.latestPatterns, pattern)
 		
 		if isvalid(pattern.PatternComponent) then
 			self.totalLength += pattern.PatternComponent.patternLength
@@ -86,16 +70,6 @@ script ScrollManager extends Component
 	end
 
 	method Entity GetPattern(integer idx)
-		--local patterns = self._T.pool[idx]
-		--if patterns then
-		--    local pattern = patterns[1]
-		--    if pattern then
-		--        log(idx)
-		--        table.remove(self._T.pool[idx][1])
-		--        return pattern
-		--    end
-		--end
-		
 		local pattern = self._T.pool[idx][1]
 			if pattern then
 				table.remove(self._T.pool[idx], 1)
@@ -117,7 +91,7 @@ script ScrollManager extends Component
 		if idx >= 1 then
 			pattern.Enable = false
 			table.insert(self._T.pool[idx], pattern)
-			table.remove(self._T.lastPatterns, 1)
+			table.remove(self._T.latestPatterns, 1)
 		end
 	end
 
