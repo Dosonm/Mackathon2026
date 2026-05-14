@@ -1,0 +1,30 @@
+@Component
+script PlayerSkill extends Component
+
+	@Sync
+	property number timeFinishSkillUse = 0
+
+	method void Skill_01(number cooltime)
+		if self.timeFinishSkillUse < _UtilLogic.ElapsedSeconds then -- 스킬을 사용한 마지막 시간에 쿨타임을 더한 뒤 과 월드 생성 후 흐른 시간과 비교하여 쿨타임을 구현합니다.
+			self.Entity.SkillEffect:SkillEffect_01() -- 스킬 이펙트를 표시합니다.
+			self.Entity.PlayerAttack:SkillAttack(10) -- 스킬 데미지(10)를 설정합니다. PlayerAttack component에서 SkillAttack Function을 추가해줬습니다.
+			self.timeFinishSkillUse = _UtilLogic.ElapsedSeconds + cooltime
+		end
+	end
+
+	@EventSender("Service", "InputService")
+	handler HandleKeyDownEvent(KeyDownEvent event)
+		-- 임시
+		
+		-- Parameters
+		local key = event.key
+		--------------------------------------------------------
+		if self.Entity ~= _UserService.LocalPlayer then -- 엔티티가 버튼을 클릭한 LocalPlayer가 아니라면 스킬을 사용하지 않습니다
+			return
+		end
+		if key == KeyboardKey.Q then
+			self.Entity.PlayerSkill:Skill_01(0.1) -- 스킬의 쿨타임(2)을 설정합니다
+		end
+	end
+
+end
