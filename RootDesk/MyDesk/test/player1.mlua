@@ -1,0 +1,82 @@
+@Component
+script player1 extends Component
+
+	property any movement = nil
+
+	property RigidbodyComponent rg = nil
+
+	property number PlayerSpeed = nil
+
+	@TargetUserSync
+	property ButtonComponent btnComponent = nil
+
+	@TargetUserSync
+	property boolean canJump = true
+
+	@TargetUserSync
+	property boolean canDoubleJump = false
+
+	method void OnBeginPlay()
+		self.movement = self.Entity.MovementComponent
+		self.rg = self.Entity.RigidbodyComponent
+		self.PlayerSpeed = self.Entity.MovementComponent.InputSpeed
+		
+		local playerController = self.Entity.PlayerControllerComponent
+		playerController:AddCondition("Jump", function()
+			if not self.canJump then
+				log("Stop Jumping")
+				return false
+			end
+			return true
+		end
+		)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void OnUpdate(number delta)
+		self.movement:MoveToDirection(Vector2(1, 0) , delta)
+		
+		-- if not self.prevCanJump and self.canJump then
+		-- 	self.prevCanJump = true
+		-- 	self:SetButtonEnable(true)
+		-- end
+		log(self.canJump)
+	end
+
+	method void TryDoubleJump()
+		log("jj")
+		self.rg:SetForce(Vector2(self.PlayerSpeed*1.6,7))
+		
+		self.canDoubleJump = false
+	end
+
+	@ExecSpace("ClientOnly")
+	method void SetButtonDisableTemp()
+		self.btnComponent.Enable = false
+		_TimerService:SetTimerOnce(function()
+				self.btnComponent.Enable = true
+			end, 0.1)
+	end
+
+	@EventSender("Self")
+	handler HandleStateChangeEvent(StateChangeEvent event)
+		if event.CurrentStateName == "MOVE" then
+			self.canJump = true
+			self.canDoubleJump = false
+		end
+		if event.CurrentStateName == "JUMP" then
+			self.canJump = false
+		end
+	end
+
+	@EventSender("Self")
+	handler HandlePlayerActionEvent(PlayerActionEvent event)
+		if event.ActionName == "Jump" then
+			_TimerService:SetTimerOnce(function()
+				self.canDoubleJump = true
+			end, 0.1)
+		end
+		self:SetButtonDisableTemp()
+	end
+
+end
