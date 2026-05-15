@@ -18,7 +18,10 @@
       "BaseModelId": "player",
       "Id": "defaultplayer",
       "Components": [
-        "script.player"
+        "script.player",
+        "script.PlayerAttack",
+        "script.PlayerSkill",
+        "script.SkillEffect"
       ],
       "Properties": [],
       "Values": [
@@ -1012,6 +1015,33 @@
         },
         {
           "TargetType": "script.player",
+          "Name": "Enable",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": true
+        },
+        {
+          "TargetType": "script.PlayerAttack",
+          "Name": "Enable",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": true
+        },
+        {
+          "TargetType": "script.PlayerSkill",
+          "Name": "Enable",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": true
+        },
+        {
+          "TargetType": "script.SkillEffect",
           "Name": "Enable",
           "ValueType": {
             "$type": "MODNativeType",
