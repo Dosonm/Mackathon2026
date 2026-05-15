@@ -332,7 +332,7 @@
       {
         "id": "9aed6bf5-a226-4be9-a7c6-96a1a62777c8",
         "path": "/maps/testMap_jw/ScrollManager",
-        "componentNames": "MOD.Core.TransformComponent,script.ScrollManager",
+        "componentNames": "MOD.Core.SpriteRendererComponent,MOD.Core.TransformComponent,script.ScrollManager",
         "jsonString": {
           "name": "ScrollManager",
           "path": "/maps/testMap_jw/ScrollManager",
@@ -352,6 +352,12 @@
           },
           "modelId": "mapempty",
           "@components": [
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "RenderSetting": 0,
+              "Enable": true
+            },
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {

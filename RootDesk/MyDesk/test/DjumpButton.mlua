@@ -1,0 +1,18 @@
+@Component
+script DjumpButton extends Component
+
+	property player1 player = nil
+
+	method void OnBeginPlay()
+		player1 = _UserService.LocalPlayer.player1
+		--StateComponent = player.Entity.StateComponent
+	end
+
+	@EventSender("Self")
+	handler HandleButtonPressedEvent(ButtonPressedEvent event)
+		if player1.jumpCount == 1 then
+			_UserService.LocalPlayer.player1:TryDoubleJump()
+		end
+	end
+
+end

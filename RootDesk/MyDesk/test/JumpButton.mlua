@@ -1,0 +1,19 @@
+@Component
+script JumpButton extends Component
+
+	property player player = nil
+
+	method void OnBeginPlay()
+		player = _UserService.LocalPlayer.player
+		--StateComponent = player.Entity.StateComponent
+	end
+
+	@EventSender("Self")
+	handler HandleButtonPressedEvent(ButtonPressedEvent event)
+		if player.canDoubleJump then
+			player.canDoubleJump = false
+			_UserService.LocalPlayer.player:TryDoubleJump()
+		end
+	end
+
+end
