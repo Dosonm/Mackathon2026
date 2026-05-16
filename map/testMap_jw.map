@@ -40,44 +40,11 @@
               "FootholdsByLayer": {
                 "1": [
                   {
-                    "Length": 1.5,
+                    "Length": 10001.0,
                     "NextFootholdId": 0,
                     "PreviousFootholdId": 0,
                     "groupID": 1,
                     "layer": 1,
-                    "sortingLayerName": "MapLayer0",
-                    "attribute": {
-                      "walk": 1.0,
-                      "force": 0.0,
-                      "drag": 1.0,
-                      "isBlockVertical": false,
-                      "isDynamic": false,
-                      "isCustomFoothold": true,
-                      "inertiaOption": 0
-                    },
-                    "OwnerId": "ccb39550-bf7c-4346-a34c-8d134b2bf7fc",
-                    "Id": 1,
-                    "StartPoint": {
-                      "x": -0.75,
-                      "y": 0.391
-                    },
-                    "EndPoint": {
-                      "x": 0.75,
-                      "y": 0.391
-                    },
-                    "Variance": {
-                      "x": 1.0,
-                      "y": 0.0
-                    }
-                  }
-                ],
-                "2": [
-                  {
-                    "Length": 10001.0,
-                    "NextFootholdId": 0,
-                    "PreviousFootholdId": 0,
-                    "groupID": 2,
-                    "layer": 2,
                     "sortingLayerName": "Default",
                     "attribute": {
                       "walk": 1.0,
@@ -89,7 +56,7 @@
                       "inertiaOption": 0
                     },
                     "OwnerId": "9af426cd-358b-45b4-be16-cf21f6b1f5cb",
-                    "Id": 2,
+                    "Id": 1,
                     "StartPoint": {
                       "x": -1.0,
                       "y": -0.61
@@ -376,7 +343,8 @@
             {
               "@type": "script.ScrollManager",
               "Enable": true,
-              "patternTable": "{\"k\":\"number\",\"v\":\"string\",\"e\":{\"1\":\"130ae093-d834-4048-b860-d8e52ac1dc52\",\"2\":\"bcabb362-a493-45dd-8996-f5c57ec9f184\"}}"
+              "patternTable": "{\"k\":\"number\",\"v\":\"string\",\"e\":{\"1\":\"8142940e-fb0a-4105-a795-3c831f887fac\"}}",
+              "Speed": 3.0
             }
           ],
           "@version": 1
@@ -390,7 +358,7 @@
           "name": "Model_foothold_start",
           "path": "/maps/testMap_jw/Model_foothold_start",
           "nameEditable": true,
-          "enable": true,
+          "enable": false,
           "visible": true,
           "localize": false,
           "displayOrder": 5,
@@ -493,6 +461,1257 @@
               "EndFrameIndex": 2147483647,
               "RenderSetting": 0,
               "StartFrameIndex": 0,
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "3f121ba2-1e2c-437c-ad92-d245c085c619",
+        "path": "/maps/testMap_jw/Model_Hole",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.HitComponent,script.HoleComponent",
+        "jsonString": {
+          "name": "Model_Hole",
+          "path": "/maps/testMap_jw/Model_Hole",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 7,
+          "pathConstraints": "///",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 5.69732475,
+                "y": -0.86,
+                "z": 1999.998
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 50.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.HitComponent",
+              "BoxSize": {
+                "x": 0.48,
+                "y": 0.48
+              },
+              "ColliderOffset": {
+                "x": 0.0,
+                "y": 0.24
+              },
+              "CollisionGroup": {
+                "Id": "e19d3559a1d34ec79853dc9399f837c7"
+              },
+              "IsLegacy": false,
+              "Enable": true
+            },
+            {
+              "@type": "script.HoleComponent",
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "91188926-7bba-49cb-bee3-fe53e43e1e17",
+        "path": "/maps/testMap_jw/pattern_sample1",
+        "componentNames": "MOD.Core.TransformComponent,script.PatternComponent,script.PatternFixer",
+        "jsonString": {
+          "name": "pattern_sample1",
+          "path": "/maps/testMap_jw/pattern_sample1",
+          "nameEditable": true,
+          "enable": false,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 8,
+          "pathConstraints": "///",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "script.PatternComponent",
+              "Enable": true,
+              "patternLength": 18.0
+            },
+            {
+              "@type": "script.PatternFixer",
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "261a7357-e8ed-49a5-b0ed-48512bc1af60",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_item1",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,script.ItemComponent,MOD.Core.HitComponent",
+        "jsonString": {
+          "name": "Model_item1",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_item1",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 0,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 5.5,
+                "y": 0.7,
+                "z": -999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 0,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 0,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "020b25de085f4c34a5f46f5a388b0c51",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "script.ItemComponent",
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.HitComponent",
+              "BoxOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "BoxSize": {
+                "x": 0.26,
+                "y": 0.26
+              },
+              "CircleRadius": 0.0,
+              "ColliderOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "ColliderType": 1,
+              "CollisionGroup": {
+                "Id": "13095fd3915c440fa708bcb3fdea4e75"
+              },
+              "IsLegacy": false,
+              "PolygonPoints": [],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "230d29b3-86a9-4430-b604-6e9ab70f356f",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_item1_4",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,script.ItemComponent,MOD.Core.HitComponent",
+        "jsonString": {
+          "name": "Model_item1_4",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_item1_4",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 1,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 8.0,
+                "y": 0.7,
+                "z": -999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 0,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 0,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "020b25de085f4c34a5f46f5a388b0c51",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "script.ItemComponent",
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.HitComponent",
+              "BoxOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "BoxSize": {
+                "x": 0.26,
+                "y": 0.26
+              },
+              "CircleRadius": 0.0,
+              "ColliderOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "ColliderType": 1,
+              "CollisionGroup": {
+                "Id": "13095fd3915c440fa708bcb3fdea4e75"
+              },
+              "IsLegacy": false,
+              "PolygonPoints": [],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "28703455-217c-4bec-87ee-b35cb5cd3aa1",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_item1_8",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,script.ItemComponent,MOD.Core.HitComponent",
+        "jsonString": {
+          "name": "Model_item1_8",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_item1_8",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 2,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 10.5,
+                "y": 0.7,
+                "z": -999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 0,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 0,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "020b25de085f4c34a5f46f5a388b0c51",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "script.ItemComponent",
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.HitComponent",
+              "BoxOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "BoxSize": {
+                "x": 0.26,
+                "y": 0.26
+              },
+              "CircleRadius": 0.0,
+              "ColliderOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "ColliderType": 1,
+              "CollisionGroup": {
+                "Id": "13095fd3915c440fa708bcb3fdea4e75"
+              },
+              "IsLegacy": false,
+              "PolygonPoints": [],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "02dffdab-cc22-43c5-9cdd-45c552a0dfb8",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_item1_15",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,script.ItemComponent,MOD.Core.HitComponent",
+        "jsonString": {
+          "name": "Model_item1_15",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_item1_15",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 3,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 13.0,
+                "y": 0.7,
+                "z": -999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 0,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 0,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "020b25de085f4c34a5f46f5a388b0c51",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "script.ItemComponent",
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.HitComponent",
+              "BoxOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "BoxSize": {
+                "x": 0.26,
+                "y": 0.26
+              },
+              "CircleRadius": 0.0,
+              "ColliderOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "ColliderType": 1,
+              "CollisionGroup": {
+                "Id": "13095fd3915c440fa708bcb3fdea4e75"
+              },
+              "IsLegacy": false,
+              "PolygonPoints": [],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "a5c916cc-cf49-4242-a780-76bdb568961e",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_item1_16",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,script.ItemComponent,MOD.Core.HitComponent",
+        "jsonString": {
+          "name": "Model_item1_16",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_item1_16",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 4,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 15.5,
+                "y": 0.7,
+                "z": -999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 0,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 0,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "020b25de085f4c34a5f46f5a388b0c51",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "script.ItemComponent",
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.HitComponent",
+              "BoxOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "BoxSize": {
+                "x": 0.26,
+                "y": 0.26
+              },
+              "CircleRadius": 0.0,
+              "ColliderOffset": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "ColliderType": 1,
+              "CollisionGroup": {
+                "Id": "13095fd3915c440fa708bcb3fdea4e75"
+              },
+              "IsLegacy": false,
+              "PolygonPoints": [],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "2025ad4d-7267-45c3-9f5d-c1ce8150ab82",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
+        "jsonString": {
+          "name": "Model_foothold1",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 5,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 2,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 2,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "2b047169fae0493b86d259c9ca0a9719",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 3.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.CustomFootholdComponent",
+              "FootholdDrag": 1.0,
+              "FootholdForce": 0.0,
+              "FootholdWalkSpeedFactor": 1.0,
+              "IsBlockVerticalLine": false,
+              "IsDynamicFoothold": true,
+              "PhysicsInteractable": false,
+              "RigidbodyMovementOption": 0,
+              "edgeLists": [
+                [
+                  {
+                    "x": -0.75,
+                    "y": 0.39
+                  },
+                  {
+                    "x": 3.75,
+                    "y": 0.39
+                  }
+                ]
+              ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "d23e11e0-efe7-4b34-8b45-77ed966527ee",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_5",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
+        "jsonString": {
+          "name": "Model_foothold1_5",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_5",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 6,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 15.5,
+                "y": 0.0,
+                "z": 999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 2,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 2,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "2b047169fae0493b86d259c9ca0a9719",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.CustomFootholdComponent",
+              "FootholdDrag": 1.0,
+              "FootholdForce": 0.0,
+              "FootholdWalkSpeedFactor": 1.0,
+              "IsBlockVerticalLine": false,
+              "IsDynamicFoothold": true,
+              "PhysicsInteractable": false,
+              "RigidbodyMovementOption": 0,
+              "edgeLists": [
+                [
+                  {
+                    "x": -0.75,
+                    "y": 0.39
+                  },
+                  {
+                    "x": 0.75,
+                    "y": 0.39
+                  }
+                ]
+              ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "974397b6-5347-4d8a-bf35-50551f90f1f0",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_4",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
+        "jsonString": {
+          "name": "Model_foothold1_4",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_4",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 7,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 13.0,
+                "y": 0.0,
+                "z": 999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 2,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 2,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "2b047169fae0493b86d259c9ca0a9719",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.CustomFootholdComponent",
+              "FootholdDrag": 1.0,
+              "FootholdForce": 0.0,
+              "FootholdWalkSpeedFactor": 1.0,
+              "IsBlockVerticalLine": false,
+              "IsDynamicFoothold": true,
+              "PhysicsInteractable": false,
+              "RigidbodyMovementOption": 0,
+              "edgeLists": [
+                [
+                  {
+                    "x": -0.75,
+                    "y": 0.39
+                  },
+                  {
+                    "x": 0.75,
+                    "y": 0.39
+                  }
+                ]
+              ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "1c98c16c-889e-4360-ae8f-c428c623699e",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_3",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
+        "jsonString": {
+          "name": "Model_foothold1_3",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_3",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 8,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 10.5,
+                "y": 0.0,
+                "z": 999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 2,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 2,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "2b047169fae0493b86d259c9ca0a9719",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.CustomFootholdComponent",
+              "FootholdDrag": 1.0,
+              "FootholdForce": 0.0,
+              "FootholdWalkSpeedFactor": 1.0,
+              "IsBlockVerticalLine": false,
+              "IsDynamicFoothold": true,
+              "PhysicsInteractable": false,
+              "RigidbodyMovementOption": 0,
+              "edgeLists": [
+                [
+                  {
+                    "x": -0.75,
+                    "y": 0.39
+                  },
+                  {
+                    "x": 0.75,
+                    "y": 0.39
+                  }
+                ]
+              ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "36326187-4ddc-4ca0-aced-e5858d0a1eb2",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_2",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
+        "jsonString": {
+          "name": "Model_foothold1_2",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_2",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 9,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 8.0,
+                "y": 0.0,
+                "z": 999.999
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 2,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 2,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "2b047169fae0493b86d259c9ca0a9719",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.CustomFootholdComponent",
+              "FootholdDrag": 1.0,
+              "FootholdForce": 0.0,
+              "FootholdWalkSpeedFactor": 1.0,
+              "IsBlockVerticalLine": false,
+              "IsDynamicFoothold": true,
+              "PhysicsInteractable": false,
+              "RigidbodyMovementOption": 0,
+              "edgeLists": [
+                [
+                  {
+                    "x": -0.75,
+                    "y": 0.39
+                  },
+                  {
+                    "x": 0.75,
+                    "y": 0.39
+                  }
+                ]
+              ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "346dba4f-0b40-443f-a5dd-277a1b5b48b0",
+        "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_1",
+        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
+        "jsonString": {
+          "name": "Model_foothold1_1",
+          "path": "/maps/testMap_jw/pattern_sample1/Model_foothold1_1",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 10,
+          "pathConstraints": "////",
+          "revision": 1,
+          "modelId": null,
+          "@components": [
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "Position": {
+                "x": 5.5,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "ZRotation": 0.0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "DrawMode": 2,
+              "EndFrameIndex": 2147483647,
+              "FlipX": false,
+              "FlipY": false,
+              "IgnoreMapLayerCheck": false,
+              "MaterialID": "",
+              "OrderInLayer": 2,
+              "PlayRate": 1.0,
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "SpriteRUID": "2b047169fae0493b86d259c9ca0a9719",
+              "StartFrameIndex": 0,
+              "TiledSize": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.CustomFootholdComponent",
+              "FootholdDrag": 1.0,
+              "FootholdForce": 0.0,
+              "FootholdWalkSpeedFactor": 1.0,
+              "IsBlockVerticalLine": false,
+              "IsDynamicFoothold": true,
+              "PhysicsInteractable": false,
+              "RigidbodyMovementOption": 0,
+              "edgeLists": [
+                [
+                  {
+                    "x": -0.75,
+                    "y": 0.39
+                  },
+                  {
+                    "x": 0.75,
+                    "y": 0.39
+                  }
+                ]
+              ],
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "8fa4b7b8-05eb-4371-b719-8768595fc37c",
+        "path": "/maps/testMap_jw/MapEmpty",
+        "componentNames": "MOD.Core.SpriteRendererComponent,MOD.Core.TransformComponent",
+        "jsonString": {
+          "name": "MapEmpty",
+          "path": "/maps/testMap_jw/MapEmpty",
+          "nameEditable": true,
+          "enable": false,
+          "visible": true,
+          "localize": false,
+          "displayOrder": 9,
+          "pathConstraints": "///",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "mapempty",
+            "sub_entity_id": null,
+            "root_entity_id": "8fa4b7b8-05eb-4371-b719-8768595fc37c",
+            "replaced_model_id": null
+          },
+          "modelId": "mapempty",
+          "@components": [
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "RenderSetting": 0,
+              "SortingLayer": "MapLayer0",
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.TransformComponent",
+              "Position": {
+                "x": 7.75,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 39.0,
+                "y": 1.0,
+                "z": 1.0
+              },
               "Enable": true
             }
           ],
