@@ -9,8 +9,9 @@ script PatternFixer extends Component
 	@ExecSpace("ServerOnly")
 	method void OnBeginPlay()
 		for _, entity in pairs(self.Entity.Children) do
-		    if isvalid(entity.CustomFootholdComponent) and isvalid(entity.SpriteRendererComponent) then
-		        local sprite = entity.SpriteRendererComponent
+		    --if isvalid(entity.CustomFootholdComponent) and isvalid(entity.SpriteRendererComponent) then
+		    if isvalid(entity.SpriteRendererComponent) then
+				local sprite = entity.SpriteRendererComponent
 		        sprite.Enable = false
 		        
 		        local modelId = "model://457a08c4-55c0-4e6d-884d-40a693a33625"
@@ -18,7 +19,10 @@ script PatternFixer extends Component
 		        newEntity.SpriteRendererComponent.SpriteRUID = sprite.SpriteRUID
 		        newEntity.SpriteRendererComponent.DrawMode = sprite.DrawMode
 		        newEntity.SpriteRendererComponent.TiledSize = sprite.TiledSize
-				newEntity.TransformComponent.Position += Vector3.right * 4
+				
+				local rotate = math.rad(entity.TransformComponent.ZRotation)
+				local direction = Vector3(math.cos(rotate), math.sin(rotate), 0)
+				newEntity.TransformComponent.Position += direction * 4
 		    end
 		end
 	end
