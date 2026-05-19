@@ -1,0 +1,389 @@
+@Logic
+script GameLogic extends Logic
+
+	property number discript = 0 -- 게임의 전체적인 흐름을 제어하기 위한 로직입니다.
+
+	property number currentScore = 0 -- 현재 게임 점수값을 담기 위한 변수입니다.
+
+	@Sync
+	property number bestScore = 0 -- 플레이어의 최고점수를 담기 위한 변수입니다.
+
+	property number scoreIncreaseTimer = 0 -- 주기적으로 점수를 갱신하기 위한 타이머 변수입니다.
+
+	property number currentStage = 1 -- 현재 스테이지 번호를 저장하기 위한 변수입니다.
+
+	property number stageTimer = 0 -- 스테이지가 전환 될 타이밍을 측정하기 위한 타이머 변수입니다.
+
+	property number hp = 0 -- 플레이어의 체력값을 저장하기 위한 변수입니다.
+
+	property boolean isEnd = true -- 게임이 종료되었음을 기록하는 상태변수입니다.
+
+	property boolean isMobile = true -- 구동환경이 모바일환경인지 상태를 저장하는 변수입니다.
+
+	@ExecSpace("ClientOnly")
+	method void OnBeginPlay()
+		-- 월드 시작시 호출되는 메서드입니다.
+		
+		-- 게임 로직의 초기화를 진행합니다.
+		self:Init()
+		
+		-- 월드 진행이 모바일로 진행되는지 상태변수로 저장합니다.
+		--self.isMobile = Environment:IsMobilePlatform()
+		
+		-- 월드 시작시 배경음악을 재생합니다.
+		--_SoundService:PlayBGM("f5bb92d91e134c699e7bb2cf1aaca8e6",0.4)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void Init()
+		-- 전반적인 게임을 관리하는 메인 로직의 초기화를 진행합니다.
+		
+		-- 내부 멤버 참조를 연결합니다.
+		--self:ConnectRefs()
+		
+		-- 다른 핵심 로직들의 초기화를 진행합니다.
+		self:OrderInit()
+		---- 점수값을 초기화합니다.
+		--self:SetScore(0)
+		---- 현재 체력값을 초기화합니다.
+		--self:SetHP(100)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void ConnectRefs()
+		-- 내부 멤버의 참조를 연결하는 메서드입니다.
+		
+		-- 스크롤링 컨트롤러 엔티티를 연결합니다.
+		--self.scrollingController = _EntityService:GetEntityByPath("/maps/MainGame/Scrolling").ScrollingController
+	end
+
+	@ExecSpace("ClientOnly")
+	method void OrderInit()
+		-- 게임 로직으로부터 각 핵심 로직, 컴포넌트들의 초기화 명령을 진행합니다.
+		
+		-- 스크롤링 컨트롤러 초기화를 진행합니다.
+		--self.scrollingController:Init()
+		-- 데이터셋 로직 초기화를 진행합니다.
+		_DataSetLogic:Init()
+		-- UI매니저로직 초기화를 진행합니다.
+		--_UIManagerLogic:Init()
+		-- 오브젝트 풀 로직 초기화를 진행합니다.
+		--_ObjectPoolLogic:Init()
+	end
+
+	@ExecSpace("ClientOnly")
+	method void OnUpdate(number delta)
+		---- 매 프레임마다 호출되는 메서드입니다.
+		--
+		---- 게임이 진행중이 아니라면
+		--if self.isEnd == true then
+		--    -- 메서드를 종료합니다.
+		--    return
+		--end
+		--
+		---- delta 값만큼 자동으로 체력을 감소합니다.
+		--self:AutoDecreaseHp(delta)
+		---- delta 값만큼 자동으로 점수를 증가합니다.
+		--self:AutoIncreaseScore(delta)
+		--
+		---- /분기1/ 스테이지 타이머의 남은 시간이 있다면
+		--if self.stageTimer > 0 then
+		--    -- 스테이지 타이머의 값에 delta값을 감소합니다.
+		--    self.stageTimer -= delta
+		---- /분기2/ 스테이지 타이머에 남은 시간값이 없다면
+		--else 
+		--    -- 스테이지 전환을 호출합니다.
+		--    self:StageChange()
+		--    -- 스테이지 타이머 값을 Config에 설정한 값으로 초기화합니다.
+		--    self.stageTimer = _Config.stageChangeTime
+		--end
+		
+		
+	end
+
+	@ExecSpace("ClientOnly")
+	method void AutoIncreaseScore(number delta)
+		-- increaseScoreIntervalSecond(주기) 마다 점수를 증가시키는 메서드입니다.
+		
+		-- /분기1/ 측정 타이머의 값이 기준이 되는 Interval 값보다 작다면
+		if self.scoreIncreaseTimer < _Config.increaseScoreInterval then
+			-- 타이머에 delta값을 추가시킨뒤 메서드 종료합니다.
+			self.scoreIncreaseTimer += delta
+			return
+		end
+		
+		-- /분기2/ 측정 타이머의 값이 기준이 되는 Interval 값보다 크거나 같다면 (특정 주기 도달시점입니다.)
+		
+		-- 점수를 추가합니다.
+		self:AddScore(_Config.increaseScore)
+		-- 측정 타이머를 초기화합니다.
+		self.scoreIncreaseTimer = 0
+	end
+
+	@ExecSpace("ClientOnly")
+	method void AutoDecreaseHp(number delta)
+		-- 자동으로 체력을 감소시키는 메서드입니다.
+		
+		-- 현재 체력값에 감소되어야하는 값을 전달합니다.
+		self:AddHP(delta * _Config.decreaseHpValue)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void SetScore(number value)
+		-- 매개변수로 전달받은 값을 Score 값으로 설정시키는 메서드입니다.
+		
+		-- 매개변수 1 number value : 점수값으로 설정되는 값입니다.
+		
+		-- 현재 점수값을 특정값으로 설정합니다.
+		self.currentScore = value
+		-- UIManager에 등록된 Text에 특정값으로 설정합니다.
+		_UIManagerLogic:SetScoreText(value)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void AddScore(number addValue)
+		-- 매개변수로 전달받은 값을 Score 값에 추가시키는 메서드입니다.
+		
+		-- 매개변수 1 number addValue : 기존 점수값에 추가되는 값을 전달받습니다.
+		
+		-- 현재 점수에 전달받은 값을 추가시킵니다.
+		self.currentScore += addValue
+		-- UIManager 에 등록된 Text에 현재 점수값을 전달합니다.
+		_UIManagerLogic:SetScoreText(self.currentScore)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void SetHP(number value)
+		-- 매개변수로 전달받은 값을 Hp 값으로 설정시키는 메서드입니다.
+		
+		-- 매개변수 1 number value : Hp 값으로 설정되는 값을 전달받습니다.
+		
+		-- 체력값을 특정값으로 설정합니다. (clamp 를 활용해 미만, 초과를 제한합니다.)
+		self.hp = math.clamp(value,0,_Config.maxHp)
+		
+		-- UIManager에 등록된 슬라이더에 체력값을 반영합니다.
+		_UIManagerLogic:SetHpSliderValue(self.hp)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void AddHP(number addValue)
+		-- 매개변수로 전달받은 값을 체력값에 추가시키는 메서드입니다.
+		
+		-- 매개변수 1 number addValue : 추가되는 체력값을 전달받습니다.
+		
+		-- 현재 체력에 매개변수값을 추가합니다.
+		self.hp += addValue
+		
+		-- clamp 를 활용해 미만, 초과를 제한합니다.
+		self.hp = math.clamp(self.hp,0,_Config.maxHp)
+		
+		-- UIManager에 등록된 슬라이더에 체력값을 반영합니다.
+		_UIManagerLogic:SetHpSliderValue(self.hp)
+		
+		-- 체력값이 0보다 작거나 같다면
+		if self.hp <= 0 then
+			-- 게임 종료 로직을 수행합니다.
+			self:EndMainGame()
+		end
+	end
+
+	@ExecSpace("Client")
+	method void EndMainGame()
+		-- 게임을 종료하는 메서드입니다. (클라이언트전용 메서드)
+		
+		-- 게임이 종료되었음 상태로 전환합니다.
+		self.isEnd = true
+		
+		-- 캐릭터를 보이지 않게 설정합니다.
+		_UserService.LocalPlayer.Visible = false
+		
+		-- 게임종료 시 구동환경이 모바일이라면 조이스틱을 비활성화합니다.
+		_UIManagerLogic:ShowMobileJoyStick(false)
+		
+		-- 결과창 팝업내 설정될 값을 지정하고 화면 내 출력합니다. (최고 점수와, 현재 점수를 전달합니다.)
+		_UIManagerLogic:ShowResultPopup(tostring(math.floor(self.bestScore)),tostring(math.floor(self.currentScore)))
+		
+		-- 스크롤링 컨트롤러에게 모든타일셋 오브젝트 반환(비활성화)을 진행합니다.
+		--self.scrollingController:ReturnAllTiles()
+		
+		-- 배경 스크롤링 속도를 감소시킵니다.
+		--self.scrollingController.background.ScrollRate = 0.5
+		
+		-- 현재 점수가 클라이언트 내에서 관리되고 있는 최고점수보다 높다면
+		if self.currentScore > self.bestScore then
+			-- 최고점수값을 현재 점수로 설정합니다.
+			self.bestScore = self.currentScore
+			-- 최고점수가 변경된 시점으므로 서버측의 최고점수값을 갱신합니다.
+			self:UpdateScore(self.bestScore)
+		end
+		
+		-- 메인타이틀의 최고점수값을 반영합니다.
+		_UIManagerLogic:UpdateTitleBestScore(self.bestScore)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void GameStart(number selectCharacterId)
+		-- 메인게임을 시작할때 호출되는 메서드입니다.
+		
+		-- CharacterInfoTable에서 캐릭터 선택창에서 선택했던 캐릭터의 속도값을 가져옵니다.
+		local scrollSpeed = _DataSetLogic.characterInfoTable[selectCharacterId].Speed
+		-- 기본 속도값을 등록합니다.
+		self:SetDefaultScrollSpeed(scrollSpeed)
+		
+		-- 현재(시작) 스테이지를 1로 초기화합니다.
+		self.currentStage = 1
+		
+		-- 스테이지 변경을 요청합니다.
+		self:StageChange()
+		
+		self:SetScore(0)
+		
+		-- 점수 타이머값을 초기화합니다.
+		self.scoreIncreaseTimer = 0
+		
+		-- 체력값을 초기화합니다.
+		self:SetHP(100)
+		
+		-- 스테이지 타이머를 config에 설정된 전환시간으로 설정합니다.
+		self.stageTimer = _Config.stageChangeTime
+		
+		-- 모바일환경인 경우 모바일 조이스틱을 표기합니다.
+		_UIManagerLogic:ShowMobileJoyStick(true)
+		
+		-- 스크롤링 컨트롤러의 초기화를 진행합니다.
+		--self.scrollingController:Reset()
+		
+		-- 플레이어 캐릭터의 초기화를 진행합니다.
+		_UserService.LocalPlayer.CustomPlayerController:ResetCharacter()
+		
+		-- 유저에게 제공되어야할 UI가 보이도록 설정합니다.
+		_UIManagerLogic:ShowPlayerInfo(true)
+		
+		-- 스킬 로직의 초기화를 진행합니다.
+		_SkillLogic:Reset()
+		
+		-- 스킬 이펙스 리소스 버퍼링을 방지하기 위해 리소스 이펙트만 재생합니다.
+		_SkillLogic:PlaySkillEffect()
+		
+		-- 캐릭터 마다 가진 고유 스킬 아이콘으로 이미지를 적용합니다.
+		_UIManagerLogic:RegistSkillIcon()
+		
+		-- 아이템 로직의 초기화를 수행합니다.
+		_ItemLogic:Reset()
+		
+		-- 본게임 시작전 3,2,1 카운트를 수행합니다. (Wait 메서드가 포함되어 있습니다.)
+		_UIManagerLogic:CountTimerStart()
+		
+		-- 게임이 진행중인 상태로 전환합니다.
+		self.isEnd = false
+		
+	end
+
+	@ExecSpace("ClientOnly")
+	method void SetDefaultScrollSpeed(number speed)
+		-- 캐릭터의 기본 스크롤링 속도값 설정합니다.
+		-- Defalut 와 Currrent를 나눈 이유 : 부스터 아이템 사용시 속도값이 변경되므로 캐릭터의 기본 속도값을 따로 저장하기 위함입니다.
+		
+		-- 매개변수 1 number speed : 게임 진행시 적용될 스크롤링 속도값을 전달받습니다.
+		
+		-- 스크롤링 컴포넌트의 기본 속도값을 매개변수 값으로 설정합니다.
+		--self.scrollingController.defaultSpeed = speed
+		-- 스크롤링 컴포넌트의 현재 속도값을 매개변수 값으로 설정합니다.
+		--self.scrollingController.currentScrollSpeed = speed
+	end
+
+	@ExecSpace("ClientOnly")
+	method void StageChange()
+		-- 스테이지를 변경시키는 메서드입니다.
+		
+		-- 스테이지 번호를 1증가시키지만, % 연산자를 활용해 리소스 요소를 순회할수 있게 설정합니다.
+		self.currentStage = (self.currentStage % (_DataSetLogic.stageResourceCount+1)) + 1
+		
+		-- 현재 설정된 스테이지 번호에 맞는 배경화면으로 전환합니다.
+		--self.scrollingController:ChangeBackground()
+	end
+
+	@ExecSpace("Server")
+	method void LoadData()
+		-- 기록된 정보를 가져오는 메서드입니다. (서버전용 메서드)
+		-- 서버측 실행 : 서버에서 관리되고 있던 데이터를 가져오기 위함입니다.
+		
+		-- 데이터스토리지 서비스를 활용해 'MyData'라는 데이터 스토리지를 가져옵니다.
+		local data = _DataStorageService:GetGlobalDataStorage("MyData")
+		
+		-- 해당 데이터 스토리지 내에서 'BestScore' 키에 해당하는 Value값을 가져옵니다.
+		local errorCode,value = data:GetAndWait("BestScore")
+		
+		-- 임시 점수값 변수를 등록합니다.
+		local tempScore
+		
+		-- 만약 저장된 데이터가 없다면
+		if value == nil then
+			-- 임시 점수값을 0으로 설정합니다.
+			tempScore = 0
+			
+		-- 만약 저장된 데이터가 있다면
+		else
+			-- 임시 점수값을 기존 점수값으로 설정합니다.
+			tempScore = tonumber(value)
+		end
+		
+		-- bestScore값을 갱신합니다.
+		-- Sync로 선언된 프로퍼티로써 값 변경이 일어날때,
+		-- 클라이언트쪽에서도 값이 동기화되며 OnSyncProperty 메서드가 자동으로 호출됩니다.
+		self.bestScore = tonumber(tempScore)
+	end
+
+	@ExecSpace("Server")
+	method void SaveScore(number score)
+		-- 유저의 정보를 저장하는 메서드입니다.
+		
+		-- 데이터 스토리지에 점수를 저장하는 메서드입니다. (서버전용 메서드)
+		
+		-- 데이터스토리지 서비스를 활용해 'MyData'라는 데이터 스토리지를 가져옵니다.
+		local data = _DataStorageService:GetGlobalDataStorage("MyData")
+		
+		-- 해당 스토리지 내의 'BestScore' 키에 해당하는 Value 값에 'score' 값을 등록합니다.
+		local errorCode = data:SetAndWait("BestScore",tostring(score))
+	end
+
+	@ExecSpace("Server")
+	method void UpdateScore(number score)
+		-- 서버측에서 관리되는 점수값을 갱신하는 메서드입니다. (서버전용 메서드)
+		
+		-- 매개변수 1 number score : 클라이언트 측에서 관리되는 점수값을 전달받습니다.
+		
+		-- 서버측 bestScore값을 매개변수 값으로 설정합니다.
+		self.bestScore = score
+	end
+
+	@ExecSpace("ClientOnly")
+	method void OnSyncProperty(string name, any value)
+		-- Sync로 선언된 프로퍼티 한정으로 서버측에서 값 변경이 일어날경우 자동으로 호출되는 메서드입니다.
+		-- 단, 서버측에서 변경된 값이 기존 클라이언트 값과 동일하다면 해당메서드는 호출되지 않습니다.
+		
+		-- 변경된 프로퍼티 변수명이 bestScore라면
+		if name == "bestScore" then
+			-- UIManagerLogic에게 메인 타이틀화면의 최고점수 텍스트 갱신을 요청합니다.
+			_UIManagerLogic:UpdateTitleBestScore(tonumber(value))
+		end
+	end
+
+	@EventSender("Service", "UserService")
+	handler HandleUserEnterEvent(UserEnterEvent event)
+		-- 유저 진입, 입장시 호출되는 메서드입니다.
+		
+		-- 서버측의 데이터를 불러옵니다.
+		self:LoadData()
+		
+	end
+
+	@EventSender("Service", "UserService")
+	handler HandleUserLeaveEvent(UserLeaveEvent event)
+		-- 유저 이탈시 호출되는 메서드입니다.
+		
+		-- 서버측으로 최고점수를 등록하는 메서드를 수행합니다.
+		self:SaveScore(self.bestScore)
+	end
+
+end

@@ -1,0 +1,82 @@
+@Logic
+script ItemLogic extends Logic
+
+	property number discript = 0 -- 아이템의 기능을 동작,관리를 위한 로직입니다.
+
+	property number boosterTimer = 0 -- 부스터 아이템 사용 지속시간을 관리하는 타이머 변수입니다.
+
+	property boolean usingBooster = false -- 부스터 아이템이 사용중인지의 여부를 나타내는 상태변수입니다.
+
+	@ExecSpace("ClientOnly")
+	method void UseBooster()
+		-- 부스터 아이템 사용시 수행되는 메서드입니다.
+		
+		-- 부스터 아이템 사용 지속시간을 Config 에서 설정한 부스터 사용시간으로 설정합니다.
+		self.boosterTimer = _Config.boostDuration
+		
+		-- 이미 부스터 아이템이 사용중이였다면
+		if self.usingBooster == true then
+			-- 로직을 종료합니다 (의도 : 부스터 사용 지속시간만 다시 설정하고 추가 작업 수행은 하지 않도록 구현)
+			return
+		end
+		
+		-- 부스터 아이템이 사용중임을 저장합니다.
+		self.usingBooster = true
+		
+		-- 부스터 아이템의 속도 배율값을 가져옵니다.
+		-- 아이템 테이블에서 Booster와 같이 저장된 값을 가져옵니다.
+		local boostItemFactor = _DataSetLogic.itemInfoTable[3].Value
+		
+		-- factor의 비율로 스크롤 목표 속도값을 저장합니다.
+		--local targetScrollSpeed = _GameLogic.scrollingController.defaultSpeed * boostItemFactor
+		
+		-- factor의 비율로 배경 스크롤 목표 속도값을 저장합니다.
+		local targetBackgroundScrollSpeed = _Config.backgroundScrollSpeed * boostItemFactor
+		
+		-- 스크롤러컨트롤러의 스크롤링 속도값을 설정합니다.
+		--_GameLogic.scrollingController:SetScrollSpeed(targetScrollSpeed)
+		-- 스크롤링컨트롤러의 배경오브젝트 스크롤링 속도값을 설정합니다.
+		--_GameLogic.scrollingController:SetBackgroundScrollSpeed(targetBackgroundScrollSpeed)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void OnUpdate(number delta)
+		-- 매 프레임마다 호출되는 메서드입니다.
+		
+		-- 게임이 종료된 상태라면
+		if _GameLogic.isEnd == true then
+			-- 아무것도 수행하지 않고 종료합니다.
+			return
+		end
+		
+		-- 만약 부스터 아이템이 사용중 이면서
+		if self.usingBooster == true then
+			-- /분기1/ 남아있는 사용가능시간이 있다면
+			if self.boosterTimer > 0 then
+				-- 사용가능시간을 delta 만큼 감소합니다.
+				self.boosterTimer -= delta
+				
+			-- /분기2/ 남아있는 사용가능시간이 없다면
+			else
+				-- 부스터 아이템이 사용중이지 않음 상태로 변경합니다.
+				self.usingBooster = false
+				
+				-- 스크롤링 컨트롤러의 스크롤링 속도값을 기본 속도값으로 재설정합니다.
+		        --_GameLogic.scrollingController:SetScrollSpeed(_GameLogic.scrollingController.defaultSpeed)
+				-- 스크롤링 컨트롤러의 배경오브젝트 스크롤링 속도값을 기본 속도값으로 재설정합니다.
+		        --_GameLogic.scrollingController:SetBackgroundScrollSpeed(_Config.backgroundScrollSpeed)
+			end
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void Reset()
+		-- 해당 Logic을 초기화하는 메서드입니다.
+		
+		-- 부스터 아이템 사용상태가 아님으로 상태로 초기화합니다.
+		self.usingBooster = false
+		-- 부스터 사용 지속시간 타이머를 초기화합니다.
+		self.boosterTimer = 0
+	end
+
+end

@@ -1,24 +1,28 @@
 @Component
 script ItemComponent extends Component
 
-	property any Shape = nil
+	property number id = 0
+
+	property number value = 0
+
+	property string name = ""
 
 	@ExecSpace("ServerOnly")
 	method void OnBeginPlay()
 		local transform = self.Entity.TransformComponent
 		local position = Vector2(transform.WorldPosition.x, transform.WorldPosition.y) 
 		local size = Vector2(transform.Scale.x, transform.Scale.y) 
-		self.Shape = BoxShape(position, size / 2, 0)
+		self._T.Shape = BoxShape(position, size / 2, 0)
 	end
 
 	@ExecSpace("ServerOnly")
 	method void OnUpdate(number delta)
 		local transform = self.Entity.TransformComponent
 		local position = Vector2(transform.WorldPosition.x, transform.WorldPosition.y) 
-		self.Shape.Position = position
+		self._T.Shape.Position = position
 		
 		local simulator = _CollisionService:GetSimulator(self.Entity)
-		local overlaps = simulator:OverlapAll(CollisionGroups.Player, self.Shape)
+		local overlaps = simulator:OverlapAll(CollisionGroups.Player, self._T.Shape)
 			
 		for _, overlap in pairs(overlaps) do
 			if isvalid(overlap.Entity.PlayerComponent) then

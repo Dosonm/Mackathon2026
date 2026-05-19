@@ -1,0 +1,23 @@
+{
+  "Id": "",
+  "GameId": "",
+  "EntryKey": "userdataset://c9afbbc0-d202-4b21-9991-6a454c997b10",
+  "ContentType": "x-mod/userdataset",
+  "Content": "",
+  "Usage": 0,
+  "UsePublish": 1,
+  "UseService": 0,
+  "CoreVersion": "26.3.0.0",
+  "StudioVersion": "0.1.0.0",
+  "DynamicLoading": 0,
+  "ContentProto": {
+    "Use": "Json",
+    "Json": {
+      "name": "ItemInfo",
+      "id": "c9afbbc0-d202-4b21-9991-6a454c997b10",
+      "serveronly": false,
+      "syncDataSetWebUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRLq6mbpwUvcGAD_xw6R34frnw7g2cZNDDmkg6CBnp1Zmj5UfMDH7GfYiN1gDBOxfM_3ZOOfLxcO4Es/pub?gid=0&single=true&output=csv",
+      "dynamicloading": 0
+    }
+  }
+}

@@ -1,0 +1,221 @@
+@Logic
+script DataSetLogic extends Logic
+
+	property string discript = ""
+
+	property table tileSetInfoTable = {}
+
+	property number totalTileSetCount = -1
+
+	property table itemInfoTable = {}
+
+	property table tilesFloorInfoTable = {[1]={} , [2]={}}
+
+	property table characterInfoTable = {}
+
+	property table skillInfoTable = {}
+
+	property table stageRenderInfoTable = {}
+
+	property number stageResourceCount = 0
+
+	@ExecSpace("ClientOnly")
+	method void Init()
+		-- DataSetLogic 컴포넌트 초기화를 진행하는 메서드입니다.
+		
+		-- 타일셋 테이블을 초기화합니다.
+		--self:InitTileSetInfoTable()
+		-- 아이템 테이블을 초기화합니다.
+		self:InitItemInfoTable()
+		-- 캐릭터 테이블을 초기화합니다.
+		--self:InitCharacterInfoTable()
+		-- 스킬 테이블을 초기화합니다.
+		self:InitSkillInfoTable()
+		-- 스테이지 렌더 테이블을 초기화합니다.
+		--self:InitStageRenderInfoTable()
+	end
+
+	@ExecSpace("ClientOnly")
+	method void InitTileSetInfoTable()
+		-- 타일오브젝트와 관련된 데이터셋을 저장하기 위한 메서드입니다.
+		
+		-- 월드스페이스에 저장된 데이터셋의 이름을 로컬로 접근하기 위한 변수입니다.
+		local dataSetName = "TileSetInfo"
+		
+		-- 대상 데이터셋의 Row수입니다.
+		local rowCount = self:GetDataSetRowCount(dataSetName)
+		
+		-- 타일셋 종류수를 저장합니다.
+		self.totalTileSetCount = rowCount
+		
+		-- 각 줄의 데이터를 담기위한 변수입니다.
+		local rowData
+		
+		-- 1 부터 데이터셋의 Row수만큼 순회를 시작합니다.
+		for i = 1 , rowCount , 1 do
+			rowData = 
+			{
+				-- 타일셋 오브젝트의 첫번째 타일의 층수입니다.
+				FirstFloor = tonumber(_DataService:GetCell(dataSetName,i,"FirstFloor")),
+				-- 타일셋 오브젝트의 마지막 타일의 층수입니다.
+				LastFloor = tonumber(_DataService:GetCell(dataSetName,i,"LastFloor")),
+				-- 타일셋 오브젝트를 생성하기 위한 원본 엔티티 모델(프리팹)Id입니다.
+				EntryID = _DataService:GetCell(dataSetName,i,"EntryID")
+			}
+		
+			-- rowData로 저장한 데이터들을 테이블에 저장합니다.
+			self.tileSetInfoTable[i] = rowData
+			
+			-- 지금 등록한 타일셋의 층수를 변수로 저장합니다.
+			local firstTileFloor = self.tileSetInfoTable[i].FirstFloor
+			
+			-- /분기1/ 만약 첫번째 타일 층수가 1층이라면
+			if firstTileFloor == 1 then
+				-- 1층 테이블 목록에 저장합니다.
+				table.insert(self.tilesFloorInfoTable[1],i)
+			-- /분기2/ 첫번째 타일 층수가 1층이 아니라면
+			else
+				-- 2층 테이블 목록에 저장합니다.
+				table.insert(self.tilesFloorInfoTable[2],i)
+			end
+		end
+		
+		
+	end
+
+	@ExecSpace("ClientOnly")
+	method number GetDataSetRowCount(string Name)
+		-- 대상 데이터셋의 Row수를 반환합니다.
+		
+		-- 매개변수1 string Name : 대상 데이터셋의 이름을 전달받습니다.
+		
+		-- 확인한 데이터셋의 Row수를 반환합니다.
+		return _DataService:GetRowCount(Name)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void InitItemInfoTable()
+		-- 아이템 데이터셋을 저장하기 위한 메서드입니다.
+		
+		-- 월드스페이스에 저장된 데이터셋의 이름을 로컬로 접근하기 위한 변수입니다.
+		local dataSetName = "ItemInfo"
+		
+		-- 대상 데이터셋의 Row수입니다.
+		local rowCount = self:GetDataSetRowCount(dataSetName)
+		
+		-- 각 줄의 데이터를 담기위한 변수입니다.
+		local rowData
+		
+		-- 1 부터 데이터셋의 Row수만큼 순회 시작합니다.
+		for i = 1 , rowCount , 1 do
+			rowData = 
+			{
+				-- 아이템 이름을 저장합니다.
+				Name = tostring(_DataService:GetCell(dataSetName,i,"Name")),
+				SpriteRUID = tostring(_DataService:GetCell(dataSetName,i,"SpriteRUID")),
+				Value = tonumber(_DataService:GetCell(dataSetName,i,"Value"))
+				-- 아이템 생성확률을 저장합니다.
+		        --SpawnRate = tonumber(_DataService:GetCell(dataSetName,i,"SpawnRate")),
+				-- 아이템의 모델(프리팹)의 EntryID 값을 저장합니다.
+		        --EntryID = tostring(_DataService:GetCell(dataSetName,i,"EntryID"))
+			}
+		
+			-- rowData로 저장한 데이터들을 테이블에 저장합니다.
+			self.itemInfoTable[i] = rowData
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void InitCharacterInfoTable()
+		-- 캐릭터 데이터셋을 저장하기 위한 메서드입니다.
+		
+		-- 월드스페이스에 저장된 데이터셋의 이름을 로컬로 접근하기 위한 변수입니다.
+		local dataSetName = "CharacterInfo"
+		
+		-- 대상 데이터셋의 Row수입니다.
+		local rowCount = self:GetDataSetRowCount(dataSetName)
+		
+		-- 각 줄의 데이터를 담기위한 변수입니다.
+		local rowData
+		
+		-- 1 부터 데이터셋의 Row수만큼 순회 시작합니다.
+		for i = 1 , rowCount , 1 do
+			rowData = 
+			{
+				-- 캐릭터 이름을 저장합니다.
+				Name = tostring(_DataService:GetCell(dataSetName,i,"Name")),
+				-- 캐릭터 고유 스크롤링 속도값을 저장합니다.
+				Speed = tonumber(_DataService:GetCell(dataSetName,i,"Speed")),
+				-- 캐릭터 고유 스킬 Id를 저장합니다.
+				SkillId = tonumber(_DataService:GetCell(dataSetName,i,"SkillId")),
+				-- 캐릭터에 부착된 Costume 렌더러에 설정될 RUID값을 저장합니다.
+				RUID = tostring(_DataService:GetCell(dataSetName,i,"RUID"))
+			}
+		
+			-- rowData로 저장한 데이터들을 테이블에 저장합니다.
+			self.characterInfoTable[i] = rowData
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void InitSkillInfoTable()
+		-- 스킬 데이터셋을 저장하기 위한 메서드입니다.
+		
+		-- 월드스페이스에 저장된 데이터셋의 이름을 로컬로 접근하기 위한 변수입니다.
+		local dataSetName = "SkillInfo"
+		
+		-- 대상 데이터셋의 row수를 확인합니다.
+		local rowCount = self:GetDataSetRowCount(dataSetName)
+		
+		-- 내부 멤버 리소스 종류 수를 저장합니다.
+		self.stageResourceCount = rowCount
+		
+		-- 각 줄의 데이터를 담기위한 변수입니다.
+		local rowData
+		
+		-- 1 부터 데이터셋의 Row수만큼 순회를 시작합니다.
+		for i = 1 , rowCount , 1 do
+			rowData = 
+			{
+				Name = tostring(_DataService:GetCell(dataSetName,i,"Name")),
+				EffectRUID = tostring(_DataService:GetCell(dataSetName,i,"EffectRUID")),
+				SpriteRUID = tostring(_DataService:GetCell(dataSetName,i,"SpriteRUID")),
+				AudioClipRUID = tostring(_DataService:GetCell(dataSetName,i,"AudioClipRUID"))
+			}
+		
+			-- rowData로 저장한 데이터들을 테이블에 저장합니다.
+			self.skillInfoTable[i] = rowData
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void InitStageRenderInfoTable()
+		-- 스테이지 별 리소스 정보 데이터셋을 저장하기 위한 메서드입니다.
+		
+		-- 월드스페이스에 저장된 데이터셋의 이름을 로컬로 접근하기 위한 변수입니다.
+		local dataSetName = "StageRenderInfo"
+		
+		-- 대상 데이터셋의 row수를 확인합니다.
+		local rowCount = self:GetDataSetRowCount(dataSetName)
+		
+		-- 각 줄의 데이터를 담기위한 변수입니다.
+		local rowData
+		
+		-- 1 부터 데이터셋의 Row수만큼 순회 시작합니다.
+		for i = 1 , rowCount , 1 do
+			rowData = 
+			{
+				-- 스테이지 별 적용할 바닥 타일의 RUID값을 저장합니다.
+				TileRUID = tostring(_DataService:GetCell(dataSetName,i,"TileRUID")),
+				-- 스테이지 별 적용할 장애물 오브젝트의 RUID값을 저장합니다.
+				ObstacleRUID = tostring(_DataService:GetCell(dataSetName,i,"ObstacleRUID")),
+				-- 스테이지 별 적용할 배경화면 RUID값을 저장합니다.
+				BackgroundRUID = tostring(_DataService:GetCell(dataSetName,i,"BackgroundRUID"))
+			}
+		
+			-- rowData로 저장한 데이터들을 테이블에 저장합니다.
+			self.stageRenderInfoTable[i] = rowData
+		end
+	end
+
+end

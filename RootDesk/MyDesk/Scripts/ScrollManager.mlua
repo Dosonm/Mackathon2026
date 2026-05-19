@@ -3,9 +3,7 @@ script ScrollManager extends Component
 
 	property SyncTable<string> patternTable
 
-	property number totalLength = 0
-
-	property number totalCount = 0
+	property number Speed = 1
 
 	@ExecSpace("ServerOnly")
 	method void OnBeginPlay()
@@ -15,46 +13,61 @@ script ScrollManager extends Component
 		for i = 1, length do
 			table.insert(self._T.pool, {})
 		end
+		
+		--self._T.totalLength = 0
+		self._T.totalCount = 0
+		self._T.patternEnd = 0
+		self._T.patternTypeIndex = 1
+		
+		self:SpawnRandomPattern()
+		self:SpawnRandomPattern()
+		self:SpawnRandomPattern()
 	end
 
 	@ExecSpace("ServerOnly")
 	method void OnUpdate(number delta)
-		if isvalid(self._T.player) == false then
-			self._T.player = _EntityService:GetEntitiesSpawnedByModelId("model://defaultplayer")[1]
-			if isvalid(self._T.player) == false then
-				return
-			end
-		end
+		--if isvalid(self._T.player) == false then
+		--    self._T.player = _EntityService:GetEntitiesSpawnedByModelId("model://defaultplayer")[1]
+		--    if isvalid(self._T.player) == false then
+		--        return
+		--    end
+		--end
 		
-		if self.totalLength > 0 then
-		    local playerPosition = self._T.player.TransformComponent.WorldPosition
-			local remainDistance = self.totalLength - playerPosition.x
+		--if self._T.totalLength > 0 then
+		    --local playerPosition = self._T.player.TransformComponent.WorldPosition
+		    --local remainDistance = self._T.totalLength - playerPosition.x
 			
-			-- 남은 타일 길이고 10m보다 짧으면 풀링&배치 
-			if remainDistance < 10 then
-		        if isvalid(self._T.latestPatterns[1]) then
-		            self:ReleasePattern(self._T.latestPatterns[1])	
+			-- 남은 타일 길이고 10m보다 짧으면 풀링&배치
+			if self._T.patternEnd < 20 then
+		        if isvalid(self._T.latestPatterns[2]) then
+		            self:ReleasePattern(self._T.latestPatterns[1])
 		        end
 				self:SpawnRandomPattern()
 			end
-		else
-			self:SpawnRandomPattern()
-			self:SpawnRandomPattern()
+		--else
+		--    self:SpawnRandomPattern()
+		--    self:SpawnRandomPattern()
+		--end
+		
+		for _, pattern in pairs(self._T.latestPatterns) do
+			pattern.TransformComponent.Position += Vector3.left * self.Speed * delta
 		end
+		self._T.patternEnd -= self.Speed * delta
 	end
 
 	method void SpawnRandomPattern()
 		local length = _SyncTableExtend:GetLength(self.patternTable)
 		
 		local index = math.random(length)
-		local spawnPosition = Vector3(self.totalLength, 0, 0)
+		local spawnPosition = Vector3(self._T.patternEnd, 0, 0)
 		
 		local pattern = self:SpawnPattern(index, spawnPosition)
 		table.insert(self._T.latestPatterns, pattern)
 		
 		if isvalid(pattern.PatternComponent) then
-			self.totalLength += pattern.PatternComponent.patternLength
-			self.totalCount += 1
+		    --self._T.totalLength += pattern.PatternComponent.patternLength
+			self._T.totalCount += 1
+			self._T.patternEnd += pattern.PatternComponent.patternLength
 		else
 			log("MISSING: PatternComponent-", pattern.Model.Name)
 		end
