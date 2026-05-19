@@ -3,21 +3,27 @@ script SkillEffect extends Component
 
 	method void OnBeginPlay()
 		self._T.dataSet = _DataService:GetTable("SkillDataSet")
+		
+		
+		self._T.SkillEffectRUID = 3
+		self._T.SkillAudioClipRUID = 5
 	end
 
 	method void SkillEffect_01()
 		local lookDirectionX = self.Entity.PlayerControllerComponent.LookDirectionX -- 캐릭터가 바라보고있는 방향을 받아옵니다. 양수일 경우 오른쪽, 음수일 경우 왼쪽을 보고있는 경우입니다.
-		local dataSet = _DataService:GetTable("SkillDataSet")
+		local dataSet = _DataService:GetTable("SkillInfo")
 		local options = { ["FlipX"] = lookDirectionX > 0 } --스킬 이펙트가 왼쪽으로만 나오는 이펙트일 경우 오른쪽으로 볼 때 "FlipX" 옵션을 통해 오른쪽으로 나올 수 있도록 옵션을 만들어줍니다. 
-		_EffectService:PlayEffectAttached(
-			dataSet:GetCell(1, 3), 
-			self.Entity, 
-			Vector3(1 * lookDirectionX, 0, 0), 
-			0,
-			Vector3(1, 1, 0), 
-			false, 
+		
+		local rowData = _DataSetLogic.skillInfoTable[1]
+		local effectRUID = rowData.EffectRUID
+		local position = Vector3(1 * lookDirectionX, 0, 0)
+		local rotation = 0
+		local scale = Vector3(1, 1, 0)
+		_EffectService:PlayEffectAttached(effectRUID, self.Entity, position, rotation, scale, false, 
 			options) --파워스트라이크의 경우 왼쪽으로만 나오기 때문에 options를 적용해줍니다.
-		_SoundService:PlaySound(dataSet:GetCell(1, 6), 1) --스킬데이터셋에서 스킬 사운드 RUID를 받아옵니다.
+		
+		local soundRUID = rowData.AudioClipRUID
+		_SoundService:PlaySound(soundRUID, 1) --스킬데이터셋에서 스킬 사운드 RUID를 받아옵니다.
 	end
 
 end

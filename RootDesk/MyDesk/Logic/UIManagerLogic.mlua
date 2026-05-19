@@ -1,0 +1,239 @@
+@Logic
+script UIManagerLogic extends Logic
+
+	property number discript = 0 -- 전반적인 UI, 객체, 내부 값을 관리하기 위한 로직입니다.
+
+	property SliderComponent hpSlider = nil
+
+	property Entity toastUIGroup = nil
+
+	property TextComponent inGameCurrentScoreText = nil
+
+	property Entity resultPopup = nil
+
+	property Entity resultBestScoreText = nil
+
+	property Entity currentScoreText = nil
+
+	property Entity resultToMenuButton = nil
+
+	property Entity mainTitlePanel = nil
+
+	property Entity characterSelectPopup = nil
+
+	property SpriteGUIRendererComponent skillRenderer = nil
+
+	property TextComponent titleBestScore = nil
+
+	property Entity inGameScoreText = nil
+
+	property TextComponent counterText = nil
+
+	property Entity titleGameStartButton = nil
+
+	property Entity defaultUIGroup = nil
+
+	property Entity mobileSlideButton = nil
+
+	property Entity mobileJumpButton = nil
+
+	@ExecSpace("ClientOnly")
+	method void Init()
+		-- UIManagerLogic의 초기화를 진행하는 메서드입니다.
+		
+		-- 내부 멤버들의 참조를 연결합니다.
+		self:ConnectRefs()
+		
+		-- 초기화 진행시 UI 객체들이 담긴 메인 캔버스 활성화합니다.
+		self.toastUIGroup.Enable = true
+		-- 결과창 내 메인메뉴 버튼 클릭시 게임실행 첫 상태로 되돌리는 메서드를 연결합니다.
+		self.resultToMenuButton:ConnectEvent(ButtonClickEvent,self.ReturnToMenu)
+		-- 타이틀 화면에서 게임시작 버튼입력시 캐릭터 선택창을 띄우는 메서드를 연결합니다.
+		self.titleGameStartButton:ConnectEvent(ButtonClickEvent,self.ShowCharacterSelectPopup)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void ConnectRefs()
+		-- 내부에 필요한 멤버들의 참조를 연결하는 메서드입니다.
+		
+		-- toastUIGroup 엔티티를 연결합니다.
+		self.toastUIGroup = _EntityService:GetEntityByPath("/ui/ToastGroup")
+		-- defaultUIGroup 엔티티를 연결합니다.
+		self.defaultUIGroup = _EntityService:GetEntityByPath("/ui/DefaultGroup")
+		
+		-- 메인 타이틀 패널 엔티티를 연결합니다.
+		self.mainTitlePanel = _EntityService:GetEntityByPath("/ui/ToastGroup/UITitle")
+		-- 메인 타이틀 화면 최고점수 텍스트 컴포넌트를 연결합니다.
+		self.titleBestScore = _EntityService:GetEntityByPath("/ui/ToastGroup/UITitle/UITitleBestScorePanel/UITitleBestScore").TextComponent
+		-- 메인 타이틀 화면에서 게임시작버튼 엔티티를 연결합니다.
+		self.titleGameStartButton = _EntityService:GetEntityByPath("/ui/ToastGroup/UITitle/UIGameStartBtn")
+		
+		-- 캐릭터 선택창 팝업 엔티티를 연결합니다.
+		self.characterSelectPopup = _EntityService:GetEntityByPath("/ui/ToastGroup/UITitle/UICharacterSelect")
+		
+		-- 인게임 화면상단의 UI hpSlider 참조를 연결합니다.
+		self.hpSlider = _EntityService:GetEntityByPath("/ui/ToastGroup/InGameUI/UI_HPbar").SliderComponent
+		-- 인게임 화면상단의 UI ScoreText (점수값) 참조를 연결합니다.
+		self.inGameCurrentScoreText = _EntityService:GetEntityByPath("/ui/ToastGroup/InGameUI/UIInGameScore").TextComponent
+		-- 인게임 화면상단의 UI ScoreText ('Score' 문구만 띄워주는) 참조를 연결합니다.
+		self.inGameScoreText = _EntityService:GetEntityByPath("/ui/ToastGroup/InGameUI/UIScoreText")
+		-- 인게임 스킬 아이콘 컴포넌트를 연결합니다.
+		self.skillRenderer = _EntityService:GetEntityByPath("/ui/ToastGroup/InGameUI/UI_Skill").SpriteGUIRendererComponent
+		-- 인게임 게임시작시 시작 대기 타이머 텍스트를 연결합니다.
+		self.counterText = _EntityService:GetEntityByPath("/ui/ToastGroup/InGameUI/UICounterText").TextComponent
+		-- 인게임 , 모바일 환경에서 캐릭터의 점프 기능을 수행하기 위한 조이스틱 버튼 엔티티를 연결합니다.
+		self.mobileJumpButton = _EntityService:GetEntityByPath("/ui/DefaultGroup/Button_Jump")
+		-- 인게임 , 모바일 환경에서 캐릭터의 슬라이드 기능을 수행하기 위한 조이스틱 버튼 엔티티를 연결합니다.
+		self.mobileSlideButton = _EntityService:GetEntityByPath("/ui/DefaultGroup/Button_Slide")
+		
+		-- 결과화면 팝업 엔티티를 연결합니다.
+		self.resultPopup = _EntityService:GetEntityByPath("/ui/ToastGroup/UIResultPopup")
+		-- 결과창 팝업내 최고점수 텍스트 엔티티를 연결합니다.
+		self.resultBestScoreText = _EntityService:GetEntityByPath("/ui/ToastGroup/UIResultPopup/UIBestScoreText/UIBestScore") 
+		-- 결과창 팝업내 현재점수 텍스트 엔티티를 연결합니다.
+		self.currentScoreText = _EntityService:GetEntityByPath("/ui/ToastGroup/UIResultPopup/UIScoreText/UIScore")
+		-- 결과창 팝업내 메뉴버튼 엔티티를 연결합니다.
+		self.resultToMenuButton = _EntityService:GetEntityByPath("/ui/ToastGroup/UIResultPopup/UIMainMenuBtn")
+	end
+
+	@ExecSpace("ClientOnly")
+	method void UpdateTitleBestScore(number score)
+		-- 메인 타이틀 화면에서 표기되는 최고 점수값을 설정하는 메서드입니다.
+		
+		-- 매개변수 1 number score : 전달받는 값으로 타이틀의 화면내 점수값을 설정합니다.
+		
+		-- score 값이 없을경우
+		if score == nil or score <= 0 then
+			-- 메인 타이틀 화면의 최고점수 텍스트값을 '0'으로 설정합니다.
+			self.titleBestScore.Text = "0"
+		
+		-- score 값이 있었다면 
+		else
+			-- 메인 타이틀 화면의 최고점수를 전달받은 값으로 등록합니다. math.floor를 활용해 소수점 이하 부분을 버립니다.
+			self.titleBestScore.Text = tostring(math.floor(score))
+			
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void ShowCharacterSelectPopup()
+		-- 캐릭터 선택창을 띄우는 메서드입니다.
+		
+		-- 엔티티 서비스를 활용해 캐릭터 선택 팝업을 가져옵니다.
+		local characterSelectPopup = _EntityService:GetEntityByPath("/ui/ToastGroup/UITitle/UICharacterSelect")
+		
+		-- 팝업 엔티티를 활성화합니다.
+		characterSelectPopup.Enable = true
+	end
+
+	@ExecSpace("ClientOnly")
+	method void ShowMobileJoyStick(boolean active)
+		-- 모바일 환경에서 캐릭터를 제어하기 위한 조이스틱 컨트롤러를 표기하는 메서드입니다.
+		
+		-- 매개변수 1 boolean active : true 일경우 활성화 , false 일경우 비활성화합니다.
+		
+		-- 만약 현재 플랫폼 환경이 모바일 환경이라면
+		if _GameLogic.isMobile == true then
+			-- 조이스틱 컨트롤러가 담긴 UI 캔버스 활성화,비활성화를 매개변수 값으로 제어합니다.
+			self.defaultUIGroup.Enable = active
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void CountTimerStart()
+		-- 본 게임 실행시 시작전 카운트 다운을 진행하는 메서드입니다.
+		
+		-- 카운트 텍스트 오브젝트를 활성화합니다.
+		self.counterText.Entity.Enable = true
+		
+		-- 카운터 텍스트의 값을 '3'으로 설정합니다.
+		self.counterText.Text = "3"
+		-- 로직 수행을 1초 대기합니다.
+		wait(1)
+		self.counterText.Text = "2"
+		wait(1)
+		self.counterText.Text = "1"
+		wait(1)
+		
+		-- 카운트 다운이 종료되었으므로 카운트 텍스트 오브젝트를 비활성화합니다.
+		self.counterText.Entity.Enable = false
+	end
+
+	@ExecSpace("ClientOnly")
+	method void ShowPlayerInfo(boolean active)
+		-- 인게임 내 플레이어에게 제공되어야할 UI 요소를 활성, 비활성화 하는 메서드입니다.
+		
+		-- 매개변수 1 boolean active : true 일경우 활성화, false 일경우 비활성화합니다.
+		
+		-- 인게임 hp 슬라이더의 활성화 상태를 매개변수 값으로 설정합니다.
+		self.hpSlider.Entity.Enable = active
+		-- 인게임 현재점수값을 나타내는 텍스트 오브젝트의 활성화 상태를 매개변수 값으로 설정합니다.
+		self.inGameCurrentScoreText.Entity.Enable = active
+		-- 인게임 'score' 텍스트 오브젝트의 활성화 상태를 매개변수 값으로 설정합니다.
+		self.inGameScoreText.Enable = active
+		-- 인게임 스킬 아이콘 오브젝트의 활성화 상태를 매개변수 값으로 설정합니다.
+		self.skillRenderer.Entity.Enable = active
+	end
+
+	@ExecSpace("ClientOnly")
+	method void RegistSkillIcon()
+		-- 인게임 내의 현재 캐릭터의 스킬아이콘 등록하는 메서드입니다.
+		
+		-- 스킬아이콘의 RUID 값을 skillLogic에 등록된 skill정보를 기반으로 테이블에서 RUID 값을 가져옵니다.
+		self.skillRenderer.ImageRUID = _DataSetLogic.skillInfoTable[_SkillLogic.skillId].UI_RUID
+		-- 스킬 사용가능한 상태로 표기하기 위해 알파값을 최대값으로 설정합니다.
+		self.skillRenderer.Color.a = 1
+	end
+
+	@ExecSpace("ClientOnly")
+	method void ShowResultPopup(string bestScore, string currentScore)
+		-- 결과창 팝업을 띄우는 메서드입니다.
+		
+		-- 최고 점수 텍스트를 등록합니다.
+		self.resultBestScoreText.TextComponent.Text = bestScore
+		
+		-- 현재 점수 텍스트를 등록합니다.
+		self.currentScoreText.TextComponent.Text = currentScore
+		
+		-- 결과창 팝업을 활성화합니다.
+		self.resultPopup.Enable = true;
+	end
+
+	@ExecSpace("ClientOnly")
+	method void ReturnToMenu()
+		-- 게임 종료 후 메인메뉴로 상태를 되돌리는 메서드입니다.
+		
+		-- 인게임에서 표기되는 UI 요소들을 비활성화합니다.
+		self:ShowPlayerInfo(false)
+		
+		-- 캐릭터 선택창 팝업을 비활성화합니다.
+		self.characterSelectPopup.Enable = false
+		-- 게임 종료 후 띄우는 결과창 팝업을 비활성화합니다.
+		self.resultPopup.Enable = false
+		-- 메인메뉴 타이틀에 띄워야할 패널 오브젝트를 활성화합니다.
+		self.mainTitlePanel.Enable = true
+	end
+
+	@ExecSpace("ClientOnly")
+	method void SetScoreText(number value)
+		-- 매개변수로 전달받은 값을 UI Score 텍스트로 설정시키는 메서드입니다.
+		
+		-- 매개변수 1 number value : 점수값으로 설정되는 값을 전달받습니다.
+		
+		self.inGameCurrentScoreText.Text = tostring(math.floor(value))
+	end
+
+	@ExecSpace("ClientOnly")
+	method number SetHpSliderValue(number value)
+		-- hp 슬라이더의 값을 매개변수의 값으로 설정하며 현재 슬라이더의 Value값을 반환하는 메서드입니다.
+		
+		-- 매개변수 1 number value : 슬라이더로 설정할 값을 전달받습니다.
+		
+		-- 슬라이더의 값을 전달받은 값으로 설정하며, clamp를 활용해 초기 최대체력값을 초과하지 못하게 설정합니다.
+		self.hpSlider.Value = math.clamp(value, 0, _Config.maxHp)
+		
+		-- 현재 슬라이더의 값을 반환합니다.
+		return self.hpSlider.Value
+	end
+
+end

@@ -1,0 +1,69 @@
+@Logic
+script SkillLogic extends Logic
+
+	property number discript = 0 -- 캐릭터의 고유 스킬 사용시 구체적인 동작을 수행하기 위해 선언한 로직입니다.
+
+	property number skillId = 0 -- 캐릭터의 고유 SkillId 값을 설정하기 위한 변수입니다.
+
+	property boolean useable = true -- 스킬사용 가능 상태를 저장하기 위한 상태변수입니다.
+
+	@ExecSpace("ClientOnly")
+	method void UseSkill()
+		-- 현재 등록된(SkillId)의 구체적인 동작을 수행하는 메서드입니다.
+		
+		-- 해당 메서드 호출시 사용할수 있는 상태가 아니라면
+		if self.useable == false then
+			-- 메서드를 종료합니다.
+			return
+		end
+		
+		-- 현재 캐릭터 스킬명을 저장합니다.
+		local skillName = _DataSetLogic.skillInfoTable[self.skillId].Name
+		-- 현재 캐릭터 스킬고유값을 저장합니다.
+		local skillValue = _DataSetLogic.skillInfoTable[self.skillId].Value
+		
+		-- 스킬명이 'GetLife' 라면
+		if skillName == "Heal" then
+		-- 스킬 고유값만큼 체력을 회복합니다.
+			_GameLogic:AddHP(skillValue)
+			
+		
+		-- 스킬명이 'GetScore' 라면
+		elseif skillName == "Bonus" then
+		-- 스킬 고유값만큼 추가 점수를 획득합니다.
+			_GameLogic:AddScore(skillValue)
+		end
+		
+		-- 스킬 이펙트를 재생합니다.
+		self:PlaySkillEffect()
+		
+		-- 스킬 효과음 재생
+		_SoundService:PlaySound("56c1b5e3c7fc4abda561c1cc00813bda",1)
+		
+		-- 스킬을 사용했으므로 사용할 수 없음으로 상태를 전환합니다.
+		self.useable = false
+		
+		-- 스킬 아이콘 UI 의 렌더러의 투명도 값을 낮게 설정합니다.
+		_UIManagerLogic.skillRenderer.Color.a = 0.3
+	end
+
+	@ExecSpace("ClientOnly")
+	method void Reset()
+		-- 내부 상태를 초기화하는 메서드입니다.
+		
+		-- 스킬을 사용할수 있게 전환합니다.
+		self.useable = true
+	end
+
+	@ExecSpace("ClientOnly")
+	method void PlaySkillEffect()
+		-- 스킬 이펙트를 재생하기 위한 메서드입니다.
+		
+		-- SkillInfoTable에 저장된 스킬 이펙트 RUID 값을 가져옵니다.
+		local effect = _DataSetLogic.skillInfoTable[self.skillId].EffectRUID
+		
+		-- EffectService를 활용해 캐릭터 오브젝트에 부착하여 스킬 이펙트를 재생합니다.
+		_EffectService:PlayEffectAttached(effect,_UserService.LocalPlayer,Vector3.zero,0,Vector3.one)
+	end
+
+end

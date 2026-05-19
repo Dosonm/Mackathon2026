@@ -1,0 +1,227 @@
+@Logic
+script ObjectPoolLogic extends Logic
+
+	property number discript = 0 -- 생성과 파괴가 빈번하게 일어나는 오브젝트들을 효율적으로 관리하기위한 로직입니다.
+
+	property table tilePool = {} -- 타일셋 오브젝트를 관리하기 위한 풀 역할을 수행하는 테이블입니다.
+
+	property table itemPool = {} -- 아이템 오브젝트를 관리하기 위한 풀 역할을 수행하는 테이블입니다.
+
+	property Entity ItemPoolParent = "9e9e98bd-4f7b-46ed-9a93-f0e7d74fac1c"
+
+	property table itemDataSetIDTable = {["Coin"] = 1 ,["Health"] = 2 ,["Booster"] = 3} -- key : 아이템명 , value : 데이터 셋의 Index 번호를 저장하기 위한 테이블입니다.
+
+	@ExecSpace("ClientOnly")
+	method void ReturnTile(Entity entity)
+		-- 타일 오브젝트를 오브젝트 풀로 반환하는 메서드입니다.
+		
+		-- 매개변수 1 entity : 반환(비활성)하고자 하는 오브젝트를 전달받습니다.
+		-- 매개변수 2 tileNumber : 타일 번호를 전달받습니다.
+		
+		-- 타일셋 엔티티의 번호를 추출합니다. (테이블 내 번호별로 타일셋 오브젝트를 관리하기 위함입니다.)
+		local tileNumber = self:GetTileNumber(entity)
+		
+		-- 타일 번호에 해당하는 풀(테이블)이 유효한지 검사합니다.
+		if isvalid(self.tilePool[tileNumber]) == false or self.tilePool[tileNumber] == nil then
+			-- 테이블이 없었다면 새로운 테이블 공간을 새로 생성합니다.
+			self.tilePool[tileNumber] = {}
+		end
+		
+		-- 대상 테이블에 대상 엔티티(오브젝트)를 저장합니다.
+		table.insert(self.tilePool[tileNumber],entity)
+		-- 엔티티(오브젝트)를 비활성화합니다.
+		entity.Enable = false
+	end
+
+	@ExecSpace("ClientOnly")
+	method Entity GetTile(number tileNumber)
+		-- 타일 풀로부터 지정된 번호 타일 엔티티 반환받는 메서드입니다.
+		
+		-- 매개변수 1 number tileNumber : 특정 타일셋 번호를 전달받습니다.
+		
+		-- math.floor메서드를 활용해 tileNumber의 소수점부분을 버리기 위함입니다. ex) 4.0 => 4
+		tileNumber = math.floor(tileNumber)
+		
+		-- 대상 풀(테이블) 유효성 검사를 진행합니다.
+		
+		-- 전달받은 tileNumber 타일오브젝트를 관리하는 풀(테이블)이 없다면
+		if isvalid(self.tilePool[tileNumber]) == false or self.tilePool[tileNumber] == nil then
+			-- 새로운 테이블 공간을 새로 생성합니다.
+			self.tilePool[tileNumber] = {}
+		end
+		
+		-- /분기1/ 없으면 새로 생성해서 반환합니다.
+		
+		-- 만약 대상 풀에 담긴 오브젝트가 더이상 없다면 (모델(프리팹)으로 부터 새로 오브젝트를 생성을 진행합니다.)
+		if #self.tilePool[tileNumber] <= 0 then
+			
+			-- 테이블 셋에 저장된 EntryID를 확인합니다.
+			local entryID = _DataSetLogic.tileSetInfoTable[tileNumber].EntryID
+			-- 사전에 미리 저장된(프리팹) 이름의 형태로 이름을 저장합니다.
+			local name = "Model_TileSet0"..tileNumber
+			
+			-- 임시 위치에 대상 모델(프리팹)오브젝트를 생성합니다.
+			local tempTile = _SpawnService:SpawnByModelId(entryID,name,Vector3.up*100,_EntityService:GetEntity("d24b5917-1821-4743-ae07-77cc9bfc2d0a"))
+			
+			-- 해당 오브젝트를 반환합니다.
+			return tempTile
+		end
+		
+		-- /분기2/ 있었다면 마지막 요소를 반환합니다.
+		
+		-- 현재 대상 테이블 수를 확인합니다.
+		local tableCount = #self.tilePool[tileNumber]
+		
+		-- 대상 테이블의 마지막 요소를 반환받으며, 해당 엔티티를 테이블에서 제거합니다.
+		local tempTile = table.remove(self.tilePool[tileNumber],tableCount)
+		
+		-- 선택한 오브젝트를 활성화합니다.
+		tempTile.Enable = true
+		
+		-- 오브젝트를 반환합니다.
+		return tempTile
+		
+		
+	end
+
+	@ExecSpace("ClientOnly")
+	method Entity GetItem(string itemName)
+		-- 오브젝트 풀로부터 아이템 오브젝트를 반환받는 메서드입니다.
+		
+		-- 매개변수 1 string itemName : 아이템의 이름을 전달받습니다.
+		
+		-- 아이템 풀에서 대상 아이템들이 담긴 테이블을 가져옵니다.
+		local targetTable = self.itemPool[itemName]
+		
+		-- 테이블 내부 요소가 비어있을때
+		if #targetTable == 0 then
+			-- 대상 아이템을 config에서 설정한 생성 갯수만큼 추가 생성을 진행합니다.
+			self:CreateItem(itemName,_Config.itemPoolInitCount)
+		end
+		
+		
+		-- 가져오고자 하는 테이블로부터 엔티티를 불러옵니다.(테이블의 마지막요소)
+		---@type Entity
+		local targetEntity = targetTable[#targetTable]
+		
+		-- 엔티티를 저장하였으므로 테이블의 마지막요소를 제거합니다.
+		table.remove(targetTable,#targetTable)
+		
+		-- 엔티티(오브젝트)를 활성화합니다.
+		targetEntity.Enable = true
+		
+		-- 저장했던 엔티티를 반환합니다.
+		return targetEntity
+	end
+
+	@ExecSpace("ClientOnly")
+	method void ReturnItem(Entity entity)
+		-- 아이템 오브젝트를 다시 오브젝트 풀로 반환하는 메서드입니다.
+		
+		-- 매개변수 1 Entity entity : 반환하고자 하는 아이템 오브젝트 엔티티를 전달합니다.
+		
+		-- 반환하는 아이템의 이름을 확인합니다.
+		local itemName = entity.Item.name
+		-- 대상 테이블로 엔티티를 집어넣습니다.
+		table.insert(self.itemPool[itemName],entity)
+		
+		-- 타일셋의 기존 Parent(타일셋의 아이템을 배치하기 위해 사전에 등록한 오브젝트)으로부터 
+		-- 다시 ItemPool 로 Parent를 이전합니다.
+		entity:AttachTo(self.ItemPoolParent)
+		-- 엔티티(오브젝트)를 비활성화합니다.
+		entity.Enable = false
+	end
+
+	@ExecSpace("ClientOnly")
+	method void CreateItem(string itemName, number createCount)
+		-- 모델(프리팹)으로부터 아이템 오브젝트를 새로 생성하여 대상 풀로 집어넣는 메서드입니다.
+		
+		-- 매개변수 1 string itemName : 생성하고자 하는 아이템 이름을 전달받습니다.
+		-- 매개변수 2 number createCount : 생성할 갯수, 오브젝트 풀로 몇개의 오브젝트를 생성해 넣어둘지를 결정합니다.
+		
+		-- 임시 테이블을 선언합니다.
+		local tempTable
+		
+		-- 테이터셋에서 참조할 Id 번호를 설정합니다.
+		local dataSetID = self.itemDataSetIDTable[itemName]
+		
+		-- 데이터셋의 대상 아이템 모델의 EntryID 값을 불러옵니다.
+		local entryID = _DataSetLogic.itemInfoTable[dataSetID].EntryID
+		-- 데이터셋의 대상 아이템 모델의 Name 값을 불러옵니다.
+		local name = _DataSetLogic.itemInfoTable[dataSetID].Name
+		-- 데이터셋의 대상 아이템 모델의 Value 값을 불러옵니다.
+		local value = _DataSetLogic.itemInfoTable[dataSetID].Value
+		
+		-- 대상 테이블의 유효성 검사를 진행합니다.
+		
+		-- /분기 1/ 대상 아이템 풀 내에 대상 풀(테이블) 이 없을경우
+		if isvalid(self.itemPool[name]) == false or self.itemPool[name] == nil then
+			-- 새로운 임시 테이블을 생성합니다.
+			tempTable = {}
+			-- 아이템 풀에서 내부 풀(테이블)을 임시테이블로 설정합니다.
+			self.itemPool[name] = tempTable
+			
+		-- /분기 2/ 대상 아이템 풀 내에 대상 풀이 이미 있을경우
+		else
+			-- 임시 테이블(풀) 을 기존에 활용하고 있던 테이블로 선언합니다.
+			tempTable = self.itemPool[name]
+		end
+		
+		-- 매개변수2 createCount 만큼의 반복문을 수행합니다.
+		for i = 1 , createCount, 1 do 
+			-- SpawnService를 활용해 오브젝트를 생성합니다.
+			local entity = _SpawnService:SpawnByModelId(entryID,name,Vector3.up * 100, self.ItemPoolParent)
+			
+			-- 생성한 오브젝트의 설정작업을 진행합니다.
+			
+			-- 생성한 오브젝트의 아이템의 고유값을 설정합니다.
+			entity.Item.value = value
+			-- 생성한 오브젝트의 아이템의 name 변수를 설정합니다.
+			entity.Item.name = name
+			
+			-- 담겨야하는 테이블(풀)로 생성된 엔티티를 삽입합니다.
+			table.insert(tempTable,entity)
+			
+			-- 생성된 엔티티 오브젝트를 비활성화합니다.
+			entity.Enable = false
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void InitItemPool()
+		-- 아이템 풀을 초기화하는 메서드입니다.
+		
+		-- DataSetLogic 으로부터 아이템 데이터셋이 담긴 테이블을 불러옵니다.
+		local itemDataTable = _DataSetLogic.itemInfoTable
+		
+		-- Coin 아이템을 Config에서 설정한 생성갯수만큼 생성합니다.
+		self:CreateItem("Coin",_Config.itemPoolInitCount)
+		-- Health 아이템을 Config에서 설정한 생성갯수만큼 생성합니다.
+		self:CreateItem("Health",_Config.itemPoolInitCount)
+		-- Booster 아이템을 Config에서 설정한 생성갯수만큼 생성합니다.
+		self:CreateItem("Booster",_Config.itemPoolInitCount)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void Init()
+		-- ObjectPool Logic의 초기화를 수행하는 메서드입니다.
+		
+		-- 아이템 풀 초기화를 진행합니다.
+		self:InitItemPool()
+	end
+
+	@ExecSpace("ClientOnly")
+	method number GetTileNumber(Entity entity)
+		-- 타일 번호를 추출하는 메서드입니다.
+		
+		-- 매개변수 1 Entity entity : 대상 엔티티를 전달받습니다.
+		
+		-- 엔티티의 이름을 추출합니다.
+		local tileSetName = entity.Name
+		-- 이름의 마지막 문자열을 추출합니다. ('Model_TileSet02' 문자열에서 14,15번째 문자 추출 > 02)
+		local numberStr = string.sub(tileSetName,14,15)
+		-- 문자열을 숫자값으로 변환해 반환합니다.
+		return tonumber(numberStr)
+	end
+
+end

@@ -304,6 +304,14 @@
                     "y": 11
                   },
                   "tileIndex": 0
+                },
+                {
+                  "type": 11,
+                  "position": {
+                    "x": 9,
+                    "y": 7
+                  },
+                  "tileIndex": 0
                 }
               ],
               "Enable": true
@@ -423,58 +431,6 @@
         }
       },
       {
-        "id": "ccb39550-bf7c-4346-a34c-8d134b2bf7fc",
-        "path": "/maps/testMap_jw/Model_foothold_start",
-        "componentNames": "MOD.Core.TransformComponent,MOD.Core.SpriteRendererComponent,MOD.Core.CustomFootholdComponent",
-        "jsonString": {
-          "name": "Model_foothold_start",
-          "path": "/maps/testMap_jw/Model_foothold_start",
-          "nameEditable": true,
-          "enable": false,
-          "visible": true,
-          "localize": false,
-          "displayOrder": 5,
-          "pathConstraints": "///",
-          "revision": 1,
-          "origin": {
-            "type": "Model",
-            "entry_id": "587e04c4-e472-4f52-bfa3-8783433c78d5",
-            "sub_entity_id": null,
-            "root_entity_id": "ccb39550-bf7c-4346-a34c-8d134b2bf7fc",
-            "replaced_model_id": null
-          },
-          "modelId": "587e04c4-e472-4f52-bfa3-8783433c78d5",
-          "@components": [
-            {
-              "@type": "MOD.Core.TransformComponent",
-              "Position": {
-                "x": 0.0,
-                "y": 0.001,
-                "z": 999.999
-              },
-              "QuaternionRotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "w": 1.0
-              },
-              "Enable": true
-            },
-            {
-              "@type": "MOD.Core.SpriteRendererComponent",
-              "ActionSheet": {},
-              "RenderSetting": 0,
-              "Enable": true
-            },
-            {
-              "@type": "MOD.Core.CustomFootholdComponent",
-              "Enable": true
-            }
-          ],
-          "@version": 1
-        }
-      },
-      {
         "id": "9af426cd-358b-45b4-be16-cf21f6b1f5cb",
         "path": "/maps/testMap_jw/Model_foothold_base",
         "componentNames": "MOD.Core.TransformComponent,MOD.Core.CustomFootholdComponent,MOD.Core.SpriteRendererComponent",
@@ -485,7 +441,7 @@
           "enable": true,
           "visible": true,
           "localize": false,
-          "displayOrder": 6,
+          "displayOrder": 5,
           "pathConstraints": "///",
           "revision": 1,
           "modelId": null,
@@ -550,7 +506,7 @@
           "enable": true,
           "visible": true,
           "localize": false,
-          "displayOrder": 7,
+          "displayOrder": 6,
           "pathConstraints": "///",
           "revision": 1,
           "modelId": null,
@@ -563,7 +519,7 @@
                 "z": 0.0
               },
               "Position": {
-                "x": 5.68079662,
+                "x": 5.66507149,
                 "y": -0.86,
                 "z": 1999.998
               },
@@ -606,60 +562,6 @@
         }
       },
       {
-        "id": "8fa4b7b8-05eb-4371-b719-8768595fc37c",
-        "path": "/maps/testMap_jw/MapEmpty",
-        "componentNames": "MOD.Core.SpriteRendererComponent,MOD.Core.TransformComponent",
-        "jsonString": {
-          "name": "MapEmpty",
-          "path": "/maps/testMap_jw/MapEmpty",
-          "nameEditable": true,
-          "enable": false,
-          "visible": true,
-          "localize": false,
-          "displayOrder": 8,
-          "pathConstraints": "///",
-          "revision": 1,
-          "origin": {
-            "type": "Model",
-            "entry_id": "mapempty",
-            "sub_entity_id": null,
-            "root_entity_id": "8fa4b7b8-05eb-4371-b719-8768595fc37c",
-            "replaced_model_id": null
-          },
-          "modelId": "mapempty",
-          "@components": [
-            {
-              "@type": "MOD.Core.SpriteRendererComponent",
-              "ActionSheet": {},
-              "RenderSetting": 0,
-              "SortingLayer": "MapLayer0",
-              "Enable": true
-            },
-            {
-              "@type": "MOD.Core.TransformComponent",
-              "Position": {
-                "x": 7.75,
-                "y": 0.0,
-                "z": 0.0
-              },
-              "QuaternionRotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "w": 1.0
-              },
-              "Scale": {
-                "x": 39.0,
-                "y": 1.0,
-                "z": 1.0
-              },
-              "Enable": true
-            }
-          ],
-          "@version": 1
-        }
-      },
-      {
         "id": "31007b77-42fc-4835-b08a-38f3d2fc6004",
         "path": "/maps/testMap_jw/pattern_sample6",
         "componentNames": "MOD.Core.TransformComponent,script.PatternComponent,script.PatternFixer",
@@ -670,7 +572,7 @@
           "enable": false,
           "visible": true,
           "localize": false,
-          "displayOrder": 9,
+          "displayOrder": 7,
           "pathConstraints": "///",
           "revision": 1,
           "origin": {

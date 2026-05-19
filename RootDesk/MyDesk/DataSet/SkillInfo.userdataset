@@ -13,7 +13,7 @@
   "ContentProto": {
     "Use": "Json",
     "Json": {
-      "name": "SkillDataSet",
+      "name": "SkillInfo",
       "id": "634ced8b-bd8f-4b58-83ea-f96c7ad10007",
       "serveronly": false,
       "syncDataSetWebUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQX0bLkKvJQTKNO1fortNsgRwL8HrbU8-Mu6X3WVhxsn80B6LDAGC5R79A06BAyEGPrEclchG1ny0By/pub?output=csv",
