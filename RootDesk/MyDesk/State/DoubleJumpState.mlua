@@ -1,0 +1,16 @@
+@State
+script DoubleJumpState extends StateType
+
+	method void OnEnter()
+		--Player = self.ParentComponent.Entity.player
+	end
+
+	method void OnUpdate(number delta)
+		
+	end
+
+	method void OnExit()
+		        
+	end
+
+end

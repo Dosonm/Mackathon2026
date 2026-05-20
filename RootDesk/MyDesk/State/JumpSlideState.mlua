@@ -1,0 +1,30 @@
+@State
+script JumpSlideState extends StateType
+
+	property player Player = nil
+
+	property any maxTimerHandle = nil
+
+	method void OnEnter()
+		Player = self.ParentComponent.Entity.player
+		
+		self.maxTimerHandle = _TimerService:SetTimerOnce(function()
+			self.maxTimerHandle = nil
+			if Player.isJumpSlide then
+				Player:EndJumpSlide()
+			end
+		end, .5)
+	end
+
+	method void OnUpdate(number delta)
+		Player.rg:SetLinearVelocityY(0)
+		if Player.jumpSlideReleased then
+			Player:EndJumpSlide()
+		end
+	end
+
+	method void OnExit()
+		_TimerService:ClearTimer(self.maxTimerHandle)
+	end
+
+end

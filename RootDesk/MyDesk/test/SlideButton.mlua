@@ -1,0 +1,22 @@
+@Component
+script SlideButton extends Component
+
+	property player Player = nil
+
+	method void OnBeginPlay()
+		Player = _UserService.LocalPlayer.player
+	end
+
+	@EventSender("Self")
+	handler HandleButtonPressedEvent(ButtonPressedEvent event)
+		Player:SlideLogic()
+	end
+
+	@EventSender("Self")
+	handler HandleButtonReleasedEvent(EventType event)
+		if Player.isJumpSlide then
+			Player.jumpSlideReleased = true
+		end
+	end
+
+end

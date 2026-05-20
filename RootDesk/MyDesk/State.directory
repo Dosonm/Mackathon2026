@@ -1,0 +1,23 @@
+{
+  "Id": "",
+  "GameId": "",
+  "EntryKey": "directory://50f7f96eabc94889b3a6d2e4775eb844",
+  "ContentType": "x-mod/directory",
+  "Content": "",
+  "Usage": 0,
+  "UsePublish": 1,
+  "UseService": 0,
+  "CoreVersion": "26.3.0.0",
+  "StudioVersion": "0.1.0.0",
+  "DynamicLoading": 0,
+  "ContentProto": {
+    "Use": "Json",
+    "Json": {
+      "entry_id": "directory://50f7f96eabc94889b3a6d2e4775eb844",
+      "name": "State",
+      "lock": false,
+      "folding": false,
+      "nameEditable": true
+    }
+  }
+}
