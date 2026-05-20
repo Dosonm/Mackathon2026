@@ -5,47 +5,44 @@ script TileManager extends Component
 
 	property number TileSpeed = nil
 
-	property Entity BackGround = nil
-
-	-- "1343" 형식으로 입력. 각 숫자가 patternTable의 인덱스
 	property string patternSequence = ""
 
-	@ExecSpace("ServerOnly")
+	@ExecSpace("ClientOnly")
 	method void OnBeginPlay()
 		self._T.activePatterns = {}
 		self._T.pool = {}
 		self._T.sequenceQueue = {}
 		self._T.spawnCursor = 0  -- 다음에 스폰할 sequenceQueue 인덱스
-
+		
 		-- patternTable 종류별로 풀 슬롯 초기화
 		local length = _SyncTableExtend:GetLength(self.patternTable)
 		for i = 1, length do
 			self._T.pool[i] = {}
 		end
-
+		
 		-- patternSequence 문자열을 숫자 배열로 파싱 ("1343" -> {1,3,4,3})
 		for c in string.gmatch(self.patternSequence, "%d") do
 			table.insert(self._T.sequenceQueue, tonumber(c))
 		end
-
+		
 		if #self._T.sequenceQueue == 0 then
 			log("TileManager: patternSequence가 비어있습니다.")
 			return
 		end
-
+		
 		-- 각 패턴 종류를 미리 1개씩 인스턴스화해서 풀에 넣어둠
 		for i = 1, length do
 			local entity = _SpawnService:SpawnByModelId(self.patternTable[i], "pattern", Vector3.zero, self.Entity)
 			entity.Enable = false
 			table.insert(self._T.pool[i], entity)
 		end
-
+		
 		-- 시작 시 타일 2개 스폰
 		self:SpawnNext()
 		self:SpawnNext()
 	end
 
-	@ExecSpace("ServerOnly")
+	@ExecSpace("ClientOnly")
 	method void OnUpdate(number delta)
 		-- 맨 앞 타일이 왼쪽 밖으로 나가면 풀에 반환
 		if #self._T.activePatterns > 0 then
@@ -61,7 +58,7 @@ script TileManager extends Component
 				end
 			end
 		end
-
+		
 		-- 마지막 타일 끝이 15 미만이면 다음 타일 스폰
 		if #self._T.activePatterns == 0 then
 			self:SpawnNext()
@@ -78,7 +75,7 @@ script TileManager extends Component
 				end
 			end
 		end
-
+		
 		-- 모든 활성 타일 이동
 		for i = 1, #self._T.activePatterns do
 			local pattern = self._T.activePatterns[i]
@@ -91,14 +88,14 @@ script TileManager extends Component
 
 	method void SpawnNext()
 		if #self._T.sequenceQueue == 0 then return end
-
+		
 		self._T.spawnCursor = self._T.spawnCursor + 1
 		if self._T.spawnCursor > #self._T.sequenceQueue then
 			self._T.spawnCursor = 1
 		end
-
+		
 		local idx = self._T.sequenceQueue[self._T.spawnCursor]
-
+		
 		local spawnX = 0
 		if #self._T.activePatterns > 0 then
 			local last = self._T.activePatterns[#self._T.activePatterns]
@@ -109,12 +106,12 @@ script TileManager extends Component
 				end
 			end
 		end
-
+		
 		local pattern = self:GetFromPool(idx)
 		pattern.Enable = true
 		pattern.TransformComponent.WorldPosition = Vector3(spawnX, 0, 0)
 		table.insert(self._T.activePatterns, pattern)
-
+		
 		if not isvalid(pattern.PatternComponent) then
 			log("MISSING: PatternComponent - idx=", idx)
 		end
@@ -137,7 +134,7 @@ script TileManager extends Component
 		if idx >= 1 then
 			pattern.Enable = false
 			table.insert(self._T.pool[idx], pattern)
-
+		
 			local names = {}
 			for i, pattern in ipairs(self._T.activePatterns) do
 				-- 패턴 객체의 이름이나 ID를 문자열로 변환해서 임시 테이블에 삽입

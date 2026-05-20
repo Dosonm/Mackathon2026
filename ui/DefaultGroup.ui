@@ -61,8 +61,8 @@
                 "y": 0.5
               },
               "RectSize": {
-                "x": 2249.25,
-                "y": 1080.0
+                "x": 1919.99988,
+                "y": 1439.99988
               },
               "UIMode": 1,
               "UIScale": {
@@ -114,7 +114,7 @@
       {
         "id": "806a43c1-3bb6-4894-b414-ae742b988d8a",
         "path": "/ui/DefaultGroup/Button_Jump",
-        "componentNames": "MOD.Core.UITransformComponent,MOD.Core.SpriteGUIRendererComponent,MOD.Core.ButtonComponent,script.JumpButton",
+        "componentNames": "MOD.Core.UITransformComponent,MOD.Core.SpriteGUIRendererComponent,MOD.Core.ButtonComponent",
         "jsonString": {
           "name": "Button_Jump",
           "path": "/ui/DefaultGroup/Button_Jump",
@@ -137,23 +137,23 @@
             {
               "@type": "MOD.Core.UITransformComponent",
               "ActivePlatform": 2,
-              "AlignmentOption": 8,
+              "AlignmentOption": 7,
               "AnchorsMax": {
-                "x": 1.0,
+                "x": 0.0,
                 "y": 0.0
               },
               "AnchorsMin": {
-                "x": 1.0,
+                "x": 0.0,
                 "y": 0.0
               },
               "MobileOnly": false,
               "OffsetMax": {
-                "x": -100.0,
-                "y": 350.0
+                "x": 460.0,
+                "y": 360.0
               },
               "OffsetMin": {
-                "x": -400.0,
-                "y": 50.0
+                "x": 160.0,
+                "y": 60.0
               },
               "Pivot": {
                 "x": 0.5,
@@ -171,12 +171,12 @@
               },
               "UIVersion": 2,
               "anchoredPosition": {
-                "x": -250.0,
-                "y": 200.0
+                "x": 310.0,
+                "y": 210.0
               },
               "Position": {
-                "x": 874.625,
-                "y": -340.0,
+                "x": -649.999939,
+                "y": -509.999939,
                 "z": 0.0
               },
               "QuaternionRotation": {
@@ -292,10 +292,6 @@
               "KeyCode": 32,
               "OverrideSorting": false,
               "Transition": 1,
-              "Enable": true
-            },
-            {
-              "@type": "script.JumpButton",
               "Enable": true
             }
           ],
@@ -442,6 +438,334 @@
         }
       },
       {
+        "id": "4b070458-cab4-4ca2-a91f-f25fa5ba993a",
+        "path": "/ui/DefaultGroup/Button_Slide",
+        "componentNames": "MOD.Core.UITransformComponent,MOD.Core.SpriteGUIRendererComponent,MOD.Core.ButtonComponent",
+        "jsonString": {
+          "name": "Button_Slide",
+          "path": "/ui/DefaultGroup/Button_Slide",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": true,
+          "displayOrder": 1,
+          "pathConstraints": "///",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "UIButton",
+            "sub_entity_id": null,
+            "root_entity_id": null,
+            "replaced_model_id": null
+          },
+          "modelId": "uibutton",
+          "@components": [
+            {
+              "@type": "MOD.Core.UITransformComponent",
+              "ActivePlatform": 2,
+              "AlignmentOption": 8,
+              "AnchorsMax": {
+                "x": 1.0,
+                "y": 0.0
+              },
+              "AnchorsMin": {
+                "x": 1.0,
+                "y": 0.0
+              },
+              "MobileOnly": false,
+              "OffsetMax": {
+                "x": -159.999939,
+                "y": 360.0
+              },
+              "OffsetMin": {
+                "x": -460.000061,
+                "y": 60.0
+              },
+              "Pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "RectSize": {
+                "x": 300.000122,
+                "y": 300.0
+              },
+              "UIMode": 1,
+              "UIScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "UIVersion": 2,
+              "anchoredPosition": {
+                "x": -310.0,
+                "y": 210.0
+              },
+              "Position": {
+                "x": 649.999939,
+                "y": -509.999939,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteGUIRendererComponent",
+              "AnimClipPlayType": 0,
+              "EndFrameIndex": 2147483647,
+              "ImageRUID": {
+                "DataId": "cd0560c4fc7f3b14994b90a502f00a21"
+              },
+              "LocalPosition": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "LocalScale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "OverrideSorting": false,
+              "PlayRate": 1.0,
+              "SortingLayer": "MapLayer0",
+              "StartFrameIndex": 0,
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              },
+              "DropShadow": false,
+              "DropShadowAngle": 30.0,
+              "DropShadowColor": {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.72
+              },
+              "DropShadowDistance": 32.0,
+              "FillAmount": 1.0,
+              "FillCenter": true,
+              "FillClockWise": true,
+              "FillMethod": 0,
+              "FillOrigin": 0,
+              "FlipX": false,
+              "FlipY": false,
+              "FrameColumn": 1,
+              "FrameRate": 0,
+              "FrameRow": 1,
+              "Outline": false,
+              "OutlineColor": {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 1.0
+              },
+              "OutlineWidth": 3.0,
+              "RaycastTarget": true,
+              "Type": 0,
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.ButtonComponent",
+              "Colors": {
+                "NormalColor": {
+                  "r": 1.0,
+                  "g": 1.0,
+                  "b": 1.0,
+                  "a": 1.0
+                },
+                "HighlightedColor": {
+                  "r": 0.9607843,
+                  "g": 0.9607843,
+                  "b": 0.9607843,
+                  "a": 1.0
+                },
+                "PressedColor": {
+                  "r": 0.784313738,
+                  "g": 0.784313738,
+                  "b": 0.784313738,
+                  "a": 1.0
+                },
+                "SelectedColor": {
+                  "r": 0.9607843,
+                  "g": 0.9607843,
+                  "b": 0.9607843,
+                  "a": 1.0
+                },
+                "DisabledColor": {
+                  "r": 0.784313738,
+                  "g": 0.784313738,
+                  "b": 0.784313738,
+                  "a": 0.5019608
+                },
+                "ColorMultiplier": 1.0,
+                "FadeDuration": 0.1
+              },
+              "ImageRUIDs": {
+                "HighlightedSprite": null,
+                "PressedSprite": null,
+                "SelectedSprite": null,
+                "DisabledSprite": null
+              },
+              "KeyCode": 274,
+              "OverrideSorting": false,
+              "Transition": 1,
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
+        "id": "21261c1d-7fb9-47a4-8273-6e97e3d97641",
+        "path": "/ui/DefaultGroup/Button_Slide/UISprite",
+        "componentNames": "MOD.Core.UITransformComponent,MOD.Core.SpriteGUIRendererComponent",
+        "jsonString": {
+          "name": "UISprite",
+          "path": "/ui/DefaultGroup/Button_Slide/UISprite",
+          "nameEditable": true,
+          "enable": true,
+          "visible": true,
+          "localize": true,
+          "displayOrder": 0,
+          "pathConstraints": "////",
+          "revision": 1,
+          "origin": {
+            "type": "Model",
+            "entry_id": "UISprite",
+            "sub_entity_id": null,
+            "root_entity_id": null,
+            "replaced_model_id": null
+          },
+          "modelId": "uisprite",
+          "@components": [
+            {
+              "@type": "MOD.Core.UITransformComponent",
+              "AlignmentOption": 0,
+              "AnchorsMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "AnchorsMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "MobileOnly": false,
+              "OffsetMax": {
+                "x": 72.87854,
+                "y": 68.0002
+              },
+              "OffsetMin": {
+                "x": -81.49994,
+                "y": -65.9998
+              },
+              "Pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "RectSize": {
+                "x": 154.378479,
+                "y": 134.0
+              },
+              "UIMode": 1,
+              "UIScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "UIVersion": 2,
+              "anchoredPosition": {
+                "x": -4.3107,
+                "y": 1.0002
+              },
+              "Position": {
+                "x": -4.3107,
+                "y": 1.0002,
+                "z": 0.0
+              },
+              "QuaternionRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+              },
+              "Enable": true
+            },
+            {
+              "@type": "MOD.Core.SpriteGUIRendererComponent",
+              "AnimClipPlayType": 0,
+              "EndFrameIndex": 2147483647,
+              "ImageRUID": {
+                "DataId": "3add2bcd562a1514595ceaa0408a54d1"
+              },
+              "LocalPosition": {
+                "x": 0.0,
+                "y": 0.0
+              },
+              "LocalScale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "OverrideSorting": false,
+              "PlayRate": 1.0,
+              "SortingLayer": "MapLayer0",
+              "StartFrameIndex": 0,
+              "Color": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 0.5019531
+              },
+              "DropShadow": false,
+              "DropShadowAngle": 30.0,
+              "DropShadowColor": {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.72
+              },
+              "DropShadowDistance": 32.0,
+              "FillAmount": 1.0,
+              "FillCenter": true,
+              "FillClockWise": true,
+              "FillMethod": 0,
+              "FillOrigin": 0,
+              "FlipX": false,
+              "FlipY": false,
+              "FrameColumn": 1,
+              "FrameRate": 0,
+              "FrameRow": 1,
+              "Outline": false,
+              "OutlineColor": {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 1.0
+              },
+              "OutlineWidth": 3.0,
+              "RaycastTarget": true,
+              "Type": 0,
+              "Enable": true
+            }
+          ],
+          "@version": 1
+        }
+      },
+      {
         "id": "88a8b023-5e8e-4a45-afff-72ad9c0a3f09",
         "path": "/ui/DefaultGroup/Button_Attack",
         "componentNames": "MOD.Core.UITransformComponent,MOD.Core.SpriteGUIRendererComponent,MOD.Core.ButtonComponent",
@@ -452,7 +776,7 @@
           "enable": false,
           "visible": false,
           "localize": true,
-          "displayOrder": 1,
+          "displayOrder": 2,
           "pathConstraints": "///",
           "revision": 1,
           "origin": {
@@ -505,8 +829,8 @@
                 "y": 332.0
               },
               "Position": {
-                "x": 949.725,
-                "y": -208.0,
+                "x": 785.1,
+                "y": -387.999939,
                 "z": 0.0
               },
               "QuaternionRotation": {
@@ -778,7 +1102,7 @@
           "enable": false,
           "visible": false,
           "localize": true,
-          "displayOrder": 2,
+          "displayOrder": 3,
           "pathConstraints": "///",
           "revision": 1,
           "origin": {
@@ -831,8 +1155,8 @@
                 "y": 230.0
               },
               "Position": {
-                "x": -814.625,
-                "y": -310.0,
+                "x": -649.999939,
+                "y": -489.999939,
                 "z": 0.0
               },
               "QuaternionRotation": {
@@ -923,7 +1247,7 @@
           "enable": false,
           "visible": false,
           "localize": true,
-          "displayOrder": 3,
+          "displayOrder": 4,
           "pathConstraints": "///",
           "revision": 1,
           "origin": {
@@ -975,8 +1299,8 @@
                 "y": -251.805115
               },
               "Position": {
-                "x": -755.652466,
-                "y": 288.1949,
+                "x": -591.0274,
+                "y": 468.194824,
                 "z": 0.0
               },
               "QuaternionRotation": {

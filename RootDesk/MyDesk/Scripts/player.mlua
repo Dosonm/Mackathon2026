@@ -1,0 +1,121 @@
+@Component
+script player extends Component
+
+	property PhysicsRigidbodyComponent rg = nil
+	property number fixedX = nil
+	property TransformComponent transform = nil
+
+	@TargetUserSync
+	property boolean canJump = true
+	property boolean canDoubleJump = false
+	property boolean canJumpSlide = false
+
+	property boolean isGround = true
+	property boolean isJumpSlide = false
+	property boolean jumpSlideReleased = false
+
+	@ExecSpace("ClientOnly")
+	method void OnBeginPlay()
+		self.rg = self.Entity.PhysicsRigidbodyComponent
+		transform = self.Entity.TransformComponent
+
+		local playerController = self.Entity.PlayerControllerComponent
+		playerController:RemoveAllActionKeyByActionName("Jump")
+		playerController:RemoveAllActionKeyByActionName("MoveDown")
+
+		self.Entity.StateComponent:AddState("DOUBLEJUMP", DoubleJumpState)
+		self.Entity.StateComponent:AddState("JUMPSLIDE", JumpSlideState)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void OnUpdate(number delta)
+		--transform.Position.x = self.fixedX
+	end
+
+	method void ChangeCollider(string state)
+		self.Entity.StateComponent:ChangeState(state)
+
+		if state == "CROUCH" then
+			self.Entity.TriggerComponent.BoxSize = _config.CrouchTriggerSize
+			self.Entity.TriggerComponent.BoxOffset = _config.CrouchTriggerOffeset
+		elseif state == "MOVE" then
+			self.Entity.TriggerComponent.BoxSize = _config.StandTriggerSize
+			self.Entity.TriggerComponent.BoxOffset = _config.StandTriggerOffeset
+		end
+	end
+
+	method void TryJump()
+		self.rg:ApplyForce(Vector2(0, 250))
+		self.canDoubleJump = true
+		self.canJumpSlide = true
+		self.isGround = false
+		self.Entity.StateComponent:ChangeState("JUMP")
+	end
+
+	method void TryDoubleJump()
+		self.rg:SetLinearVelocityY(0)
+		self.rg:ApplyForce(Vector2(0, 200))
+		self.Entity.StateComponent:ChangeState("DOUBLEJUMP")
+	end
+
+	method void TryJumpSlide()
+		self.isJumpSlide = true
+		self.canJumpSlide = false
+		self.jumpSlideReleased = false
+		self.Entity.StateComponent:ChangeState("JUMPSLIDE")
+	end
+
+	method void EndJumpSlide()
+		self.isJumpSlide = false
+		self.Entity.StateComponent:ChangeState("JUMP")
+	end
+
+	method void JumpLogic()
+		if self.canJump then
+			self.canJump = false
+			self:TryJump()
+		elseif self.canDoubleJump then
+			self.canDoubleJump = false
+			self:TryDoubleJump()
+		end
+	end
+
+	method void SlideLogic()
+		if self.isGround then
+			self:ChangeCollider("CROUCH")
+		elseif self.canJumpSlide then
+			self:TryJumpSlide()
+		end
+	end
+
+	@EventSender("Service", "InputService")
+	handler HandleKeyDownEvent(KeyDownEvent event)
+		if event.key == KeyboardKey.Space then
+			self:JumpLogic()
+		end
+		if event.key == KeyboardKey.DownArrow then
+			self:SlideLogic()
+		end
+	end
+
+	@EventSender("Service", "InputService")
+	handler HandleKeyUpEvent(KeyUpEvent event)
+		if event.key == KeyboardKey.DownArrow then
+			if self.isJumpSlide then
+				self.jumpSlideReleased = true
+			else
+				self:ChangeCollider("MOVE")
+			end
+		end
+	end
+
+	@EventSender("Self")
+	handler HandlePhysicsContactBeginEvent(PhysicsContactBeginEvent event)
+		self.Entity.StateComponent:ChangeState("MOVE")
+		self.isGround = true
+		self.canJump = true
+		self.canDoubleJump = false
+		self.canJumpSlide = false
+	end
+
+end

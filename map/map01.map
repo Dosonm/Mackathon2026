@@ -334,7 +334,7 @@
       {
         "id": "059bad79-e945-490e-b4f4-6b53aed4a5b6",
         "path": "/maps/map01/TileScroller",
-        "componentNames": "MOD.Core.TransformComponent",
+        "componentNames": "MOD.Core.SpriteRendererComponent,MOD.Core.TransformComponent",
         "jsonString": {
           "name": "TileScroller",
           "path": "/maps/map01/TileScroller",
@@ -354,6 +354,12 @@
           },
           "modelId": "mapempty",
           "@components": [
+            {
+              "@type": "MOD.Core.SpriteRendererComponent",
+              "ActionSheet": {},
+              "RenderSetting": 0,
+              "Enable": true
+            },
             {
               "@type": "MOD.Core.TransformComponent",
               "Position": {

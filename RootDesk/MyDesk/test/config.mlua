@@ -1,0 +1,16 @@
+@Logic
+script config extends Logic
+
+	@Sync
+	property Vector2 StandTriggerSize = Vector2(0.42,0.67) -- 플레이어가 서 있을 때 트리거 사이즈
+
+	@Sync
+	property Vector2 StandTriggerOffeset = Vector2(0,0.33) 
+
+	@Sync
+	property Vector2 CrouchTriggerSize = Vector2(0.64,0.22)
+
+	@Sync
+	property Vector2 CrouchTriggerOffeset = Vector2(0,0.11) 
+
+end
