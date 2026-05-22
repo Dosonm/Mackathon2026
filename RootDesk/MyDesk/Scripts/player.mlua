@@ -1,11 +1,10 @@
 @Component
 script player extends Component
 
-	property PhysicsRigidbodyComponent rg = nil
+	property RigidbodyComponent rg = nil
 	property number fixedX = nil
 	property TransformComponent transform = nil
 
-	@TargetUserSync
 	property boolean canJump = true
 	property boolean canDoubleJump = false
 	property boolean canJumpSlide = false
@@ -16,7 +15,7 @@ script player extends Component
 
 	@ExecSpace("ClientOnly")
 	method void OnBeginPlay()
-		self.rg = self.Entity.PhysicsRigidbodyComponent
+		self.rg = self.Entity.RigidbodyComponent
 		transform = self.Entity.TransformComponent
 
 		local playerController = self.Entity.PlayerControllerComponent
@@ -25,13 +24,19 @@ script player extends Component
 
 		self.Entity.StateComponent:AddState("DOUBLEJUMP", DoubleJumpState)
 		self.Entity.StateComponent:AddState("JUMPSLIDE", JumpSlideState)
+		
+		_TimerService:SetTimerOnce(function ()
+			self.Entity.CameraComponent.DeadZone = Vector2(10,10)
+			self.Entity.CameraComponent.SoftZone = Vector2(10,10)
+		end,.5)
 	end
 
 	@ExecSpace("ClientOnly")
 	method void OnUpdate(number delta)
-		--transform.Position.x = self.fixedX
+		transform.Position.x = self.fixedX
 	end
 
+	@ExecSpace("ClientOnly")
 	method void ChangeCollider(string state)
 		self.Entity.StateComponent:ChangeState(state)
 
@@ -44,20 +49,22 @@ script player extends Component
 		end
 	end
 
+	@ExecSpace("ClientOnly")
 	method void TryJump()
-		self.rg:ApplyForce(Vector2(0, 250))
+		self.rg:SetForce(Vector2(0,8))
 		self.canDoubleJump = true
 		self.canJumpSlide = true
 		self.isGround = false
 		self.Entity.StateComponent:ChangeState("JUMP")
 	end
 
+	@ExecSpace("ClientOnly")
 	method void TryDoubleJump()
-		self.rg:SetLinearVelocityY(0)
-		self.rg:ApplyForce(Vector2(0, 200))
+		self.rg:SetForce(Vector2(0,6))
 		self.Entity.StateComponent:ChangeState("DOUBLEJUMP")
 	end
 
+	@ExecSpace("ClientOnly")
 	method void TryJumpSlide()
 		self.isJumpSlide = true
 		self.canJumpSlide = false
@@ -65,11 +72,13 @@ script player extends Component
 		self.Entity.StateComponent:ChangeState("JUMPSLIDE")
 	end
 
+	@ExecSpace("ClientOnly")
 	method void EndJumpSlide()
 		self.isJumpSlide = false
 		self.Entity.StateComponent:ChangeState("JUMP")
 	end
 
+	-- 내부 헬퍼 메서드들은 위에서 호출하는 원본 함수 공간(ClientOnly)을 그대로 따라감.
 	method void JumpLogic()
 		if self.canJump then
 			self.canJump = false
@@ -80,6 +89,7 @@ script player extends Component
 		end
 	end
 
+	-- 내부 헬퍼 메서드들은 위에서 호출하는 원본 함수 공간(ClientOnly)을 그대로 따라감
 	method void SlideLogic()
 		if self.isGround then
 			self:ChangeCollider("CROUCH")
@@ -88,6 +98,7 @@ script player extends Component
 		end
 	end
 
+	@ExecSpace("ClientOnly")
 	@EventSender("Service", "InputService")
 	handler HandleKeyDownEvent(KeyDownEvent event)
 		if event.key == KeyboardKey.Space then
@@ -98,6 +109,7 @@ script player extends Component
 		end
 	end
 
+	@ExecSpace("ClientOnly")
 	@EventSender("Service", "InputService")
 	handler HandleKeyUpEvent(KeyUpEvent event)
 		if event.key == KeyboardKey.DownArrow then
@@ -109,13 +121,44 @@ script player extends Component
 		end
 	end
 
+	@ExecSpace("ClientOnly")
 	@EventSender("Self")
-	handler HandlePhysicsContactBeginEvent(PhysicsContactBeginEvent event)
-		self.Entity.StateComponent:ChangeState("MOVE")
-		self.isGround = true
-		self.canJump = true
-		self.canDoubleJump = false
-		self.canJumpSlide = false
+	handler HandleStateChangeEvent(StateChangeEvent event)
+		if event.CurrentStateName == "MOVE" then
+			self.isGround = true
+			self.canJump = true
+			self.canDoubleJump = false
+			self.canJumpSlide = false
+		end
 	end
+
+	-- @EventSender("Self")
+	-- handler HandlePhysicsContactBeginEvent(PhysicsContactBeginEvent event)
+	-- 	local ContactedBodyEntity = event.ContactedBodyEntity
+
+	-- 	-- 충돌한 강체의 부모 오브젝트의 TileSet 컴포넌트를 가져옵니다.
+	-- 	local tileSet = ContactedBodyEntity.Parent.PatternComponent
+
+	-- 	-- 접촉한 오브젝트에서 타일셋이 검출되었다면
+	-- 	if tileSet ~= nil then
+			
+	-- 		-- 접촉한 오브젝트의 Transform 컴포넌트를 가져옵니다.
+	-- 		local contactTransform = ContactedBodyEntity.TransformComponent
+	-- 		-- 캐릭터의 Transform 컴포넌트를 가져옵니다.
+	-- 		local playerTransform = self.Entity.TransformComponent
+			
+	-- 		-- 만약 충돌체 대상의 오브젝트의 위치 y 값이 캐릭터의 위치 y 값 보다 더 높다면
+	-- 		if contactTransform.Position.y >= playerTransform.Position.y then
+	-- 			-- 해당 메서드 수행을 중단합니다.
+	-- 			return
+	-- 		end
+			
+	-- 		self.Entity.StateComponent:ChangeState("MOVE")
+	-- 		self.isGround = true
+	-- 		self.canJump = true
+	-- 		self.canDoubleJump = false
+	-- 		self.canJumpSlide = false
+	-- 	end
+	-- end
 
 end

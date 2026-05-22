@@ -16,8 +16,9 @@ script JumpSlideState extends StateType
 		end, .5)
 	end
 
+	@ExecSpace("ClientOnly")
 	method void OnUpdate(number delta)
-		Player.rg:SetLinearVelocityY(0)
+		Player.rg:SetForce(Vector2(0,0))
 		if Player.jumpSlideReleased then
 			Player:EndJumpSlide()
 		end

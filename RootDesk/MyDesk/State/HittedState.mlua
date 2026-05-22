@@ -1,6 +1,5 @@
 @State
-script DoubleJumpState extends StateType
-
+script HittedState extends StateType
 	method void OnEnter()
 		--Player = self.ParentComponent.Entity.player
 	end
@@ -13,5 +12,4 @@ script DoubleJumpState extends StateType
 	method void OnExit()
 		        
 	end
-
 end

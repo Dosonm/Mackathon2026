@@ -9,6 +9,8 @@ script DataSetLogic extends Logic
 
 	property table itemInfoTable = {}
 
+	property table ObstacleInfoTable = {}
+
 	property table tilesFloorInfoTable = {[1]={} , [2]={}}
 
 	property table characterInfoTable = {}
@@ -33,6 +35,7 @@ script DataSetLogic extends Logic
 		self:InitSkillInfoTable()
 		-- 스테이지 렌더 테이블을 초기화합니다.
 		--self:InitStageRenderInfoTable()
+		self:InitObstackleInfoTable()
 	end
 
 	@ExecSpace("ClientOnly")
@@ -185,6 +188,32 @@ script DataSetLogic extends Logic
 		
 			-- rowData로 저장한 데이터들을 테이블에 저장합니다.
 			self.skillInfoTable[i] = rowData
+		end
+	end
+
+	@ExecSpace("ClientOnly")
+	method void InitObstackleInfoTable()
+		-- 스킬 데이터셋을 저장하기 위한 메서드입니다.
+		
+		-- 월드스페이스에 저장된 데이터셋의 이름을 로컬로 접근하기 위한 변수입니다.
+		local dataSetName = "ObstackleInfo"
+		
+		-- 대상 데이터셋의 row수를 확인합니다.
+		local rowCount = self:GetDataSetRowCount(dataSetName)
+		
+		-- 각 줄의 데이터를 담기위한 변수입니다.
+		local rowData
+		
+		-- 1 부터 데이터셋의 Row수만큼 순회를 시작합니다.
+		for i = 1 , rowCount , 1 do
+			rowData = 
+			{
+				Name = tostring(_DataService:GetCell(dataSetName,i,"Name")),
+				Damage = tostring(_DataService:GetCell(dataSetName,i,"Damage")),
+			}
+		
+			-- rowData로 저장한 데이터들을 테이블에 저장합니다.
+			self.ObstacleInfoTable[i] = rowData
 		end
 	end
 
