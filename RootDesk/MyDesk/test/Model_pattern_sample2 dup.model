@@ -1,7 +1,7 @@
 {
   "Id": "",
   "GameId": "",
-  "EntryKey": "model://cf1edf66-42f8-4984-9297-800ff12ceb97",
+  "EntryKey": "model://878e7af2-a967-4f86-bddb-7698cfd4bcdc",
   "ContentType": "x-mod/model",
   "Content": "",
   "Usage": 0,
@@ -14,9 +14,9 @@
     "Use": "Json",
     "Json": {
       "Version": 1,
-      "Name": "Model_pattern_sample2",
+      "Name": "Model_pattern_sample2 dup",
       "BaseModelId": null,
-      "Id": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+      "Id": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
       "Components": [
         "MOD.Core.TransformComponent",
         "script.PatternComponent",
@@ -148,14 +148,14 @@
       "EventLinks": [],
       "Children": [
         {
-          "Id": "715647d6-64cc-4cb5-9250-dafcd51ee430",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "4e1f6e68-8029-4b50-811d-7df230838d7c",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_foothold1",
           "Model": {
             "Version": 1,
             "Name": "Model_foothold1",
             "BaseModelId": null,
-            "Id": "715647d6-64cc-4cb5-9250-dafcd51ee430",
+            "Id": "4e1f6e68-8029-4b50-811d-7df230838d7c",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.SpriteRendererComponent",
@@ -469,11 +469,11 @@
                   "$values": [
                     [
                       {
-                        "x": -0.75,
+                        "x": -4.75,
                         "y": 0.39
                       },
                       {
-                        "x": 15.75,
+                        "x": 11.75,
                         "y": 0.39
                       }
                     ]
@@ -513,14 +513,14 @@
           }
         },
         {
-          "Id": "0520c2cc-53b8-4ff8-9156-b2776766f6cd",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "ddebb955-cfce-4b64-9761-90e2b5284b74",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_foothold2",
           "Model": {
             "Version": 1,
             "Name": "Model_foothold2",
             "BaseModelId": null,
-            "Id": "0520c2cc-53b8-4ff8-9156-b2776766f6cd",
+            "Id": "ddebb955-cfce-4b64-9761-90e2b5284b74",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.SpriteRendererComponent",
@@ -698,11 +698,11 @@
                   "$values": [
                     [
                       {
-                        "x": -1.28,
+                        "x": -5.28,
                         "y": 0.13
                       },
                       {
-                        "x": 1.29,
+                        "x": -2.71,
                         "y": 0.13
                       }
                     ]
@@ -742,14 +742,14 @@
           }
         },
         {
-          "Id": "5170be0e-025d-47d4-b338-2b3390750d83",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "15ad183c-4931-4c8a-9296-8d728581de95",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_foothold2_1",
           "Model": {
             "Version": 1,
             "Name": "Model_foothold2_1",
             "BaseModelId": null,
-            "Id": "5170be0e-025d-47d4-b338-2b3390750d83",
+            "Id": "15ad183c-4931-4c8a-9296-8d728581de95",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.SpriteRendererComponent",
@@ -927,11 +927,11 @@
                   "$values": [
                     [
                       {
-                        "x": -1.28,
+                        "x": -5.28,
                         "y": 0.13
                       },
                       {
-                        "x": 1.29,
+                        "x": -2.71,
                         "y": 0.13
                       }
                     ]
@@ -971,14 +971,14 @@
           }
         },
         {
-          "Id": "8f676d54-5e3b-4406-be3f-eca5a391a6db",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "7812f089-62fb-4c45-bfd6-f4bc42dc3dc7",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_foothold1_2",
           "Model": {
             "Version": 1,
             "Name": "Model_foothold1_2",
             "BaseModelId": null,
-            "Id": "8f676d54-5e3b-4406-be3f-eca5a391a6db",
+            "Id": "7812f089-62fb-4c45-bfd6-f4bc42dc3dc7",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.SpriteRendererComponent",
@@ -1292,11 +1292,11 @@
                   "$values": [
                     [
                       {
-                        "x": -0.75,
+                        "x": -4.75,
                         "y": 0.39
                       },
                       {
-                        "x": 0.75,
+                        "x": -3.25,
                         "y": 0.39
                       }
                     ]
@@ -1336,14 +1336,14 @@
           }
         },
         {
-          "Id": "e58bfa78-b901-4141-b10d-06ee56d667a2",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "196e59f7-d44b-4310-b679-07bb489bf454",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_foothold1_1",
           "Model": {
             "Version": 1,
             "Name": "Model_foothold1_1",
             "BaseModelId": null,
-            "Id": "e58bfa78-b901-4141-b10d-06ee56d667a2",
+            "Id": "196e59f7-d44b-4310-b679-07bb489bf454",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.SpriteRendererComponent",
@@ -1657,11 +1657,11 @@
                   "$values": [
                     [
                       {
-                        "x": -0.75,
+                        "x": -4.75,
                         "y": 0.39
                       },
                       {
-                        "x": 0.75,
+                        "x": -3.25,
                         "y": 0.39
                       }
                     ]
@@ -1701,14 +1701,14 @@
           }
         },
         {
-          "Id": "04b4efce-f988-4d3d-9170-87faf4725264",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "3c77a8ac-2396-481b-9b23-9f2d2dac2701",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_trap1",
           "Model": {
             "Version": 1,
             "Name": "Model_trap1",
             "BaseModelId": null,
-            "Id": "04b4efce-f988-4d3d-9170-87faf4725264",
+            "Id": "3c77a8ac-2396-481b-9b23-9f2d2dac2701",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.StateAnimationComponent",
@@ -1991,14 +1991,14 @@
           }
         },
         {
-          "Id": "572d444a-74e0-45d8-bb6d-17282451c6d7",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "7979493d-7ffb-42c0-9926-f9cfdab7391c",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_trap1_1",
           "Model": {
             "Version": 1,
             "Name": "Model_trap1_1",
             "BaseModelId": null,
-            "Id": "572d444a-74e0-45d8-bb6d-17282451c6d7",
+            "Id": "7979493d-7ffb-42c0-9926-f9cfdab7391c",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.StateAnimationComponent",
@@ -2258,14 +2258,14 @@
           }
         },
         {
-          "Id": "ad600349-1ff9-43f2-becc-2c6e8c3c8db2",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "7611168f-3341-4673-aa53-d8fae4288f9e",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_trap1_2",
           "Model": {
             "Version": 1,
             "Name": "Model_trap1_2",
             "BaseModelId": null,
-            "Id": "ad600349-1ff9-43f2-becc-2c6e8c3c8db2",
+            "Id": "7611168f-3341-4673-aa53-d8fae4288f9e",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.StateAnimationComponent",
@@ -2525,14 +2525,14 @@
           }
         },
         {
-          "Id": "ae8f0319-086f-4698-adc6-1848cf4bc211",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "8f67e8c3-dd9e-4bd0-acc9-603e15991106",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_trap1_3",
           "Model": {
             "Version": 1,
             "Name": "Model_trap1_3",
             "BaseModelId": null,
-            "Id": "ae8f0319-086f-4698-adc6-1848cf4bc211",
+            "Id": "8f67e8c3-dd9e-4bd0-acc9-603e15991106",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.StateAnimationComponent",
@@ -2815,14 +2815,14 @@
           }
         },
         {
-          "Id": "7b98ff01-8fea-4300-96c9-3cca72a30678",
-          "ParentId": "cf1edf66-42f8-4984-9297-800ff12ceb97",
+          "Id": "e4b49c66-3129-4286-8fe5-20e1e8dc0a12",
+          "ParentId": "878e7af2-a967-4f86-bddb-7698cfd4bcdc",
           "Name": "Model_trap1_4",
           "Model": {
             "Version": 1,
             "Name": "Model_trap1_4",
             "BaseModelId": null,
-            "Id": "7b98ff01-8fea-4300-96c9-3cca72a30678",
+            "Id": "e4b49c66-3129-4286-8fe5-20e1e8dc0a12",
             "Components": [
               "MOD.Core.TransformComponent",
               "MOD.Core.StateAnimationComponent",

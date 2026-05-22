@@ -34,8 +34,7 @@
         "MOD.Core.InventoryComponent",
         "MOD.Core.AvatarStateAnimationComponent",
         "script.PlayerHit",
-        "MOD.Core.PhysicsColliderComponent",
-        "MOD.Core.PhysicsRigidbodyComponent"
+        "MOD.Core.RigidbodyComponent"
       ],
       "Properties": [
         {
@@ -343,30 +342,7 @@
           }
         }
       ],
-      "Values": [
-        {
-          "TargetType": "MOD.Core.PhysicsColliderComponent",
-          "Name": "ClientOnly",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": true
-        },
-        {
-          "TargetType": "MOD.Core.PhysicsColliderComponent",
-          "Name": "BoxSize",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "MOD.Core.MODVector2, MOD.Core, Version=26.3.0.0, Culture=neutral, PublicKeyToken=null"
-          },
-          "Value": {
-            "$type": "MOD.Core.MODVector2, MOD.Core",
-            "x": 0.47,
-            "y": 1.04
-          }
-        }
-      ],
+      "Values": [],
       "EventLinks": [],
       "Children": []
     }

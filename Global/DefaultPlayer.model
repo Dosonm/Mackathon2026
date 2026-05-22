@@ -21,7 +21,10 @@
         "script.player",
         "script.PlayerAttack",
         "script.PlayerSkill",
-        "script.SkillEffect"
+        "script.SkillEffect",
+        "MOD.Core.KinematicbodyComponent",
+        "MOD.Core.SideviewbodyComponent",
+        "MOD.Core.MovementComponent"
       ],
       "Properties": [],
       "Values": [
@@ -96,8 +99,8 @@
           },
           "Value": {
             "$type": "MOD.Core.MODVector2, MOD.Core",
-            "x": 10.0,
-            "y": 10.0
+            "x": 0.0,
+            "y": 0.0
           }
         },
         {
@@ -288,8 +291,8 @@
           },
           "Value": {
             "$type": "MOD.Core.MODVector2, MOD.Core",
-            "x": 10.0,
-            "y": 10.0
+            "x": 0.0,
+            "y": 0.0
           }
         },
         {
@@ -379,50 +382,6 @@
         },
         {
           "TargetType": "MOD.Core.MovementComponent",
-          "Name": "Enable",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": false
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "ApplyClimbableRotation",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": false
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "MoveVelocity",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "MOD.Core.MODVector2, MOD.Core, Version=26.3.0.0, Culture=neutral, PublicKeyToken=null"
-          },
-          "Value": {
-            "$type": "MOD.Core.MODVector2, MOD.Core",
-            "x": 0.0,
-            "y": 0.0
-          }
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "RealMoveVelocity",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "MOD.Core.MODVector2, MOD.Core, Version=26.3.0.0, Culture=neutral, PublicKeyToken=null"
-          },
-          "Value": {
-            "$type": "MOD.Core.MODVector2, MOD.Core",
-            "x": 0.0,
-            "y": 0.0
-          }
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
           "Name": "Enable",
           "ValueType": {
             "$type": "MODNativeType",
@@ -800,51 +759,6 @@
           "Value": 1.3
         },
         {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "WalkDrag",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": 0.0
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "AirAccelerationX",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": 0.0
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "AirDecelerationX",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": 0.0
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "IsBlockVerticalLine",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": false
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "FallSpeedMaxX",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": 0.0
-        },
-        {
           "TargetType": "MOD.Core.AvatarStateAnimationComponent",
           "Name": "StateToAvatarBodyActionSheet",
           "ValueType": {
@@ -914,7 +828,7 @@
             "$type": "MODNativeType",
             "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
           },
-          "Value": true
+          "Value": false
         },
         {
           "TargetType": "MOD.Core.CameraComponent",
@@ -980,33 +894,6 @@
             "$type": "MOD.Core.Physics.CollisionGroup, MOD.Core",
             "Id": "184abcedde304cd6ae74c4c93cf4125c"
           }
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "Mass",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": 100.0
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "WalkSlant",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": 1.0
-        },
-        {
-          "TargetType": "MOD.Core.RigidbodyComponent",
-          "Name": "IsolatedMove",
-          "ValueType": {
-            "$type": "MODNativeType",
-            "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-          },
-          "Value": false
         },
         {
           "TargetType": "script.player",
@@ -1108,7 +995,7 @@
             "$type": "MODNativeType",
             "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
           },
-          "Value": true
+          "Value": false
         },
         {
           "TargetType": "MOD.Core.PhysicsColliderComponent",
@@ -1144,7 +1031,7 @@
             "$type": "MODNativeType",
             "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
           },
-          "Value": true
+          "Value": false
         },
         {
           "TargetType": "MOD.Core.PhysicsColliderComponent",
@@ -1206,7 +1093,16 @@
             "$type": "MODNativeType",
             "type": "MOD.Core.PhysicsCollisionDetectionMode, MOD.Core, Version=26.3.0.0, Culture=neutral, PublicKeyToken=null"
           },
-          "Value": 1
+          "Value": 0
+        },
+        {
+          "TargetType": "MOD.Core.CameraComponent",
+          "Name": "MaterialId",
+          "ValueType": {
+            "$type": "MODNativeType",
+            "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+          },
+          "Value": ""
         }
       ],
       "EventLinks": [],

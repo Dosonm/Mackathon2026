@@ -1,0 +1,43 @@
+@Logic
+script PlayerStatLogic extends Logic
+
+	property number hp = 0 -- 플레이어의 체력값을 저장하기 위한 변수입니다.
+	property number maxHp = 100
+
+	@ExecSpace("ClientOnly")
+	method void SetHP(number value)
+		-- 매개변수로 전달받은 값을 Hp 값으로 설정시키는 메서드입니다.
+		
+		-- 매개변수 1 number value : Hp 값으로 설정되는 값을 전달받습니다.
+		
+		-- 체력값을 특정값으로 설정합니다. (clamp 를 활용해 미만, 초과를 제한합니다.)
+		self.hp = math.clamp(value,0,self.maxHp)	--config.maxhp
+		
+		-- UIManager에 등록된 슬라이더에 체력값을 반영합니다.
+		_UIManagerLogic:SetHpSliderValue(self.hp)
+	end
+
+	@ExecSpace("ClientOnly")
+	method void AddHP(number addValue)
+		-- 매개변수로 전달받은 값을 체력값에 추가시키는 메서드입니다.
+		
+		-- 매개변수 1 number addValue : 추가되는 체력값을 전달받습니다.
+		
+		-- 현재 체력에 매개변수값을 추가합니다.
+		self.hp += addValue
+		
+		-- clamp 를 활용해 미만, 초과를 제한합니다.
+		self.hp = math.clamp(self.hp,0,self.maxHp) --config.maxhp
+		
+		-- UIManager에 등록된 슬라이더에 체력값을 반영합니다.
+		_UIManagerLogic:SetHpSliderValue(self.hp)
+		
+		-- 체력값이 0보다 작거나 같다면
+		if self.hp <= 0 then
+			-- 게임 종료 로직을 수행합니다.
+			_GameLogic:EndMainGame()
+		end
+
+		log()
+	end
+end
